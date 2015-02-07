@@ -29,8 +29,8 @@ public class ContextCreateAndCloneMethods {
 		IVPError e3 = c.addString("key3", "Hello, world!");
 		IVPError e4 = c.addBoolean("key4", true);
 
-		assertTrue((10 == c.getInt("key1")) && ( 11 == c.getInt("key2"))
-		        && "Hello, world!".equals(c.getString("key3")) && c.getBoolean("key4"));
+		assertTrue((10 == c.getInt("key1")) && (11 == c.getInt("key2")) && "Hello, world!".equals(c.getString("key3"))
+		        && c.getBoolean("key4"));
 
 	}
 

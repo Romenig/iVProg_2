@@ -24,16 +24,14 @@ public class NotEqualTo extends Expression {
 	private String expA;
 	private String expB;
 
-
 	/**
 	 * @param name
 	 * @param description
 	 */
-    public NotEqualTo() {
-	    super("NotEqualTo", "NotEqualTo object.");
-    }
+	public NotEqualTo() {
+		super("NotEqualTo", "NotEqualTo object.");
+	}
 
-	
 	/**
 	 * Set the left expression of and. EqualTo := expressionA == expressionB
 	 * 
@@ -53,19 +51,22 @@ public class NotEqualTo extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPValue expressionA = (IVPValue) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPValue expressionB = (IVPValue) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPValue expressionA = (IVPValue) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPValue expressionB = (IVPValue) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		return expressionA.ivpNotEqualTo(expressionB, c, map, factory);
 	}
 
-
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

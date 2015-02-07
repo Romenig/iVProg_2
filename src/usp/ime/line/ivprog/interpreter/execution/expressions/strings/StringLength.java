@@ -29,10 +29,10 @@ public class StringLength extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public StringLength() {
-	    super("StringLength", "StringLength object.");
-    }
-    
+	public StringLength() {
+		super("StringLength", "StringLength object.");
+	}
+
 	/**
 	 * Set the string.
 	 * 
@@ -43,17 +43,21 @@ public class StringLength extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPString str1 = (IVPString) ((DataObject)map.get(string)).evaluate(c, map, factory);
+		IVPString str1 = (IVPString) ((DataObject) map.get(string)).evaluate(c, map, factory);
 		IVPNumber result = str1.strlen(c, factory);
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		return false;
+	}
 
 }

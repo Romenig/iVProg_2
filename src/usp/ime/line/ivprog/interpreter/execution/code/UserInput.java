@@ -21,7 +21,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.gui.JDialogReadInteger;
 
 public class UserInput extends DataObject {
-	
+
 	private String type;
 	private String valueID;
 
@@ -29,62 +29,73 @@ public class UserInput extends DataObject {
 	 * @param name
 	 * @param description
 	 */
-    public UserInput() {
-	    super("UserInput", "UserInput object.");
-    }
+	public UserInput() {
+		super("UserInput", "UserInput object.");
+	}
 
-	/* (non-Javadoc)
-	 * @see usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap, usp.ime.line.ivprog.interpreter.DataFactory)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog
+	 * .interpreter.execution.Context, java.util.HashMap,
+	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
-    public Object evaluate(Context c, HashMap map, DataFactory factory) {
-    	String theValue = IVPValue.NULL;
-    	if(type.equals(IVPValue.INTEGER_TYPE)){
-    		
-    		JDialogReadInteger.getInstance().setVisible(true);
-    		
-    		theValue = JDialogReadInteger.getInstance().getValue();
-    		IVPNumber number = (IVPNumber) map.get(valueID);
-    		number.updateIntegerValue(c, new Integer(theValue).intValue());
-    	}else if(type.equals(IVPValue.DOUBLE_TYPE)){
-    		
-    	}else if(type.equals(IVPValue.STRING_TYPE)){
-    		
-    	}else if(type.equals(IVPValue.BOOLEAN_TYPE)){
-    		
-    	}
-	    return null;
-    }
+	public Object evaluate(Context c, HashMap map, DataFactory factory) {
+		String theValue = IVPValue.NULL;
+		if (type.equals(IVPValue.INTEGER_TYPE)) {
+
+			JDialogReadInteger.getInstance().setVisible(true);
+
+			theValue = JDialogReadInteger.getInstance().getValue();
+			IVPNumber number = (IVPNumber) map.get(valueID);
+			number.updateIntegerValue(c, new Integer(theValue).intValue());
+		} else if (type.equals(IVPValue.DOUBLE_TYPE)) {
+
+		} else if (type.equals(IVPValue.STRING_TYPE)) {
+
+		} else if (type.equals(IVPValue.BOOLEAN_TYPE)) {
+
+		}
+		return null;
+	}
 
 	/**
 	 * Set the value type to read.
+	 * 
 	 * @param integerType
 	 */
-    public void setType(String integerType) {
-    	type = integerType;
-    }
+	public void setType(String integerType) {
+		type = integerType;
+	}
 
-    /**
-     * Get the value type that is going to be read.
-     * @return
-     */
-    public String getType(){
-    	return type;
-    }
+	/**
+	 * Get the value type that is going to be read.
+	 * 
+	 * @return
+	 */
+	public String getType() {
+		return type;
+	}
 
 	/**
 	 * @param argument
 	 */
-    public void setValueID(String argument) {
-	    valueID = argument;
-    }
+	public void setValueID(String argument) {
+		valueID = argument;
+	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

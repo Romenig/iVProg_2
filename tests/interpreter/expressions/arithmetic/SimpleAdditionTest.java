@@ -89,7 +89,7 @@ public class SimpleAdditionTest {
 		b.setValueType(IVPValue.INTEGER_TYPE);
 		a.setValueType(IVPValue.DOUBLE_TYPE);
 
-		c.addDouble(a.getUniqueID(),3.4313);
+		c.addDouble(a.getUniqueID(), 3.4313);
 		c.addInt(b.getUniqueID(), 10);
 
 		Addition addition = factory.createAddition();

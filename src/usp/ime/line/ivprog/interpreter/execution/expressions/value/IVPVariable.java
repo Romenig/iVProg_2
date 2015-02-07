@@ -27,10 +27,10 @@ public class IVPVariable extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public IVPVariable() {
-	    super("IVPVariable", "IVPVariable object.");
-    }
-	
+	public IVPVariable() {
+		super("IVPVariable", "IVPVariable object.");
+	}
+
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		DataObject dO = (DataObject) map.get(valueID);
 		return dO.evaluate(c, map, factory);
@@ -84,13 +84,17 @@ public class IVPVariable extends Expression {
 		return variableName;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

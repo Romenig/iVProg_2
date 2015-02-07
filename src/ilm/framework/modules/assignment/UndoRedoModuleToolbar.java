@@ -20,7 +20,8 @@ public class UndoRedoModuleToolbar extends IlmModuleToolbar {
 	private JButton _redoButton;
 
 	public UndoRedoModuleToolbar() {
-		_undoButton = makeButton("undo", ResourceBundleIVP.getString("undoBtn.AltText"), ResourceBundleIVP.getString("undoBtn.AltText"), ResourceBundleIVP.getString("undoBtn.AltText"));
+		_undoButton = makeButton("undo", ResourceBundleIVP.getString("undoBtn.AltText"), ResourceBundleIVP.getString("undoBtn.AltText"),
+		        ResourceBundleIVP.getString("undoBtn.AltText"));
 		add(_undoButton);
 		_undoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -28,7 +29,8 @@ public class UndoRedoModuleToolbar extends IlmModuleToolbar {
 			}
 		});
 		_undoButton.setEnabled(false);
-		_redoButton = makeButton("redo", ResourceBundleIVP.getString("redoBtn.AltText"), ResourceBundleIVP.getString("redoBtn.AltText"), ResourceBundleIVP.getString("redoBtn.AltText"));
+		_redoButton = makeButton("redo", ResourceBundleIVP.getString("redoBtn.AltText"), ResourceBundleIVP.getString("redoBtn.AltText"),
+		        ResourceBundleIVP.getString("redoBtn.AltText"));
 		add(_redoButton);
 		_redoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -36,32 +38,30 @@ public class UndoRedoModuleToolbar extends IlmModuleToolbar {
 			}
 		});
 		_redoButton.setEnabled(false);
-		
+
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	}
-	
+
 	public void update(Observable o, Object arg) {
-		if(o instanceof UndoRedoModule) {
-			_undoRedo = (UndoRedoModule)o;
+		if (o instanceof UndoRedoModule) {
+			_undoRedo = (UndoRedoModule) o;
 			updateUndoButton();
 			updateRedoButton();
 		}
 	}
-	
+
 	private void updateUndoButton() {
-		if(_undoRedo.isUndoStackEmpty()) {
+		if (_undoRedo.isUndoStackEmpty()) {
 			_undoButton.setEnabled(false);
-		}
-		else {
+		} else {
 			_undoButton.setEnabled(true);
 		}
 	}
-	
+
 	private void updateRedoButton() {
-		if(_undoRedo.isRedoStackEmpty()) {
+		if (_undoRedo.isRedoStackEmpty()) {
 			_redoButton.setEnabled(false);
-		}
-		else {
+		} else {
 			_redoButton.setEnabled(true);
 		}
 	}

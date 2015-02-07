@@ -13,13 +13,12 @@ public final class SystemControl {
 	private AssignmentControl _assignmentControl;
 	private CommControl _comm;
 	private BaseGUI _gui;
-	
+
 	public void initialize(boolean isApplet, String[] parameterList, SystemFactory factory) {
 		IParameterListParser parser;
 		if (isApplet) {
 			parser = new AppletParameterListParser();
-		}
-		else {
+		} else {
 			parser = new DesktopParameterListParser();
 		}
 		Map parsedParameterList = parser.Parse(parameterList);
@@ -29,21 +28,19 @@ public final class SystemControl {
 
 	private void initComponents(SystemFactory factory) {
 		_comm = factory.createCommControl(_config);
-		_assignmentControl = factory.createAssignmentControl(_config, _comm, 
-															 factory.getDomainModel(_config),
-															 factory.getDomainConverter());
+		_assignmentControl = factory.createAssignmentControl(_config, _comm, factory.getDomainModel(_config), factory.getDomainConverter());
 		_gui = factory.createBaseGUI(_config, _assignmentControl, factory);
 	}
-	
+
 	public IlmProtocol getProtocol() {
 		return _assignmentControl;
 	}
-	
+
 	public void startDesktopGUI() {
 		_gui.initGUI();
 		_gui.startDesktop();
 	}
-	
+
 	public BaseGUI getAppletGUI() {
 		_gui.initGUI();
 		return _gui;

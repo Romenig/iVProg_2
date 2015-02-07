@@ -30,10 +30,10 @@ public class IVPVector extends DataObject {
 	 * @param name
 	 * @param description
 	 */
-    public IVPVector() {
-	    super("IVPVector", "IVPVector object.");
-    }
-    
+	public IVPVector() {
+		super("IVPVector", "IVPVector object.");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -141,13 +141,17 @@ public class IVPVector extends DataObject {
 		return removed;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

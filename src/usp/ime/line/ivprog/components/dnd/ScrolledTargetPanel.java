@@ -17,6 +17,7 @@ public class ScrolledTargetPanel extends JScrollPane {
 
 	TargetPanel target;
 	JPanel contentPanel;
+
 	/**
 	 * Create the panel.
 	 */
@@ -28,7 +29,7 @@ public class ScrolledTargetPanel extends JScrollPane {
 		this.setViewportView(contentPanel);
 	}
 
-	public void addComponent(ComponentPanel p){
+	public void addComponent(ComponentPanel p) {
 		target.addComponent(p);
 	}
 }

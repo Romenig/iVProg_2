@@ -11,8 +11,9 @@ package usp.ime.line.ivprog.interpreter.gui;
 import javax.swing.JDialog;
 
 public abstract class IVPInput extends JDialog {
-	
+
 	public abstract void failRegex();
+
 	public abstract void verifyRegex();
 
 }

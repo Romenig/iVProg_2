@@ -11,33 +11,31 @@ import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Properties;
 
-
 public final class SystemConfig extends Observable {
 
 	private static final String CUSTOM_PROPERTIES_KEY = "config";
-	//deprecated
-	//private static final String DEFAULT_PROPERTIES_FILE = "src/ilm/framework/config/defaultConfig.properties";
+	// deprecated
+	// private static final String DEFAULT_PROPERTIES_FILE =
+	// "src/ilm/framework/config/defaultConfig.properties";
 	private Properties _parameters;
 	private boolean _isApplet;
-    private Locale _currentLocale;
-    
+	private Locale _currentLocale;
+
 	public SystemConfig(boolean isApplet, Map parameterList) {
 		this(isApplet, parameterList, null);
 	}
-	
+
 	public SystemConfig(boolean isApplet, Map parameterList, Properties properties) {
-		if(properties != null) {
+		if (properties != null) {
 			_parameters = properties;
-		}
-		else {
+		} else {
 			try {
-				if(!isApplet){
-					if(parameterList.containsKey(CUSTOM_PROPERTIES_KEY)) {
+				if (!isApplet) {
+					if (parameterList.containsKey(CUSTOM_PROPERTIES_KEY)) {
 						_parameters = new Properties();
 						_parameters.load(getClass().getResourceAsStream((String) parameterList.get(CUSTOM_PROPERTIES_KEY)));
-					}
-					else {
-						_parameters = getDefaultProperties();		
+					} else {
+						_parameters = getDefaultProperties();
 					}
 				} else {
 					_parameters = new Properties();
@@ -59,21 +57,20 @@ public final class SystemConfig extends Observable {
 		setLanguage(_parameters.getProperty("language"));
 	}
 
-	private Properties getDefaultProperties() 
-			throws InvalidParameterException, FileNotFoundException, IOException {
-        Properties defaultProperties = new Properties();
-        defaultProperties.load(getClass().getResourceAsStream("defaultConfig.properties"));
-        return defaultProperties;
+	private Properties getDefaultProperties() throws InvalidParameterException, FileNotFoundException, IOException {
+		Properties defaultProperties = new Properties();
+		defaultProperties.load(getClass().getResourceAsStream("defaultConfig.properties"));
+		return defaultProperties;
 	}
-	
+
 	private void setProperties(Map parameterList) {
-	    Iterator parameterIterator = parameterList.entrySet().iterator();
-	    while(parameterIterator.hasNext()){
-	        Map.Entry entry = (Entry) parameterIterator.next();
-	        _parameters.setProperty((String)entry.getKey(), (String)entry.getValue());
-	    }
-    }
-	
+		Iterator parameterIterator = parameterList.entrySet().iterator();
+		while (parameterIterator.hasNext()) {
+			Map.Entry entry = (Entry) parameterIterator.next();
+			_parameters.setProperty((String) entry.getKey(), (String) entry.getValue());
+		}
+	}
+
 	public void setParameter(String key, String value) {
 		_parameters.setProperty(key, value);
 		setChanged();
@@ -89,23 +86,23 @@ public final class SystemConfig extends Observable {
 	public String getValue(String key) {
 		return _parameters.getProperty(key);
 	}
-	
+
 	public Locale getLanguage() {
 		return _currentLocale;
 	}
-	
+
 	public boolean isApplet() {
 		return _isApplet;
 	}
-	
+
 	public String toString() {
 		String string = "";
 		Enumeration e = _parameters.propertyNames();
-		while(e.hasMoreElements()){
-		    String s = (String) e.nextElement();
-		    string += "<" + s + ">" + _parameters.getProperty(s) + "</" + s + ">";
+		while (e.hasMoreElements()) {
+			String s = (String) e.nextElement();
+			string += "<" + s + ">" + _parameters.getProperty(s) + "</" + s + ">";
 		}
 		return string;
 	}
-	
+
 }

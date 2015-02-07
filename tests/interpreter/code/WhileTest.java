@@ -75,7 +75,7 @@ public class WhileTest {
 		map.put(attLine.getUniqueID(), attLine);
 		map.put(f.getUniqueID(), f);
 		context.setFunctionID(f.getUniqueID());
-		
+
 		w.setLoopCondition(leq.getUniqueID());
 		w.addChild(attLine.getUniqueID());
 		w.evaluate(context, map, factory);

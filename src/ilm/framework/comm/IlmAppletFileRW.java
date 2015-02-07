@@ -11,25 +11,20 @@ public class IlmAppletFileRW implements ICommunication {
 		return null;
 	}
 
-	public Vector readResourceFiles(String packageName,
-			Vector resourceList) {
+	public Vector readResourceFiles(String packageName, Vector resourceList) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Vector readAssignmentFiles(String packageName,
-			Vector assignmentList) {
+	public Vector readAssignmentFiles(String packageName, Vector assignmentList) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ZipFile writeAssignmentPackage(String packageName, String metadata,
-			Vector resourceNameList, Vector resourceList,
-			Vector assignmentNameList,
-			Vector assignmentList) throws IOException {
+	public ZipFile writeAssignmentPackage(String packageName, String metadata, Vector resourceNameList, Vector resourceList,
+	        Vector assignmentNameList, Vector assignmentList) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

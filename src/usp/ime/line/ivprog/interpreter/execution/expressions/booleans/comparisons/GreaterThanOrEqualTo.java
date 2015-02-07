@@ -26,9 +26,9 @@ public class GreaterThanOrEqualTo extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public GreaterThanOrEqualTo() {
-	    super("GreaterThanOrEqualTo", "GreaterThanOrEqualTo object.");
-    }
+	public GreaterThanOrEqualTo() {
+		super("GreaterThanOrEqualTo", "GreaterThanOrEqualTo object.");
+	}
 
 	private String expA;
 	private String expB;
@@ -52,18 +52,22 @@ public class GreaterThanOrEqualTo extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber expressionA = (IVPNumber) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPNumber expressionB = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPNumber expressionA = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPNumber expressionB = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		return expressionA.greaterThanOrEqualTo(expressionB, c, map, factory);
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

@@ -19,62 +19,72 @@ import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class FunctionReference extends DataObject {
-	
+
 	private String functionID;
 	private Vector parameterTypes;
 	private Vector arguments;
-	
-	public FunctionReference(){
+
+	public FunctionReference() {
 		super("FunctionReference", "FunctionReference object.");
 		parameterTypes = new Vector();
 		arguments = new Vector();
 	}
 
-	/* (non-Javadoc)
-	 * @see usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap, usp.ime.line.ivprog.interpreter.DataFactory)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog
+	 * .interpreter.execution.Context, java.util.HashMap,
+	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		return ((DataObject)map.get(functionID)).evaluate(c, map, factory);
+		return ((DataObject) map.get(functionID)).evaluate(c, map, factory);
 	}
 
 	/**
 	 * @return the functionID
 	 */
-    public String getFunctionID() {
-	    return functionID;
-    }
+	public String getFunctionID() {
+		return functionID;
+	}
 
 	/**
-	 * @param functionID the functionID to set
+	 * @param functionID
+	 *            the functionID to set
 	 */
-    public void setFunctionID(String functionID) {
-	    this.functionID = functionID;
-    }
-    
-    public String setParameterType(int position, String parameterType){
-    	String lastType = IVPValue.NULL;
-    	if(parameterTypes.size() >= position){
-    		lastType = (String) parameterTypes.get(position); 
-    	}
-    	parameterTypes.add(position, parameterType);
-    	return lastType;
-    }
+	public void setFunctionID(String functionID) {
+		this.functionID = functionID;
+	}
 
-    public String setParameter(int position, String parameter){
-    	String lastParameter = IVPValue.NULL;
-    	if(arguments.size() >= position){
-    		lastParameter = (String) arguments.get(position); 
-    	}
-    	arguments.add(position, parameter);
-    	return lastParameter;
-    }
+	public String setParameterType(int position, String parameterType) {
+		String lastType = IVPValue.NULL;
+		if (parameterTypes.size() >= position) {
+			lastType = (String) parameterTypes.get(position);
+		}
+		parameterTypes.add(position, parameterType);
+		return lastType;
+	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	public String setParameter(int position, String parameter) {
+		String lastParameter = IVPValue.NULL;
+		if (arguments.size() >= position) {
+			lastParameter = (String) arguments.get(position);
+		}
+		arguments.add(position, parameter);
+		return lastParameter;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

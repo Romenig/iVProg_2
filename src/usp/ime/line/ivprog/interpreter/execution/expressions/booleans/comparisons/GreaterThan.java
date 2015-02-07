@@ -29,9 +29,9 @@ public class GreaterThan extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public GreaterThan() {
-	    super("GreaterThan", "GreaterThan object.");
-    }
+	public GreaterThan() {
+		super("GreaterThan", "GreaterThan object.");
+	}
 
 	/**
 	 * Set the left expression of and. EqualTo := expressionA == expressionB
@@ -52,18 +52,22 @@ public class GreaterThan extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber expressionA = (IVPNumber) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPNumber expressionB = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPNumber expressionA = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPNumber expressionB = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		return expressionA.greaterThan(expressionB, c, map, factory);
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

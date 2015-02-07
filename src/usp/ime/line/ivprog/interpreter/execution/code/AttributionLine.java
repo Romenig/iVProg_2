@@ -29,9 +29,9 @@ public class AttributionLine extends DataObject {
 	 * @param name
 	 * @param description
 	 */
-    public AttributionLine() {
-	    super("AttLine", "AttLine object.");
-    }
+	public AttributionLine() {
+		super("AttLine", "AttLine object.");
+	}
 
 	private String variableID;
 	private String expressionID;
@@ -52,12 +52,12 @@ public class AttributionLine extends DataObject {
 			variable.setValueID(copyOfValue.getUniqueID());
 		} else if (map.get(variableID) instanceof IVPVectorReference) {
 			IVPVectorReference ref = (IVPVectorReference) map.get(variableID);
-			IVPValue value = (IVPValue) ((DataObject)map.get(expressionID)).evaluate(c, map, factory);
+			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
 			IVPValue copyOfValue = createCopy(value, c, map, factory);
 			ref.setElementIntoVector(copyOfValue.getUniqueID(), c, map, factory);
 		} else if (map.get(variableID) instanceof IVPMatrixReference) {
 			IVPMatrixReference ref = (IVPMatrixReference) map.get(variableID);
-			IVPValue value = (IVPValue) ((DataObject)map.get(expressionID)).evaluate(c, map, factory);
+			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
 			IVPValue copyOfValue = createCopy(value, c, map, factory);
 			ref.setElementIntoMatrix(copyOfValue.getUniqueID(), c, map, factory);
 		}
@@ -74,9 +74,9 @@ public class AttributionLine extends DataObject {
 		IVPValue copy = null;
 		if (value instanceof IVPNumber) {
 			copy = factory.createIVPNumber();
-			if(value.getValueType().equals(IVPValue.INTEGER_TYPE)){
+			if (value.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 				c.addInt(copy.getUniqueID(), c.getInt(value.getUniqueID()));
-			}else{
+			} else {
 				c.addDouble(copy.getUniqueID(), c.getDouble(value.getUniqueID()));
 			}
 		} else if (value instanceof IVPBoolean) {
@@ -112,12 +112,16 @@ public class AttributionLine extends DataObject {
 		expressionID = uniqueID;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		return false;
+	}
 
 }

@@ -35,7 +35,7 @@ public class Context implements Cloneable {
 		booleanMap = bMap;
 	}
 
-	//DOUBLE 
+	// DOUBLE
 	/**
 	 * Add a double to the hashmap of doubleValues.
 	 * 
@@ -80,7 +80,8 @@ public class Context implements Cloneable {
 		}
 		return e;
 	}
-	//---------------- INTEGER
+
+	// ---------------- INTEGER
 	/**
 	 * Add an int to the hashmap of integers.
 	 * 
@@ -125,8 +126,7 @@ public class Context implements Cloneable {
 		}
 		return e;
 	}
-	
-	
+
 	/**
 	 * Add a string object to the hashmap of strings.
 	 * 
@@ -219,7 +219,7 @@ public class Context implements Cloneable {
 	 * The clone method will be used only during a recursive call.
 	 */
 	public Object clone() {
-		Context c = new Context((HashMap) integerMap.clone(),(HashMap) doubleMap.clone(), (HashMap) stringMap.clone(),
+		Context c = new Context((HashMap) integerMap.clone(), (HashMap) doubleMap.clone(), (HashMap) stringMap.clone(),
 		        (HashMap) booleanMap.clone());
 		return c;
 	}
@@ -227,15 +227,16 @@ public class Context implements Cloneable {
 	/**
 	 * @return the functionID
 	 */
-    public String getFunctionID() {
-	    return functionID;
-    }
+	public String getFunctionID() {
+		return functionID;
+	}
 
 	/**
-	 * @param functionID the functionID to set
+	 * @param functionID
+	 *            the functionID to set
 	 */
-    public void setFunctionID(String functionID) {
-	    this.functionID = functionID;
-    }
+	public void setFunctionID(String functionID) {
+		this.functionID = functionID;
+	}
 
 }

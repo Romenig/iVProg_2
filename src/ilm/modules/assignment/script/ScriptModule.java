@@ -24,7 +24,7 @@ public class ScriptModule extends AssignmentModule {
 
 	public void print() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public String getStringContent(DomainConverter converter, int index) {
@@ -34,22 +34,22 @@ public class ScriptModule extends AssignmentModule {
 
 	public void removeAssignment(int index) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setDomainModel(DomainModel model) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setState(AssignmentState state) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void setActionObservers(Collection values) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

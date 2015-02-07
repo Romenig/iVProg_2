@@ -31,10 +31,10 @@ public class IVPMatrix extends DataObject {
 	 * @param name
 	 * @param description
 	 */
-    public IVPMatrix() {
-	    super("IVPMatrix", "IVPMatrix object.");
-    }
-    
+	public IVPMatrix() {
+		super("IVPMatrix", "IVPMatrix object.");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -43,7 +43,7 @@ public class IVPMatrix extends DataObject {
 	 * .interpreter.execution.Context, java.util.HashMap,
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
-	
+
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		return this;
 	}
@@ -164,13 +164,17 @@ public class IVPMatrix extends DataObject {
 		return nLinID;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

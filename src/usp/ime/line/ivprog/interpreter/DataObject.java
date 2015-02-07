@@ -14,16 +14,18 @@ import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.execution.Context;
 
-public abstract class DataObject extends DomainObject{
+public abstract class DataObject extends DomainObject {
 
 	/**
-	 * This method is inheritance from LPS. If you are going to use the interpreter separately, you can remove this method.
+	 * This method is inheritance from LPS. If you are going to use the
+	 * interpreter separately, you can remove this method.
+	 * 
 	 * @param name
 	 * @param description
 	 */
-    public DataObject(String name, String description) {
-	    super(name, description);
-    }
+	public DataObject(String name, String description) {
+		super(name, description);
+	}
 
 	private String uniqueID;
 

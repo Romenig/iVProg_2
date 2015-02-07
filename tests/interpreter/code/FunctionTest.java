@@ -80,5 +80,5 @@ public class FunctionTest {
 		IVPNumber result = (IVPNumber) v.evaluate(context, map, factory);
 		assertTrue(context.getInt(result.getUniqueID()) == 10);
 	}
-	
+
 }

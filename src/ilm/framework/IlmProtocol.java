@@ -17,7 +17,7 @@ public interface IlmProtocol {
 	public static final String FEEDBACK = "iLM_PARAM_Feedback";
 	public static final String SEND_ANSWER = "iLM_PARAM_SendAnswer";
 	public static final String CHANGE_PAGE = "iLM_PARAM_ChangePage";
-	
+
 	/**
 	 * File attributes from iLM specification
 	 */
@@ -38,24 +38,24 @@ public interface IlmProtocol {
 	public static final String HISTORY_MODULE_NAME = "history";
 	public static final String UNDO_REDO_MODULE_NAME = "undo_redo";
 	public static final String AUTO_CHECKING_MODULE_NAME = "automatic_checking";
-	
+
 	/**
 	 * Configuration attributes/properties from iLM specification
 	 */
-	public static final String ACTIVE_ASSIGNMENT_INDEX = "active_assignment_index"; 
-	
+	public static final String ACTIVE_ASSIGNMENT_INDEX = "active_assignment_index";
+
 	/**
-	 * @return a number which represents the grade obtained by the
-	 * 		student for this assignment (percentage of correctness)
+	 * @return a number which represents the grade obtained by the student for
+	 *         this assignment (percentage of correctness)
 	 */
 	public float getEvaluation();
-	
+
 	/**
-	 * @return a string with the converted solution created by the 
-	 * 		student for this assignment
+	 * @return a string with the converted solution created by the student for
+	 *         this assignment
 	 */
 	public String getAnswer();
-	
+
 	/**
 	 * @return a zip package with all the assignment data
 	 */

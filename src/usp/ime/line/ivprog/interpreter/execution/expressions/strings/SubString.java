@@ -31,10 +31,10 @@ public class SubString extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public SubString() {
-	    super("SubString", "SubString object.");
-    }
-    
+	public SubString() {
+		super("SubString", "SubString object.");
+	}
+
 	/**
 	 * Set the string.
 	 * 
@@ -45,7 +45,7 @@ public class SubString extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPString str1 = (IVPString) ((DataObject)map.get(string)).evaluate(c, map, factory);
+		IVPString str1 = (IVPString) ((DataObject) map.get(string)).evaluate(c, map, factory);
 		IVPString result = str1.substring(beginIndex, endIndex, c, factory);
 		return result;
 	}
@@ -68,13 +68,17 @@ public class SubString extends Expression {
 		endIndex = ei;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

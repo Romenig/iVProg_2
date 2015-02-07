@@ -28,17 +28,17 @@ public class HistoryModuleGUI extends JFrame implements Observer {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		list = new JList();
 		contentPane.add(list, BorderLayout.CENTER);
 		setTitle(ResourceBundleIVP.getString("historyBtn.Text"));
 	}
 
 	public void update(Observable o, Object arg) {
-		if(o instanceof HistoryModule) {
-			_history = (HistoryModule)o;
+		if (o instanceof HistoryModule) {
+			_history = (HistoryModule) o;
 			DefaultListModel listModel = new DefaultListModel();
-			for(int i = 0; i < _history.getHistory().size(); i++) {
+			for (int i = 0; i < _history.getHistory().size(); i++) {
 				listModel.addElement(((DomainAction) _history.getHistory().get(i)).getDescription());
 			}
 			list.setModel(listModel);

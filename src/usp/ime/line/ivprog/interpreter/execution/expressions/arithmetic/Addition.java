@@ -26,9 +26,9 @@ public class Addition extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public Addition() {
-	    super("Addition", "Addition object.");
-    }
+	public Addition() {
+		super("Addition", "Addition object.");
+	}
 
 	private String expA;
 	private String expB;
@@ -54,8 +54,8 @@ public class Addition extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber v1 = (IVPNumber) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPNumber v2 = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		IVPNumber result = v1.add(v2, c, factory, map);
 		if (v1.getValueType() == IVPValue.DOUBLE_TYPE || v2.getValueType() == IVPValue.DOUBLE_TYPE) {
 			result.setValueType(IVPValue.DOUBLE_TYPE);
@@ -65,13 +65,17 @@ public class Addition extends Expression {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

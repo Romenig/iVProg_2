@@ -78,7 +78,7 @@ public class ReturnTest {
 
 		f.addChild(w.getUniqueID());
 		f.addChild(r.getUniqueID());
-		
+
 		IVPNumber result = (IVPNumber) f.evaluate(context, map, factory);
 		assertTrue(context.getInt(result.getUniqueID()) == 10);
 	}

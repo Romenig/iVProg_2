@@ -40,17 +40,16 @@ public class IlmDesktopFileRW implements ICommunication {
 		return null;
 	}
 
-	public Vector readAssignmentFiles(String packageName, 
-												 Vector assignmentFileList) throws IOException {
+	public Vector readAssignmentFiles(String packageName, Vector assignmentFileList) throws IOException {
 		File sourceZipFile = new File(packageName);
 		try {
 			ZipFile zipFile = new ZipFile(sourceZipFile, ZipFile.OPEN_READ);
 			InputStream in;
 			Vector assignmentContentList = new Vector();
-			for(int i = 0; i < assignmentFileList.size(); i++){
-			    String fileName = (String) assignmentFileList.get(i);
-			    in = zipFile.getInputStream(zipFile.getEntry(fileName));
-                assignmentContentList.add(convertInputStreamToString(in));
+			for (int i = 0; i < assignmentFileList.size(); i++) {
+				String fileName = (String) assignmentFileList.get(i);
+				in = zipFile.getInputStream(zipFile.getEntry(fileName));
+				assignmentContentList.add(convertInputStreamToString(in));
 			}
 			zipFile.close();
 			return assignmentContentList;
@@ -61,32 +60,28 @@ public class IlmDesktopFileRW implements ICommunication {
 		return null;
 	}
 
-	public ZipFile writeAssignmentPackage(String packageName, 
-										String metadata,
-										Vector resourceNameList,
-										Vector resourceList, 
-										Vector assignmentNameList,
-										Vector assignmentList) {
+	public ZipFile writeAssignmentPackage(String packageName, String metadata, Vector resourceNameList, Vector resourceList,
+	        Vector assignmentNameList, Vector assignmentList) {
 		writeFile(metadata, IlmProtocol.METADATA_FILENAME);
-		for(int i = 0; i < assignmentNameList.size(); i++) {
-			writeFile((String)assignmentList.get(i), (String)assignmentNameList.get(i));
+		for (int i = 0; i < assignmentNameList.size(); i++) {
+			writeFile((String) assignmentList.get(i), (String) assignmentNameList.get(i));
 		}
-		
+
 		try {
 			ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(packageName));
 			BufferedReader in = new BufferedReader(new FileReader(IlmProtocol.METADATA_FILENAME));
 			zos.putNextEntry(new ZipEntry(IlmProtocol.METADATA_FILENAME));
 			int c;
 			while ((c = in.read()) != -1)
-		        zos.write(c);
+				zos.write(c);
 			in.close();
 			zos.closeEntry();
-			for(int i = 0; i < assignmentNameList.size(); i++){
-                String fileName = (String) assignmentNameList.get(i);
+			for (int i = 0; i < assignmentNameList.size(); i++) {
+				String fileName = (String) assignmentNameList.get(i);
 				in = new BufferedReader(new FileReader(fileName));
 				zos.putNextEntry(new ZipEntry(fileName));
 				while ((c = in.read()) != -1)
-			        zos.write(c);
+					zos.write(c);
 				in.close();
 				zos.closeEntry();
 			}
@@ -101,7 +96,6 @@ public class IlmDesktopFileRW implements ICommunication {
 		// TODO Return something meaningfull
 		return null;
 	}
-
 
 	private void writeFile(String content, String fileName) {
 		try {
@@ -119,24 +113,24 @@ public class IlmDesktopFileRW implements ICommunication {
 	}
 
 	public String convertInputStreamToString(InputStream in) {
-		if(in != null) {
+		if (in != null) {
 			StringWriter writer = new StringWriter();
 			char[] buffer = new char[1024];
-			
+
 			try {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 				int n;
-				while((n = reader.read(buffer)) != -1) {
+				while ((n = reader.read(buffer)) != -1) {
 					writer.write(buffer, 0, n);
 				}
 				in.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
+			}
 			return writer.toString();
 		} else {
-			return "";			
+			return "";
 		}
 	}
 

@@ -32,15 +32,14 @@ public class For extends CodeComposite {
 	private String index;
 	private String increment;
 
-
 	/**
 	 * @param name
 	 * @param description
 	 */
-    public For() {
-	    super("For", "For class.");
-    }
-	
+	public For() {
+		super("For", "For class.");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -56,66 +55,66 @@ public class For extends CodeComposite {
 		IVPValue incrementValue = null;
 		Function f = (Function) map.get(c.getFunctionID());
 		if (executionMethod.equals(FOR_N_TIMES)) {
-			upperValue = (IVPValue) ((DataObject)map.get(upperBound)).evaluate(c, map, factory);
+			upperValue = (IVPValue) ((DataObject) map.get(upperBound)).evaluate(c, map, factory);
 			int upperInt = c.getInt(upperValue.getUniqueID());
 			for (int i = 0; i < upperInt; i++) {
 				for (int j = 0; j < children.size(); j++) {
 					DataObject component = (DataObject) map.get(children.get(j));
-					if(component instanceof Return){
+					if (component instanceof Return) {
 						DataObject returnedElement = (DataObject) component.evaluate(c, map, factory);
 						f.setFunctionReturnedElementID(returnedElement.getUniqueID());
 						f.setReturning(true);
 						return returnedElement;
-					}else if(f.isReturning()){
+					} else if (f.isReturning()) {
 						return IVPValue.NULL;
 					}
 					component.evaluate(c, map, factory);
 				}
 			}
 		} else if (executionMethod.equals(FOR_N_TIMES_WITH_INDEX)) {
-			upperValue = (IVPValue) ((DataObject)map.get(upperBound)).evaluate(c, map, factory);
+			upperValue = (IVPValue) ((DataObject) map.get(upperBound)).evaluate(c, map, factory);
 			indexVariable = (IVPVariable) map.get(index);
-			IVPNumber indexValue = (IVPNumber) ((DataObject)map.get(indexVariable.getValueID())).evaluate(c, map, factory);
+			IVPNumber indexValue = (IVPNumber) ((DataObject) map.get(indexVariable.getValueID())).evaluate(c, map, factory);
 			int upperInt = c.getInt(upperValue.getUniqueID());
 			for (int i = 0; i < upperInt; i++) {
 				for (int j = 0; j < children.size(); j++) {
 					DataObject component = (DataObject) map.get(children.get(j));
-					if(component instanceof Return){
+					if (component instanceof Return) {
 						DataObject returnedElement = (DataObject) component.evaluate(c, map, factory);
 						f.setFunctionReturnedElementID(returnedElement.getUniqueID());
 						f.setReturning(true);
 						return returnedElement;
-					}else if(f.isReturning()){
+					} else if (f.isReturning()) {
 						return IVPValue.NULL;
 					}
 					component.evaluate(c, map, factory);
 				}
-				indexValue.updateIntegerValue(c, c.getInt(indexValue.getUniqueID())+1);
+				indexValue.updateIntegerValue(c, c.getInt(indexValue.getUniqueID()) + 1);
 			}
 		} else { // COMPLETE
-			upperValue = (IVPValue) ((DataObject)map.get(upperBound)).evaluate(c, map, factory);
-			lowerValue = (IVPValue) ((DataObject)map.get(lowerBound)).evaluate(c, map, factory);
-			incrementValue = (IVPValue) ((DataObject)map.get(incrementValue)).evaluate(c, map, factory);
+			upperValue = (IVPValue) ((DataObject) map.get(upperBound)).evaluate(c, map, factory);
+			lowerValue = (IVPValue) ((DataObject) map.get(lowerBound)).evaluate(c, map, factory);
+			incrementValue = (IVPValue) ((DataObject) map.get(incrementValue)).evaluate(c, map, factory);
 			indexVariable = (IVPVariable) map.get(index);
-			IVPNumber indexValue = (IVPNumber) ((DataObject)map.get(indexVariable.getValueID())).evaluate(c, map, factory);
+			IVPNumber indexValue = (IVPNumber) ((DataObject) map.get(indexVariable.getValueID())).evaluate(c, map, factory);
 			int upperInt = c.getInt(upperValue.getUniqueID());
 			int lowerInt = c.getInt(lowerValue.getUniqueID());
 			int incrementInt = c.getInt(incrementValue.getUniqueID());
 			for (int i = lowerInt; i < upperInt; i += incrementInt) {
 				for (int j = 0; j < children.size(); j++) {
 					DataObject component = (DataObject) map.get(children.get(j));
-					if(component instanceof Return){
+					if (component instanceof Return) {
 						DataObject returnedElement = (DataObject) component.evaluate(c, map, factory);
 						f.setFunctionReturnedElementID(returnedElement.getUniqueID());
 						f.setReturning(true);
 						return returnedElement;
-					}else if(f.isReturning()){
+					} else if (f.isReturning()) {
 						return IVPValue.NULL;
 					}
 					component.evaluate(c, map, factory);
 				}
-				indexValue.updateIntegerValue(c, c.getInt(indexValue.getUniqueID())+1);
-				incrementValue = (IVPValue) ((DataObject)map.get(incrementValue)).evaluate(c, map, factory);
+				indexValue.updateIntegerValue(c, c.getInt(indexValue.getUniqueID()) + 1);
+				incrementValue = (IVPValue) ((DataObject) map.get(incrementValue)).evaluate(c, map, factory);
 				incrementInt = c.getInt(incrementValue.getUniqueID());
 			}
 		}
@@ -197,11 +196,15 @@ public class For extends CodeComposite {
 		this.increment = increment;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    public boolean equals(DomainObject o) {
-	    return false;
-    }
+	public boolean equals(DomainObject o) {
+		return false;
+	}
 
 }

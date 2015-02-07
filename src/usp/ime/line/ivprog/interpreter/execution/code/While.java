@@ -26,10 +26,10 @@ public class While extends CodeComposite {
 	 * @param name
 	 * @param description
 	 */
-    public While() {
-	    super("While", "While object.");
-    }
-	
+	public While() {
+		super("While", "While object.");
+	}
+
 	/**
 	 * @param uniqueID
 	 */
@@ -46,33 +46,37 @@ public class While extends CodeComposite {
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPBoolean b = (IVPBoolean) ((DataObject)map.get(loopConditionID)).evaluate(c, map, factory);
+		IVPBoolean b = (IVPBoolean) ((DataObject) map.get(loopConditionID)).evaluate(c, map, factory);
 		Function f = (Function) map.get(c.getFunctionID());
 		while (c.getBoolean(b.getUniqueID())) {
 			for (int i = 0; i < children.size(); i += 1) {
 				DataObject component = (DataObject) map.get(children.get(i));
-				if(component instanceof Return){
+				if (component instanceof Return) {
 					DataObject returnedElement = (DataObject) component.evaluate(c, map, factory);
 					f.setFunctionReturnedElementID(returnedElement.getUniqueID());
 					f.setReturning(true);
 					return returnedElement;
-				}else if(f.isReturning()){
+				} else if (f.isReturning()) {
 					return IVPValue.NULL;
 				}
 				component.evaluate(c, map, factory);
 			}
-			b = (IVPBoolean) ((DataObject)map.get(loopConditionID)).evaluate(c, map, factory);
+			b = (IVPBoolean) ((DataObject) map.get(loopConditionID)).evaluate(c, map, factory);
 		}
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

@@ -41,12 +41,16 @@ public class IVPError extends DataObject {
 		return this;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		return false;
+	}
 
 }

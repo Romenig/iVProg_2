@@ -45,10 +45,10 @@ public class FunctionReferenceTest {
 		IVPValue maximumValue = factory.createIVPNumber();
 		maximumValue.setValueType(IVPValue.INTEGER_TYPE);
 		f.addConstant(maximumValue, "9", context, map);
-		
+
 		IVPVariable result = factory.createIVPVariable();
 		result.setVariableType(IVPValue.INTEGER_TYPE);
-		f.addVariable(result,"-11",context,map,factory);
+		f.addVariable(result, "-11", context, map, factory);
 
 		IVPValue one = factory.createIVPNumber();
 		one.setValueType(IVPValue.INTEGER_TYPE);
@@ -80,25 +80,25 @@ public class FunctionReferenceTest {
 		map.put(r.getUniqueID(), r);
 		map.put(f.getUniqueID(), f);
 		map.put(fr.getUniqueID(), fr);
-		
+
 		context.setFunctionID(f.getUniqueID());
 
 		w.setLoopCondition(leq.getUniqueID());
 		w.addChild(attLine.getUniqueID());
 
 		fr.setFunctionID(f.getUniqueID());
-		
+
 		f.addChild(w.getUniqueID());
 		f.addChild(r.getUniqueID());
-		
+
 		attLine2.setVariable(result.getUniqueID());
 		attLine2.setExpression(fr.getUniqueID());
-		
+
 		attLine2.evaluate(context, map, factory);
-		
+
 		IVPNumber result2 = (IVPNumber) result.evaluate(context, map, factory);
-		
-		assertTrue(context.getInt(result2.getUniqueID())== 10);
+
+		assertTrue(context.getInt(result2.getUniqueID()) == 10);
 	}
-	
+
 }

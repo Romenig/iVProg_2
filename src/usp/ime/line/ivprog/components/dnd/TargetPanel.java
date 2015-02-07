@@ -27,10 +27,9 @@ import java.util.Vector;
  * @author Romenig
  */
 public class TargetPanel extends JPanel {
-	
+
 	private Vector elementList;
 	private boolean isInternal;
-
 
 	/**
 	 * Create the panel.
@@ -44,57 +43,58 @@ public class TargetPanel extends JPanel {
 		setBackground(Color.blue);
 	}
 
-    private void initializeVariables() {
-    	elementList = new Vector();
-    }
+	private void initializeVariables() {
+		elementList = new Vector();
+	}
 
 	private void initializeLayout() {
-	    GridBagLayout gridBagLayout = new GridBagLayout();
+		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
-        if (isInternal)
-            setPreferredSize(new Dimension(10, 30));
-    }
+		if (isInternal)
+			setPreferredSize(new Dimension(10, 30));
+	}
 
 	/**
 	 * Add a component that would be a Leaf or a Composite Panel.
+	 * 
 	 * @param componentPanel
 	 */
-    public void addComponent(ComponentPanel componentPanel) {
-    	elementList.add(componentPanel);
-    	relayout();
-    }
+	public void addComponent(ComponentPanel componentPanel) {
+		elementList.add(componentPanel);
+		relayout();
+	}
 
 	/**
 	 * Repaint the target panel with the updated element list.
 	 */
-    private void relayout() {
-        int row = 0;
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.weightx = 1.0;
-        gbc.weighty = 0.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        removeAll();
-        gbc.gridy = row++;
-        gbc.insets = new Insets(4, 3, 2, 5);
-        for (int i = 0; i < elementList.size(); i++) {
-            gbc.gridy = row++;
-            JComponent c = (JComponent) elementList.get(i);
-            add(c, gbc);
-        }
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridy = row++;
-        Component strut = Box.createVerticalStrut(1);
-        add(strut, gbc);
-        revalidate();
-        repaint();
-    }
+	private void relayout() {
+		int row = 0;
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.weightx = 1.0;
+		gbc.weighty = 0.0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		removeAll();
+		gbc.gridy = row++;
+		gbc.insets = new Insets(4, 3, 2, 5);
+		for (int i = 0; i < elementList.size(); i++) {
+			gbc.gridy = row++;
+			JComponent c = (JComponent) elementList.get(i);
+			add(c, gbc);
+		}
+		gbc.weighty = 1.0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.gridy = row++;
+		Component strut = Box.createVerticalStrut(1);
+		add(strut, gbc);
+		revalidate();
+		repaint();
+	}
 
-	
 	/**
 	 * Returns if this targetPanel is inside a CompositePanel.
+	 * 
 	 * @return the isInternal
 	 */
 	public boolean isInternal() {
@@ -103,19 +103,22 @@ public class TargetPanel extends JPanel {
 
 	/**
 	 * Set if this TargetPanel is inside a CompositePanel or not.
-	 * @param isInternal the isInternal to set
+	 * 
+	 * @param isInternal
+	 *            the isInternal to set
 	 */
 	public void setInternal(boolean isInternal) {
 		this.isInternal = isInternal;
 	}
-    
+
 	/**
 	 * Removes this element from the containing panel.
+	 * 
 	 * @param abstractAction
 	 */
-    public void removeElement(ComponentPanel element) {
-    	elementList.remove(element);
-    	relayout();
-    }
+	public void removeElement(ComponentPanel element) {
+		elementList.remove(element);
+		relayout();
+	}
 
 }

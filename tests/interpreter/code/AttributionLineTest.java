@@ -277,7 +277,7 @@ public class AttributionLineTest {
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
 
-		assertTrue(c.getInt(v.getValueID())== 10);
+		assertTrue(c.getInt(v.getValueID()) == 10);
 		attLine.evaluate(c, map, factory);
 		assertTrue(c.getInt(v.getValueID()) == 41);
 	}

@@ -36,7 +36,7 @@ public class RecursiveCallWithUserInputTest {
 		DataFactory factory = new DataFactory();
 		Context context = new Context();
 		HashMap map = new HashMap();
-		
+
 		Function fatorial = factory.createFunction();
 		context.setFunctionID(fatorial.getUniqueID());
 		fatorial.setFunctionName("fatorial");
@@ -44,53 +44,53 @@ public class RecursiveCallWithUserInputTest {
 		fatorial.addArgument(IVPValue.INTEGER_TYPE, context, map, factory);
 		IVPNumber argu = (IVPNumber) map.get(fatorial.getArgument(0));
 		map.put(fatorial.getUniqueID(), fatorial);
-		
+
 		UserInput input = factory.createUserInput();
 		input.setType(IVPValue.INTEGER_TYPE);
 		input.setValueID(argu.getUniqueID());
 		map.put(input.getUniqueID(), input);
-		
+
 		Return r1 = factory.createReturn();
 		IVPNumber one = factory.createIVPNumber();
 		one.setValueType(IVPValue.INTEGER_TYPE);
 		fatorial.addConstant(one, "1", context, map);
 		r1.setReturnable(one.getUniqueID());
 		map.put(r1.getUniqueID(), r1);
-		
+
 		Return r2 = factory.createReturn();
 		RecursiveCall recursion = factory.createRecursiveCall();
 		map.put(recursion.getUniqueID(), recursion);
 		recursion.setFunctionID(fatorial.getUniqueID());
 		map.put(r2.getUniqueID(), r2);
-		
+
 		IfElse ifElse = factory.createIfElse();
 		ifElse.addChild(r1.getUniqueID());
 		ifElse.addElseChild(r2.getUniqueID());
 		map.put(ifElse.getUniqueID(), ifElse);
-		
+
 		EqualTo eq = factory.createEqualTo();
 		eq.setExpressionA(fatorial.getArgument(0));
 		eq.setExpressionB(one.getUniqueID());
 		ifElse.setFlowCondition(eq.getUniqueID());
 		map.put(eq.getUniqueID(), eq);
 		fatorial.addChild(ifElse.getUniqueID());
-		
+
 		Multiplication m = factory.createMultiplication();
 		m.setExpressionA(fatorial.getArgument(0));
 		m.setExpressionB(recursion.getUniqueID());
 		r2.setReturnable(m.getUniqueID());
 		map.put(m.getUniqueID(), m);
-		
+
 		Subtraction sub = factory.createSubtraction();
 		sub.setExpressionA(fatorial.getArgument(0));
 		sub.setExpressionB(one.getUniqueID());
 		map.put(sub.getUniqueID(), sub);
 		recursion.addParameter(0, sub.getUniqueID());
-		
+
 		input.evaluate(context, map, factory);
 		IVPNumber result = (IVPNumber) fatorial.evaluate(context, map, factory);
-		
-		assertTrue(context.getInt(result.getUniqueID()) == 120); 
+
+		assertTrue(context.getInt(result.getUniqueID()) == 120);
 	}
 
 }

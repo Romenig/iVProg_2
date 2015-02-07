@@ -84,7 +84,7 @@ public class ForTest {
 		Context context = new Context();
 		For f = factory.createFor();
 		Function func = factory.createFunction();
-		
+
 		IVPValue startingValue = factory.createIVPNumber();
 		startingValue.setValueType(IVPValue.INTEGER_TYPE);
 		context.addInt(startingValue.getUniqueID(), 0);

@@ -17,27 +17,28 @@ public class ObjectListModuleToolbar extends IlmModuleToolbar {
 	private static final long serialVersionUID = 1L;
 	private ObjectListModuleGUI _window;
 	private JButton button;
-	
+
 	public ObjectListModuleToolbar() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		button = makeButton("objectlist", ResourceBundleIVP.getString("objectBtn.Text"), ResourceBundleIVP.getString("objectBtn.AltText"),ResourceBundleIVP.getString("objectBtn.AltText"));
+
+		button = makeButton("objectlist", ResourceBundleIVP.getString("objectBtn.Text"), ResourceBundleIVP.getString("objectBtn.AltText"),
+		        ResourceBundleIVP.getString("objectBtn.AltText"));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				showWindow();
 			}
 		});
 		add(button);
-		
+
 		_window = new ObjectListModuleGUI();
 	}
-	
+
 	private void showWindow() {
 		_window.setVisible(true);
 	}
-	
+
 	public void update(Observable o, Object arg) {
-		if(_window != null) {
+		if (_window != null) {
 			_window.update(o, arg);
 		}
 	}

@@ -7,18 +7,17 @@ import java.util.zip.ZipFile;
 import ilm.framework.config.SystemConfig;
 
 public class CommControl implements ICommunication {
-	
+
 	private SystemConfig _config;
 	private IEncrypter _encrypter;
 	private ICommunication _fileRW;
-	
+
 	public CommControl(SystemConfig config) {
 		_config = config;
 		_encrypter = new IlmEncrypter();
-		if(_config.isApplet()) {
+		if (_config.isApplet()) {
 			_fileRW = new IlmAppletFileRW();
-		}
-		else {
+		} else {
 			_fileRW = new IlmDesktopFileRW();
 		}
 	}
@@ -53,15 +52,11 @@ public class CommControl implements ICommunication {
 		return null;
 	}
 
-	public ZipFile writeAssignmentPackage(String packageName, 
-										String metadata,
-										Vector resourceNameList,
-										Vector resourceList, 
-										Vector assignmentNameList,
-										Vector assignmentList) {
+	public ZipFile writeAssignmentPackage(String packageName, String metadata, Vector resourceNameList, Vector resourceList,
+	        Vector assignmentNameList, Vector assignmentList) {
 		try {
-			return _fileRW.writeAssignmentPackage(packageName, metadata, resourceNameList, resourceList, 
-												  assignmentNameList, _encrypter.encryptFileContent(assignmentList));
+			return _fileRW.writeAssignmentPackage(packageName, metadata, resourceNameList, resourceList, assignmentNameList,
+			        _encrypter.encryptFileContent(assignmentList));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

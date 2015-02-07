@@ -19,7 +19,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import usp.ime.line.ivprog.view.utils.IconButtonUI;
+import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 
 /**
  * @author Romenig
@@ -57,54 +57,53 @@ public class CompositePanel extends ComponentPanel {
 	private void initButtons() {
 		initExpandBtnUp();
 		initExpandBtnDown();
-    }
-	
+	}
+
 	private void initExpandBtnUp() {
 		expandBtnUp = new JButton();
 		expandBtnUp.setIcon(up);
 		expandBtnUp.setUI(new IconButtonUI());
 		expandBtnUp.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                expandedActions();
-            }
-        });
+			public void actionPerformed(ActionEvent arg0) {
+				expandedActions();
+			}
+		});
 		expandBtnUp.setVisible(false);
-        header.add(expandBtnUp);
-    }
+		header.add(expandBtnUp);
+	}
 
 	private void initExpandBtnDown() {
-    	expandBtnDown = new JButton();
-    	expandBtnDown.setIcon(down);
-    	expandBtnDown.setUI(new IconButtonUI());
-    	expandBtnDown.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                notExpandedAction();
-            }
-        });
-        header.add(expandBtnDown);
-    }
-	
-    
-    protected void notExpandedAction() {
-        content.setVisible(true);
-        expandBtnUp.setVisible(true);
-        expandBtnDown.setVisible(false);
-        revalidate();
-        repaint();
-    }
-    
-    protected void expandedActions() {
-    	content.setVisible(false);
-        expandBtnUp.setVisible(false);
-        expandBtnDown.setVisible(true);
-        revalidate();
-        repaint();
-    }
-	
+		expandBtnDown = new JButton();
+		expandBtnDown.setIcon(down);
+		expandBtnDown.setUI(new IconButtonUI());
+		expandBtnDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				notExpandedAction();
+			}
+		});
+		header.add(expandBtnDown);
+	}
+
+	protected void notExpandedAction() {
+		content.setVisible(true);
+		expandBtnUp.setVisible(true);
+		expandBtnDown.setVisible(false);
+		revalidate();
+		repaint();
+	}
+
+	protected void expandedActions() {
+		content.setVisible(false);
+		expandBtnUp.setVisible(false);
+		expandBtnDown.setVisible(true);
+		revalidate();
+		repaint();
+	}
+
 	private void initHeader() {
 		header = new JPanel();
 		header = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        header.setOpaque(false);
+		header.setOpaque(false);
 		contentPanel.add(BorderLayout.NORTH, header);
 	}
 

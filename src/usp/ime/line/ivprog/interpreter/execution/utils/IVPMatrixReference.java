@@ -23,14 +23,14 @@ public class IVPMatrixReference extends DataObject {
 	private String linID;
 	private String colID;
 
-
 	/**
 	 * @param name
 	 * @param description
 	 */
-    public IVPMatrixReference() {
-	    super("IVPMatrixReference", "IVPMatrixReference object.");
-    }
+	public IVPMatrixReference() {
+		super("IVPMatrixReference", "IVPMatrixReference object.");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -98,13 +98,18 @@ public class IVPMatrixReference extends DataObject {
 	public void setColID(String colID) {
 		this.colID = colID;
 	}
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

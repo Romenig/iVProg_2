@@ -18,46 +18,56 @@ import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class Return extends DataObject {
-	
+
 	private String returnable;
 
 	/**
 	 * @param name
 	 * @param description
 	 */
-    public Return() {
-	    super("Return", "Return object.");
-    }
-    
-	/* (non-Javadoc)
-	 * @see usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap, usp.ime.line.ivprog.interpreter.DataFactory)
+	public Return() {
+		super("Return", "Return object.");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog
+	 * .interpreter.execution.Context, java.util.HashMap,
+	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		DataObject value = (DataObject) ((DataObject)map.get(returnable)).evaluate(c, map, factory);
+		DataObject value = (DataObject) ((DataObject) map.get(returnable)).evaluate(c, map, factory);
 		return value;
 	}
 
 	/**
 	 * @return the returnable
 	 */
-    public String getReturnable() {
-	    return returnable;
-    }
+	public String getReturnable() {
+		return returnable;
+	}
 
 	/**
-	 * @param returnable the returnable to set
+	 * @param returnable
+	 *            the returnable to set
 	 */
-    public void setReturnable(String returnable) {
-	    this.returnable = returnable;
-    }
+	public void setReturnable(String returnable) {
+		this.returnable = returnable;
+	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

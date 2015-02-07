@@ -26,18 +26,18 @@ public class ObjectListModuleGUI extends JFrame implements Observer {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		list = new JList();
 		contentPane.add(list, BorderLayout.CENTER);
 		setTitle(IlmProtocol.OBJECT_LIST_MODULE_NAME);
 	}
 
 	public void update(Observable o, Object arg) {
-		if(o instanceof ObjectListModule) {
-			_objectList = (ObjectListModule)o;
+		if (o instanceof ObjectListModule) {
+			_objectList = (ObjectListModule) o;
 			// TODO need a better non-brute force way to do this
 			DefaultListModel listModel = new DefaultListModel();
-			for(int i = 0; i < _objectList.getObjectList().size(); i++) {
+			for (int i = 0; i < _objectList.getObjectList().size(); i++) {
 				listModel.addElement(((DomainObject) _objectList.getObjectList().get(i)).getDescription());
 			}
 			list.setModel(listModel);

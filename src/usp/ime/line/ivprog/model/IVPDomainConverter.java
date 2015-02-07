@@ -14,36 +14,52 @@ import ilm.framework.domain.DomainConverter;
 
 /**
  * @author Romenig
- *
+ * 
  */
 public class IVPDomainConverter implements DomainConverter {
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.domain.DomainConverter#convertStringToObject(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.domain.DomainConverter#convertStringToObject(java.lang.
+	 * String)
 	 */
 	public Vector convertStringToObject(String objectListDescription) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.domain.DomainConverter#convertObjectToString(java.util.Vector)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.domain.DomainConverter#convertObjectToString(java.util.
+	 * Vector)
 	 */
 	public String convertObjectToString(Vector objectList) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.domain.DomainConverter#convertStringToAction(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.domain.DomainConverter#convertStringToAction(java.lang.
+	 * String)
 	 */
 	public Vector convertStringToAction(String actionListDescription) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.domain.DomainConverter#convertActionToString(java.util.Vector)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.domain.DomainConverter#convertActionToString(java.util.
+	 * Vector)
 	 */
 	public String convertActionToString(Vector actionList) {
 		// TODO Auto-generated method stub

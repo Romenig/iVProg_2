@@ -126,7 +126,7 @@ public class IVPVectorTests {
 		context.addInt(a.getUniqueID(), 3);
 		context.addInt(b.getUniqueID(), 10);
 		context.addInt(c.getUniqueID(), 2);
-		context.addInt(size.getUniqueID(),10);
+		context.addInt(size.getUniqueID(), 10);
 		context.addInt(index.getUniqueID(), 0);
 
 		vect.setSize(size.getUniqueID(), context);

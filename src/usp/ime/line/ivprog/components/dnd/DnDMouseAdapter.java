@@ -22,7 +22,7 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 	public static final String INTERACTION_PROTOCOL_DND = "drag&drop";
 	public static final String INTERACTION_PROTOCOL_CNP = "cut&paste";
 	public static final String INTERACTION_PROTOCOL_CNP_AND_DND = "both";
-	
+
 	private boolean isHolding = false;
 	private String holdingComponent = "";
 	private JComponent lastEnteredComponent = null;
@@ -48,7 +48,7 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 			if (event.getSource() instanceof TargetPanel) {
 				lastEnteredComponent = (JComponent) event.getComponent();
 				lastYOnLastEnteredComponent = event.getY();
-				System.out.println("Y "+lastYOnLastEnteredComponent);
+				System.out.println("Y " + lastYOnLastEnteredComponent);
 				event.consume();
 			}
 		}
@@ -63,7 +63,7 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 	}
 
 	public void mouseExited(MouseEvent event) {
-		
+
 	}
 
 	public void mousePressed(MouseEvent event) {
@@ -80,7 +80,7 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 	}
 
 	public void mouseMoved(MouseEvent event) {
-		
+
 	}
 
 	// ---------------------------------------------------------------------------------------
@@ -101,6 +101,6 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 	}
 
 	private void dropComponent(TargetPanel target, int dropY) {
-		
+
 	}
 }

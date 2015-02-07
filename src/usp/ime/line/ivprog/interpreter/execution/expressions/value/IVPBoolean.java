@@ -22,9 +22,9 @@ public class IVPBoolean extends IVPValue {
 	 * @param name
 	 * @param description
 	 */
-    public IVPBoolean() {
-	    super("IVPBoolean", "IVPBoolean object.");
-    }
+	public IVPBoolean() {
+		super("IVPBoolean", "IVPBoolean object.");
+	}
 
 	/**
 	 * Updates the boolean value to the given value inside the given context.
@@ -94,13 +94,17 @@ public class IVPBoolean extends IVPValue {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

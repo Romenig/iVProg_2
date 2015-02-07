@@ -13,11 +13,13 @@ import ilm.framework.domain.DomainModel;
 
 /**
  * @author Romenig
- *
+ * 
  */
 public class IVPDomainModel extends DomainModel {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ilm.framework.domain.DomainModel#getNewAssignmentState()
 	 */
 	public AssignmentState getNewAssignmentState() {
@@ -26,8 +28,12 @@ public class IVPDomainModel extends DomainModel {
 		return assignment;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.domain.DomainModel#AutomaticChecking(ilm.framework.assignment.model.AssignmentState, ilm.framework.assignment.model.AssignmentState)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.domain.DomainModel#AutomaticChecking(ilm.framework.assignment
+	 * .model.AssignmentState, ilm.framework.assignment.model.AssignmentState)
 	 */
 	public float AutomaticChecking(AssignmentState studentAnswer, AssignmentState expectedAnswer) {
 		// TODO Auto-generated method stub

@@ -13,12 +13,14 @@ public abstract class AuthoringGUI extends JFrame implements Observer {
 
 	/**
 	 * @attribute serial version due to javax.swing specification
-	 * @attribute the domain user interface this authoring interface is attached to
+	 * @attribute the domain user interface this authoring interface is attached
+	 *            to
 	 * @attribute the assignment that is being authored
 	 * @attribute the assignemnt configuration
 	 * @attribute the assignment metadata
 	 * 
-	 * TODO maybe put the config and the metadata inside the assignment already
+	 *            TODO maybe put the config and the metadata inside the
+	 *            assignment already
 	 */
 	private static final long serialVersionUID = 1L;
 	protected DomainGUI _domainGUI;
@@ -27,14 +29,17 @@ public abstract class AuthoringGUI extends JFrame implements Observer {
 	protected HashMap _metadata;
 
 	/**
-	 * Defines and initializes the components on which the assignment will be authored
-	 * @param assignment config
+	 * Defines and initializes the components on which the assignment will be
+	 * authored
+	 * 
+	 * @param assignment
+	 *            config
 	 * @param domainGUI
-	 * @param assignment metadata
-	 * It is called just after the construct method by the framework
+	 * @param assignment
+	 *            metadata It is called just after the construct method by the
+	 *            framework
 	 */
-	public final void setComponents(HashMap config, DomainGUI domainGUI, 
-									HashMap metadata) {
+	public final void setComponents(HashMap config, DomainGUI domainGUI, HashMap metadata) {
 		_config = config;
 		_domainGUI = domainGUI;
 		_domainGUI.getCurrentState().addObserver(this);
@@ -43,38 +48,38 @@ public abstract class AuthoringGUI extends JFrame implements Observer {
 
 	/**
 	 * Defines and initializes the assignment that will be authored
+	 * 
 	 * @param proposition
-	 * @param initial assignment state
-	 * @param current assignment state
-	 * @param expected assignment answer
-	 * It is called just after the construct method by the framework
+	 * @param initial
+	 *            assignment state
+	 * @param current
+	 *            assignment state
+	 * @param expected
+	 *            assignment answer It is called just after the construct method
+	 *            by the framework
 	 */
-	public final void setAssignment(String proposition, AssignmentState initial,
-							  AssignmentState current, AssignmentState expected) {
+	public final void setAssignment(String proposition, AssignmentState initial, AssignmentState current, AssignmentState expected) {
 		_assignment = new Assignment(proposition, initial, current, expected);
 		initFields();
 	}
-	
+
 	/**
-	 * Initialization method to the user interface features (widgets) 
-	 * that depend on the assignment to be defined. It is called at the
-	 * method "setAssignment", just after the assignment is defined.
+	 * Initialization method to the user interface features (widgets) that
+	 * depend on the assignment to be defined. It is called at the method
+	 * "setAssignment", just after the assignment is defined.
 	 * 
 	 * @see IVPAuthoringGUI.ilm.gui.IlmAuthoringGUI
 	 */
 	protected abstract void initFields();
-	
+
 	/**
-	 * @return Template Method that creates the authored assignment
-	 * calling up various Hook Methods that define each one of the
-	 * assignment's field. It is called by BaseGUI when the button
-	 * save assignment is pressed.
+	 * @return Template Method that creates the authored assignment calling up
+	 *         various Hook Methods that define each one of the assignment's
+	 *         field. It is called by BaseGUI when the button save assignment is
+	 *         pressed.
 	 */
 	public Assignment getAssignment() {
-		_assignment = new Assignment(getProposition(), 
-									 getInitialState(), 
-									 getInitialState(), 
-									 getExpectedAnswer());
+		_assignment = new Assignment(getProposition(), getInitialState(), getInitialState(), getExpectedAnswer());
 		_assignment.setName(getAssignmentName());
 		_assignment.setConfig(getConfig());
 		_assignment.setMetadata(getMetadata());
@@ -83,21 +88,23 @@ public abstract class AuthoringGUI extends JFrame implements Observer {
 
 	/**
 	 * Hook Method for defining the assignment's proposition
+	 * 
 	 * @return the assignment's proposition
 	 */
 	protected abstract String getProposition();
 
 	/**
 	 * Hook Method for defining the assignment's name
+	 * 
 	 * @return the assignment's name
 	 */
 	protected abstract String getAssignmentName();
-	
+
 	/**
 	 * Hook Method for defining the assignment's initial state
-	 * @return the initial state
-	 * It must be implemented by any method using domain specific
-	 * informations.
+	 * 
+	 * @return the initial state It must be implemented by any method using
+	 *         domain specific informations.
 	 * 
 	 * @see IVPAuthoringGUI.ilm.gui.IlmAuthoringGUI
 	 */
@@ -105,29 +112,29 @@ public abstract class AuthoringGUI extends JFrame implements Observer {
 
 	/**
 	 * Hook Method for defining the assignment's expected answer
-	 * @return the expected answer
-	 * It must be implemented by any method using domain specific
-	 * informations.
+	 * 
+	 * @return the expected answer It must be implemented by any method using
+	 *         domain specific informations.
 	 * 
 	 * @see IVPAuthoringGUI.ilm.gui.IlmAuthoringGUI
 	 */
 	protected abstract AssignmentState getExpectedAnswer();
-	
+
 	/**
 	 * Hook Method for defining the assignment's configuration
-	 * @return the configuration
-	 * It must be implemented by any method using domain specific
-	 * informations.
+	 * 
+	 * @return the configuration It must be implemented by any method using
+	 *         domain specific informations.
 	 * 
 	 * @see IVPAuthoringGUI.ilm.gui.IlmAuthoringGUI
 	 */
 	protected abstract HashMap getConfig();
-	
+
 	/**
 	 * Hook Method for defining the assignment's metadata
-	 * @return the metadata
-	 * It must be implemented by any method using domain specific
-	 * informations.
+	 * 
+	 * @return the metadata It must be implemented by any method using domain
+	 *         specific informations.
 	 * 
 	 * @see IVPAuthoringGUI.ilm.gui.IlmAuthoringGUI
 	 */

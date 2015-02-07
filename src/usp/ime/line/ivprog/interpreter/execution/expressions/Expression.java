@@ -17,8 +17,8 @@ public abstract class Expression extends DataObject {
 	 * @param name
 	 * @param description
 	 */
-    public Expression(String name, String description) {
-	    super(name, description);
-    }
+	public Expression(String name, String description) {
+		super(name, description);
+	}
 
 }

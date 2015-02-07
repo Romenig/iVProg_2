@@ -10,8 +10,10 @@ package usp.ime.line.ivprog.components.dnd;
 
 import javax.swing.JPanel;
 
-import usp.ime.line.ivprog.view.utils.RoundedJPanel;
+import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
+
 import javax.swing.JLabel;
+
 import java.awt.Color;
 
 /**
@@ -25,7 +27,7 @@ public class DestinyDrop extends RoundedJPanel {
 	public DestinyDrop() {
 		JLabel dropLabel = new JLabel("Solte aqui.");
 		setBackgroundColor(new Color(230, 250, 230));
-		setBorderColor(new Color(150,170,150));
+		setBorderColor(new Color(150, 170, 150));
 		repaint();
 		add(dropLabel);
 	}

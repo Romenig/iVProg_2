@@ -29,9 +29,10 @@ public class LessThan extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public LessThan() {
-	    super("LessThan", "LessThan object.");
-    }
+	public LessThan() {
+		super("LessThan", "LessThan object.");
+	}
+
 	/**
 	 * Set the left expression of and. EqualTo := expressionA == expressionB
 	 * 
@@ -51,17 +52,22 @@ public class LessThan extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber expressionA = (IVPNumber) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPNumber expressionB = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPNumber expressionA = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPNumber expressionB = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		return expressionA.lessThan(expressionB, c, map, factory);
 	}
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

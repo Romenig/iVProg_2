@@ -16,43 +16,42 @@ import ilm.framework.modules.IlmModule;
 public class HistoryModule extends AssignmentModule {
 
 	private Vector _history;
-	
+
 	public HistoryModule() {
 		_history = new Vector();
 		_name = IlmProtocol.HISTORY_MODULE_NAME;
 		_gui = new HistoryModuleToolbar();
 		_observerType = ACTION_OBSERVER;
 	}
-	
+
 	Vector getHistory() {
 		return (Vector) _history.get(_assignmentIndex);
 	}
-	
+
 	public void update(Observable o, Object arg) {
-		if(o instanceof DomainAction) {
-			DomainAction action = (DomainAction)o;
-			
-			if(!action.isUndo()) {
-				((Vector) _history.get(_assignmentIndex)).add((DomainAction)action.clone());
+		if (o instanceof DomainAction) {
+			DomainAction action = (DomainAction) o;
+
+			if (!action.isUndo()) {
+				((Vector) _history.get(_assignmentIndex)).add((DomainAction) action.clone());
 				setChanged();
 				notifyObservers();
-			}
-			else {
-				((Vector) _history.get(_assignmentIndex)).remove(((Vector) _history.get(_assignmentIndex)).size()-1);
+			} else {
+				((Vector) _history.get(_assignmentIndex)).remove(((Vector) _history.get(_assignmentIndex)).size() - 1);
 				setChanged();
 				notifyObservers();
 			}
 		}
 	}
 
-	public void setContentFromString(DomainConverter converter,	int index, String moduleContent) {
-		if(_history.size() == index) {
+	public void setContentFromString(DomainConverter converter, int index, String moduleContent) {
+		if (_history.size() == index) {
 			addAssignment();
 		}
 		Vector actionArray = converter.convertStringToAction(moduleContent);
-		for(int i = 0; i < actionArray.size(); i++){
-		    ((DomainAction)actionArray.get(i)).addObserver(this);
-		    ((Vector) _history.get(index)).add(actionArray.get(i));
+		for (int i = 0; i < actionArray.size(); i++) {
+			((DomainAction) actionArray.get(i)).addObserver(this);
+			((Vector) _history.get(index)).add(actionArray.get(i));
 		}
 	}
 
@@ -61,15 +60,15 @@ public class HistoryModule extends AssignmentModule {
 	}
 
 	public void print() {
-		for(int i = 0; i < _history.size(); i++){
-		    for(int j = 0; j < ((Vector) _history.get(i)).size(); j++){
-		        DomainAction a = (DomainAction) ((Vector) _history.get(i)).get(j);
-		    }
+		for (int i = 0; i < _history.size(); i++) {
+			for (int j = 0; j < ((Vector) _history.get(i)).size(); j++) {
+				DomainAction a = (DomainAction) ((Vector) _history.get(i)).get(j);
+			}
 		}
 	}
 
 	public String getStringContent(DomainConverter converter, int index) {
-		if(((Vector) _history.get(_assignmentIndex)).size() == 0) {
+		if (((Vector) _history.get(_assignmentIndex)).size() == 0) {
 			return "<" + _name + "/>";
 		}
 		String string = "<" + _name + ">";
@@ -83,36 +82,36 @@ public class HistoryModule extends AssignmentModule {
 	}
 
 	public void setDomainModel(DomainModel model) {
-	    for(int i = 0; i < _history.size(); i++){
-	        Vector list = (Vector) _history.get(i);
-	        for(int j = 0; j < list.size(); j++){
-	            DomainAction action = (DomainAction) list.get(j);
-	               action.setDomainModel(model);
-	        }
-	    }
+		for (int i = 0; i < _history.size(); i++) {
+			Vector list = (Vector) _history.get(i);
+			for (int j = 0; j < list.size(); j++) {
+				DomainAction action = (DomainAction) list.get(j);
+				action.setDomainModel(model);
+			}
+		}
 	}
 
 	public void setState(AssignmentState state) {
-	    for(int i = 0; i < ((Vector) _history.get(_history.size()-1)).size(); i++){
-	        DomainAction action = (DomainAction) ((Vector) _history.get(_history.size()-1)).get(i);
-	        action.setState(state);
-	    }
+		for (int i = 0; i < ((Vector) _history.get(_history.size() - 1)).size(); i++) {
+			DomainAction action = (DomainAction) ((Vector) _history.get(_history.size() - 1)).get(i);
+			action.setState(state);
+		}
 	}
 
 	public void setActionObservers(Collection values) {
-	    Iterator valuesIterator = values.iterator();
-	    while(valuesIterator.hasNext()){
-	        IlmModule m = (IlmModule) valuesIterator.next();
-	        if(m instanceof AssignmentModule){
-	            for(int i = 0; i < _history.size(); i++){
-	                Vector list = (Vector) _history.get(i);
-	                for(int j = 0; j < list.size(); j++){
-	                    DomainAction action = (DomainAction) list.get(j);
-	                    action.addObserver((AssignmentModule)m);
-	                }
-	            }
-	        }
-	    }
+		Iterator valuesIterator = values.iterator();
+		while (valuesIterator.hasNext()) {
+			IlmModule m = (IlmModule) valuesIterator.next();
+			if (m instanceof AssignmentModule) {
+				for (int i = 0; i < _history.size(); i++) {
+					Vector list = (Vector) _history.get(i);
+					for (int j = 0; j < list.size(); j++) {
+						DomainAction action = (DomainAction) list.get(j);
+						action.addObserver((AssignmentModule) m);
+					}
+				}
+			}
+		}
 	}
 
 }

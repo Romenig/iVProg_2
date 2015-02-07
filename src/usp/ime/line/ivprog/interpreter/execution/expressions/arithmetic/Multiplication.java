@@ -25,9 +25,9 @@ public class Multiplication extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public Multiplication() {
-	    super("Multiplication", "Multiplication object.");
-    }
+	public Multiplication() {
+		super("Multiplication", "Multiplication object.");
+	}
 
 	private String expA;
 	private String expB;
@@ -53,19 +53,23 @@ public class Multiplication extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber v1 = (IVPNumber) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPNumber v2 = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		IVPNumber result = v1.multiply(v2, c, factory, map);
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

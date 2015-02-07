@@ -28,9 +28,10 @@ public class EqualTo extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public EqualTo() {
-	    super("EqualTo", "EqualTo object.");
-    }
+	public EqualTo() {
+		super("EqualTo", "EqualTo object.");
+	}
+
 	/**
 	 * Set the left expression of and. EqualTo := expressionA == expressionB
 	 * 
@@ -50,17 +51,22 @@ public class EqualTo extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPValue expressionA = (IVPValue) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPValue expressionB = (IVPValue) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPValue expressionA = (IVPValue) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPValue expressionB = (IVPValue) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		return expressionA.ivpEqualTo(expressionB, c, map, factory);
 	}
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

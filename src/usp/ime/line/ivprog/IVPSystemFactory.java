@@ -13,8 +13,8 @@ import java.util.Vector;
 
 import usp.ime.line.ivprog.model.IVPDomainConverter;
 import usp.ime.line.ivprog.model.IVPDomainModel;
-import usp.ime.line.ivprog.view.IVPAuthoringGUI;
-import usp.ime.line.ivprog.view.IVPDomainGUI;
+import usp.ime.line.ivprog.view.domaingui.IVPAuthoringGUI;
+import usp.ime.line.ivprog.view.domaingui.IVPDomainGUI;
 import ilm.framework.SystemFactory;
 import ilm.framework.assignment.model.AssignmentState;
 import ilm.framework.config.SystemConfig;
@@ -25,11 +25,13 @@ import ilm.framework.gui.AuthoringGUI;
 
 /**
  * @author Romenig
- *
+ * 
  */
 public class IVPSystemFactory extends SystemFactory {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ilm.framework.SystemFactory#createDomainModel()
 	 */
 	protected DomainModel createDomainModel() {
@@ -37,7 +39,9 @@ public class IVPSystemFactory extends SystemFactory {
 		return model;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ilm.framework.SystemFactory#createDomainConverter()
 	 */
 	protected DomainConverter createDomainConverter() {
@@ -45,8 +49,12 @@ public class IVPSystemFactory extends SystemFactory {
 		return converter;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.SystemFactory#createDomainGUI(ilm.framework.config.SystemConfig, ilm.framework.domain.DomainModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.SystemFactory#createDomainGUI(ilm.framework.config.SystemConfig
+	 * , ilm.framework.domain.DomainModel)
 	 */
 	public DomainGUI createDomainGUI(SystemConfig config, DomainModel domainModel) {
 		IVPDomainGUI gui = new IVPDomainGUI();
@@ -54,8 +62,15 @@ public class IVPSystemFactory extends SystemFactory {
 		return gui;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.SystemFactory#createAuthoringGUI(ilm.framework.domain.DomainGUI, java.lang.String, ilm.framework.assignment.model.AssignmentState, ilm.framework.assignment.model.AssignmentState, ilm.framework.assignment.model.AssignmentState, java.util.HashMap, java.util.HashMap)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.SystemFactory#createAuthoringGUI(ilm.framework.domain.DomainGUI
+	 * , java.lang.String, ilm.framework.assignment.model.AssignmentState,
+	 * ilm.framework.assignment.model.AssignmentState,
+	 * ilm.framework.assignment.model.AssignmentState, java.util.HashMap,
+	 * java.util.HashMap)
 	 */
 	public AuthoringGUI createAuthoringGUI(DomainGUI domainGUI, String proposition, AssignmentState initial, AssignmentState current,
 	        AssignmentState expected, HashMap config, HashMap metadata) {
@@ -63,11 +78,11 @@ public class IVPSystemFactory extends SystemFactory {
 		return gui;
 	}
 
-	 protected Vector getIlmModuleList() {
-	        Vector list = new Vector();
-	        // list.add(new ScriptModule());
-	        // list.add(new ExampleTracingTutorModule());
-	        // list.add(new ScormModule());
-	        return list;
-	    }
+	protected Vector getIlmModuleList() {
+		Vector list = new Vector();
+		// list.add(new ScriptModule());
+		// list.add(new ExampleTracingTutorModule());
+		// list.add(new ScormModule());
+		return list;
+	}
 }

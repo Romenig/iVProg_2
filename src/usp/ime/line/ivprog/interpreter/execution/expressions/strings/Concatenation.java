@@ -30,9 +30,10 @@ public class Concatenation extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public Concatenation() {
-	    super("Concatenation", "Concatenation object.");
-    }
+	public Concatenation() {
+		super("Concatenation", "Concatenation object.");
+	}
+
 	/**
 	 * Set the left expression of addition. Concatenation := expressionA +
 	 * expressionB
@@ -54,18 +55,23 @@ public class Concatenation extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPString str1 = (IVPString) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPString str2 = (IVPString) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPString str1 = (IVPString) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPString str2 = (IVPString) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		IVPString result = str1.concatenate(str2, c, factory);
 		return result;
 	}
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

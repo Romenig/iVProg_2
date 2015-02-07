@@ -1,4 +1,5 @@
 package usp.ime.line.ivprog.interpreter.gui;
+
 /** 
  * Instituto de Matemática e Estatística da Universidade de São Paulo (IME-USP)
  * iVProg is a open source and free software of Laboratório de Informática na 
@@ -22,27 +23,27 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import usp.ime.line.ivprog.language.Messages;
-import usp.ime.line.ivprog.view.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 
 public class JDialogReadString extends JDialog {
 	private static JDialogReadString instance;
 	private JButton btnOk;
 	private JButton btnCancelar;
-	private JPanel contentPane; 
+	private JPanel contentPane;
 	private JPanel textFieldPanel;
 	private JCustomTextField customTextField;
 	private JLabel textLabel;
 
-	//Singleton
-	public static JDialogReadString getInstance(){
-		if(instance != null){ 
+	// Singleton
+	public static JDialogReadString getInstance() {
+		if (instance != null) {
 			return instance;
 		} else {
 			instance = new JDialogReadString();
 			return instance;
 		}
 	}
-	
+
 	public JDialogReadString() {
 		init();
 		initTextPanel();
@@ -51,61 +52,62 @@ public class JDialogReadString extends JDialog {
 		setLocationRelativeTo(null);
 		pack();
 		setModal(true);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	}
-	
-    private void initBtnPanel() {
+
+	private void initBtnPanel() {
 		JPanel btnsPanel = new JPanel();
 		getContentPane().add(btnsPanel, BorderLayout.SOUTH);
 		btnsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-    	
-    	btnOk = new JButton(Messages.getString("Btn.OK"));
-    	btnOk.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+
+		btnOk = new JButton(Messages.getString("Btn.OK"));
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				JDialogReadString.getInstance().dispose();
-            }
-    	});
+			}
+		});
 		btnsPanel.add(btnOk);
-		
+
 		btnCancelar = new JButton(Messages.getString("Btn.CANCEL"));
-		btnCancelar.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				JDialogReadString.getInstance().dispose();
-            }
+			}
 		});
 		btnsPanel.add(btnCancelar);
-    }
+	}
 
-    private void initTextPanel() {
+	private void initTextPanel() {
 		textFieldPanel = new JPanel();
 		contentPane.add(textFieldPanel, BorderLayout.CENTER);
 		textFieldPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		textLabel = new JLabel(Messages.getString("JDialogReadInteger.textLabel.text"));
 		textFieldPanel.add(textLabel);
-    }
-
-	private void init(){
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(20, 20, 20, 20));
-        contentPane.setLayout(new BorderLayout(0, 0));
-        contentPane.setBackground(FlatUIColors.MAIN_BG);
-        setContentPane(contentPane);
 	}
 
-    private void initTextField() {
+	private void init() {
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(20, 20, 20, 20));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setBackground(FlatUIColors.MAIN_BG);
+		setContentPane(contentPane);
+	}
+
+	private void initTextField() {
 		customTextField = new JCustomTextField();
 		customTextField.setColumns(20);
 		customTextField.setRegexFilter(JCustomTextField.STRING);
 		textFieldPanel.add(customTextField);
-    }
+	}
 
 	/**
 	 * Get the input value.
+	 * 
 	 * @return
 	 */
-    public String getValue() {
-	    return customTextField.getText();
-    }
+	public String getValue() {
+		return customTextField.getText();
+	}
 
 }

@@ -26,9 +26,10 @@ public class IVPVectorReference extends DataObject {
 	 * @param name
 	 * @param description
 	 */
-    public IVPVectorReference() {
-	    super("IVPVectorReference", "IVPVectorReference object.");
-    }
+	public IVPVectorReference() {
+		super("IVPVectorReference", "IVPVectorReference object.");
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -82,12 +83,17 @@ public class IVPVectorReference extends DataObject {
 	public void setPositionID(String positionID) {
 		this.positionID = positionID;
 	}
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -28,11 +28,10 @@ public class Division extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public Division() {
-	    super("Division", "Division object.");
-    }
+	public Division() {
+		super("Division", "Division object.");
+	}
 
-	
 	/**
 	 * Set the left expression of addition. Addition := expressionA +
 	 * expressionB
@@ -54,20 +53,23 @@ public class Division extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber v1 = (IVPNumber) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPNumber v2 = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		IVPNumber result = v1.divide(v2, c, factory, map);
 		return result;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

@@ -16,8 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import usp.ime.line.ivprog.view.FlatUIColors;
-import usp.ime.line.ivprog.view.utils.IconButtonUI;
+import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 
 public abstract class BaseGUI extends JPanel implements Observer {
 
@@ -28,7 +28,7 @@ public abstract class BaseGUI extends JPanel implements Observer {
 	protected Vector _authoringGUIList;
 	protected IAssignment _assignments;
 	protected int _activeAssignment;
-	
+
 	public void setComponents(SystemConfig config, IAssignment commands, SystemFactory factory) {
 		_config = config;
 		_config.addObserver(this);
@@ -44,12 +44,11 @@ public abstract class BaseGUI extends JPanel implements Observer {
 		initAssignments();
 		initToolbar(_assignments.getIlmModuleList().values());
 	}
-	
+
 	protected abstract void initAssignments();
-	
+
 	protected abstract void initToolbar(Collection moduleList);
 
-	
 	public void startDesktop() {
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(this);
@@ -58,57 +57,55 @@ public abstract class BaseGUI extends JPanel implements Observer {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-	
-	
+
 	protected void updateAssignmentIndex(int index) {
 		_activeAssignment = index;
-		
-		Iterator moduleIterator = _assignments.getIlmModuleList().values().iterator(); 
-		while(moduleIterator.hasNext()){
-		    IlmModule module = (IlmModule) moduleIterator.next();
+
+		Iterator moduleIterator = _assignments.getIlmModuleList().values().iterator();
+		while (moduleIterator.hasNext()) {
+			IlmModule module = (IlmModule) moduleIterator.next();
 			module.setAssignmentIndex(index);
-			if(module instanceof AssignmentModule) {
-				AssignmentModule m = (AssignmentModule)module;
-				if(m.getObserverType() != AssignmentModule.ACTION_OBSERVER) {
+			if (module instanceof AssignmentModule) {
+				AssignmentModule m = (AssignmentModule) module;
+				if (m.getObserverType() != AssignmentModule.ACTION_OBSERVER) {
 					m.update(_assignments.getCurrentState(index), null);
 				}
 			}
 		}
 	}
-	
+
 	protected abstract void setAuthoringButton();
-	
+
 	protected abstract void setNewAssignmentButton();
-	
+
 	protected abstract void setCloseAssignmentButton();
-	
+
 	protected abstract void setOpenAssignmentButton();
-	
+
 	protected abstract void setSaveAssignmentButton();
-	
-	
+
 	protected abstract void startAuthoring();
-	
+
 	protected abstract void addNewAssignment();
-	
+
 	protected abstract void closeAssignment(int index);
-	
+
 	protected abstract void openAssignmentFile(String fileName);
-	
+
 	protected abstract void saveAssignmentFile(String fileName);
 
-	
 	protected JButton makeButton(String imageName, String actionCommand, String toolTipText, String altText) {
-        JButton button = new JButton();
-        button.setActionCommand(actionCommand);
-        button.setToolTipText(toolTipText);
-        try {
-            button.setIcon(new ImageIcon(BaseGUI.class.getResource("/usp/ime/line/resources/icons/" + imageName + ".png"), altText));
-        } catch (Exception e) {
-            System.err.println("Error: image './usp/ime/line/resources/icons/" + imageName + ".png' is missing: ilm/framework/gui/BaseGUI.java");
-        }
-        button.setUI(new IconButtonUI());
-        return button;
-    }
+		JButton button = new JButton();
+		button.setActionCommand(actionCommand);
+		button.setToolTipText(toolTipText);
+		try {
+			button.setIcon(new ImageIcon(BaseGUI.class.getResource("/usp/ime/line/resources/icons/" + imageName + ".png"), altText));
+		} catch (Exception e) {
+			System.err.println("Error: image './usp/ime/line/resources/icons/" + imageName
+			        + ".png' is missing: ilm/framework/gui/BaseGUI.java");
+		}
+		button.setUI(new IconButtonUI());
+		return button;
+	}
 
 }

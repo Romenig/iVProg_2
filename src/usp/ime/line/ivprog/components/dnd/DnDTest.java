@@ -26,7 +26,6 @@ public class DnDTest extends JFrame {
 
 	private JPanel contentPane;
 	private ScrolledTargetPanel target;
-	
 
 	/**
 	 * Launch the application.
@@ -54,29 +53,29 @@ public class DnDTest extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
-		
+
 		JButton btnAddLeaf = new JButton("Add Leaf");
-		btnAddLeaf.addActionListener(new ActionListener(){
+		btnAddLeaf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	            target.addComponent(new LeafPanel());
-            }
+				target.addComponent(new LeafPanel());
+			}
 		});
 		panel_1.add(btnAddLeaf);
 		JButton btnAddComposite = new JButton("Add Composite");
-		btnAddComposite.addActionListener(new ActionListener(){
+		btnAddComposite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	            target.addComponent(new CompositePanel());
-            }
+				target.addComponent(new CompositePanel());
+			}
 		});
 		panel_1.add(btnAddComposite);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		target = new ScrolledTargetPanel();
 		panel.add(target);
 		target.setBackground(Color.white);

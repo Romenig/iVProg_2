@@ -23,9 +23,9 @@ public class IVPString extends IVPValue {
 	 * @param name
 	 * @param description
 	 */
-    public IVPString() {
-	    super("IVPString", "IVPString object.");
-    }
+	public IVPString() {
+		super("IVPString", "IVPString object.");
+	}
 
 	/**
 	 * Updates the strings' value to the given value inside the given context.
@@ -47,7 +47,7 @@ public class IVPString extends IVPValue {
 	 * usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap,
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
-	
+
 	public IVPBoolean ivpEqualTo(IVPValue v, Context c, HashMap map, DataFactory factory) {
 		IVPBoolean result = factory.createIVPBoolean();
 		Boolean booleanResult = new Boolean(c.getString(getUniqueID()).equals(c.getString(v.getUniqueID())));
@@ -65,7 +65,7 @@ public class IVPString extends IVPValue {
 	 * usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap,
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
-	
+
 	public IVPBoolean ivpNotEqualTo(IVPValue v, Context c, HashMap map, DataFactory factory) {
 		IVPBoolean result = factory.createIVPBoolean();
 		Boolean booleanResult = new Boolean(!c.getString(getUniqueID()).equals(c.getString(v.getUniqueID())));
@@ -131,13 +131,17 @@ public class IVPString extends IVPValue {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

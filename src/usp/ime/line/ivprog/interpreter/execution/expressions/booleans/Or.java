@@ -27,9 +27,9 @@ public class Or extends Expression {
 	 * @param name
 	 * @param description
 	 */
-    public Or() {
-	    super("Or", "Or object.");
-    }
+	public Or() {
+		super("Or", "Or object.");
+	}
 
 	/**
 	 * Set the left expression of and. And := expressionA && expressionB
@@ -50,19 +50,23 @@ public class Or extends Expression {
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPBoolean b1 = (IVPBoolean) ((DataObject)map.get(expA)).evaluate(c, map, factory);
-		IVPBoolean b2 = (IVPBoolean) ((DataObject)map.get(expB)).evaluate(c, map, factory);
+		IVPBoolean b1 = (IVPBoolean) ((DataObject) map.get(expA)).evaluate(c, map, factory);
+		IVPBoolean b2 = (IVPBoolean) ((DataObject) map.get(expB)).evaluate(c, map, factory);
 		IVPBoolean result = b1.or(b2, c, factory);
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    @Override
-    public boolean equals(DomainObject o) {
-	    // TODO Auto-generated method stub
-	    return false;
-    }
+	@Override
+	public boolean equals(DomainObject o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
