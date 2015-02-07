@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -18,6 +20,14 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class Subtraction extends Expression {
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Subtraction() {
+	    super("Subtraction", "Subtraction object.");
+    }
 
 	private String expA;
 	private String expB;
@@ -48,5 +58,14 @@ public class Subtraction extends Expression {
 		IVPNumber result = v1.subtract(v2, c, factory, map);
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

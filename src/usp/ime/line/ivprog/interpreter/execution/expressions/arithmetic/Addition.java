@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -19,6 +21,14 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class Addition extends Expression {
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Addition() {
+	    super("Addition", "Addition object.");
+    }
 
 	private String expA;
 	private String expB;
@@ -54,5 +64,14 @@ public class Addition extends Expression {
 		}
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

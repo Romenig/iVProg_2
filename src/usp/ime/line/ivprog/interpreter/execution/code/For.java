@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -30,6 +32,15 @@ public class For extends CodeComposite {
 	private String index;
 	private String increment;
 
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public For() {
+	    super("For", "For class.");
+    }
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -185,5 +196,12 @@ public class For extends CodeComposite {
 	public void setIncrement(String increment) {
 		this.increment = increment;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    public boolean equals(DomainObject o) {
+	    return false;
+    }
 
 }

@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.strings;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -25,6 +27,14 @@ public class SubString extends Expression {
 	private String beginIndex;
 	private String endIndex;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public SubString() {
+	    super("SubString", "SubString object.");
+    }
+    
 	/**
 	 * Set the string.
 	 * 
@@ -57,5 +67,14 @@ public class SubString extends Expression {
 	public void setEndIndex(String ei) {
 		endIndex = ei;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

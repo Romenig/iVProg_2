@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.strings;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -24,6 +26,14 @@ public class Contains extends Expression {
 	private String string;
 	private String subString;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Contains() {
+	    super("Contains", "Contains object.");
+    }
+    
 	/**
 	 * Set the string.
 	 * 
@@ -48,5 +58,14 @@ public class Contains extends Expression {
 		IVPNumber result = str1.searchSubstring(sub, c, factory);
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

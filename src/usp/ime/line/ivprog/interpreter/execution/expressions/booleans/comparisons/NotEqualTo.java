@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -22,6 +24,16 @@ public class NotEqualTo extends Expression {
 	private String expA;
 	private String expB;
 
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public NotEqualTo() {
+	    super("NotEqualTo", "NotEqualTo object.");
+    }
+
+	
 	/**
 	 * Set the left expression of and. EqualTo := expressionA == expressionB
 	 * 
@@ -45,5 +57,15 @@ public class NotEqualTo extends Expression {
 		IVPValue expressionB = (IVPValue) ((DataObject)map.get(expB)).evaluate(c, map, factory);
 		return expressionA.ivpNotEqualTo(expressionB, c, map, factory);
 	}
+
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

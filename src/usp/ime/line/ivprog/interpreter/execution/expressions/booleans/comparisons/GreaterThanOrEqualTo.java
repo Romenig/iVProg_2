@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -19,6 +21,14 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class GreaterThanOrEqualTo extends Expression {
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public GreaterThanOrEqualTo() {
+	    super("GreaterThanOrEqualTo", "GreaterThanOrEqualTo object.");
+    }
 
 	private String expA;
 	private String expB;
@@ -46,5 +56,14 @@ public class GreaterThanOrEqualTo extends Expression {
 		IVPNumber expressionB = (IVPNumber) ((DataObject)map.get(expB)).evaluate(c, map, factory);
 		return expressionA.greaterThanOrEqualTo(expressionB, c, map, factory);
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

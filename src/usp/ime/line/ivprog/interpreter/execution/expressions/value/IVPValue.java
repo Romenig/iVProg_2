@@ -17,6 +17,14 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 
 public abstract class IVPValue extends Expression {
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPValue(String name, String description) {
+	    super(name, description);
+    }
+
 	public static final String INTEGER_TYPE = "int";
 	public static final String DOUBLE_TYPE = "double";
 	public static final String STRING_TYPE = "String";

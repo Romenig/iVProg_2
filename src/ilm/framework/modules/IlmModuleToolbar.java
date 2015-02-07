@@ -21,9 +21,9 @@ public abstract class IlmModuleToolbar extends JPanel implements Observer {
         button.setActionCommand(actionCommand);
         button.setToolTipText(toolTipText);
         try {
-            button.setIcon(new ImageIcon(IlmModuleToolbar.class.getResource("/usp/ime/line/resources/" + imageName + ".png"), altText));
+            button.setIcon(new ImageIcon(IlmModuleToolbar.class.getResource("/usp/ime/line/resources/icons/" + imageName + ".png"), altText));
         } catch (Exception e) {
-            System.err.println("Error: image './usp/ime/line/resources/" + imageName + ".png' is missing: ilm/framework/modules/IlmModuleToolbar.java");
+            System.err.println("Error: image './usp/ime/line/resources/icons/" + imageName + ".png' is missing: ilm/framework/modules/IlmModuleToolbar.java");
         }
         button.setUI(new IconButtonUI());
         return button;

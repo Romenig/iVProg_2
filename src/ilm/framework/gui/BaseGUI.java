@@ -103,9 +103,9 @@ public abstract class BaseGUI extends JPanel implements Observer {
         button.setActionCommand(actionCommand);
         button.setToolTipText(toolTipText);
         try {
-            button.setIcon(new ImageIcon(BaseGUI.class.getResource("/usp/ime/line/resources/" + imageName + ".png"), altText));
+            button.setIcon(new ImageIcon(BaseGUI.class.getResource("/usp/ime/line/resources/icons/" + imageName + ".png"), altText));
         } catch (Exception e) {
-            System.err.println("Error: image './usp/ime/line/resources/" + imageName + ".png' is missing: ilm/framework/gui/BaseGUI.java");
+            System.err.println("Error: image './usp/ime/line/resources/icons/" + imageName + ".png' is missing: ilm/framework/gui/BaseGUI.java");
         }
         button.setUI(new IconButtonUI());
         return button;

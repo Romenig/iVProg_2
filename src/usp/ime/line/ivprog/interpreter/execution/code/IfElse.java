@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
@@ -24,6 +26,7 @@ public class IfElse extends CodeComposite {
 	private Vector elseChildren;
 
 	public IfElse() {
+		super("IfElse", "IfElse object.");
 		elseChildren = new Vector();
 	}
 
@@ -158,5 +161,14 @@ public class IfElse extends CodeComposite {
 		}
 		return childRemoved;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.value;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -15,6 +17,14 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 
 public class IVPNumber extends IVPValue {
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPNumber() {
+	    super("IVPNumber", "IVPNumber object.");
+    }
 
 	/**
 	 * Updates the integer value to the given value inside the given context.
@@ -379,5 +389,14 @@ public class IVPNumber extends IVPValue {
 		c.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

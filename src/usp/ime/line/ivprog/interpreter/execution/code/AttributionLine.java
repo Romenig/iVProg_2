@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -22,6 +24,14 @@ import usp.ime.line.ivprog.interpreter.execution.utils.IVPMatrixReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPVectorReference;
 
 public class AttributionLine extends DataObject {
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public AttributionLine() {
+	    super("AttLine", "AttLine object.");
+    }
 
 	private String variableID;
 	private String expressionID;
@@ -101,5 +111,13 @@ public class AttributionLine extends DataObject {
 	public void setExpression(String uniqueID) {
 		expressionID = uniqueID;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    return false;
+    }
 
 }

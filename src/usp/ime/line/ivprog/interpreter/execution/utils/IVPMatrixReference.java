@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.utils;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -21,6 +23,14 @@ public class IVPMatrixReference extends DataObject {
 	private String linID;
 	private String colID;
 
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPMatrixReference() {
+	    super("IVPMatrixReference", "IVPMatrixReference object.");
+    }
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -88,5 +98,13 @@ public class IVPMatrixReference extends DataObject {
 	public void setColID(String colID) {
 		this.colID = colID;
 	}
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

@@ -17,7 +17,8 @@ public abstract class CodeComposite extends DataObject {
 
 	protected Vector children;
 
-	public CodeComposite() {
+	public CodeComposite(String name, String description) {
+		super(name, description);
 		children = new Vector();
 	}
 

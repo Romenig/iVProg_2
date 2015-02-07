@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.utils;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
@@ -24,6 +26,14 @@ public class IVPVector extends DataObject {
 	private String primitiveTypeID;
 	private String[] vectorRepresentation;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPVector() {
+	    super("IVPVector", "IVPVector object.");
+    }
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -130,5 +140,14 @@ public class IVPVector extends DataObject {
 		vectorRepresentation[index] = IVPValue.NULL;
 		return removed;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.strings;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -24,6 +26,13 @@ public class Concatenation extends Expression {
 	private String expA;
 	private String expB;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Concatenation() {
+	    super("Concatenation", "Concatenation object.");
+    }
 	/**
 	 * Set the left expression of addition. Concatenation := expressionA +
 	 * expressionB
@@ -50,5 +59,13 @@ public class Concatenation extends Expression {
 		IVPString result = str1.concatenate(str2, c, factory);
 		return result;
 	}
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

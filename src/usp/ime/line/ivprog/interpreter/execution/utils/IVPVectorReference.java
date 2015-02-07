@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.utils;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -20,6 +22,13 @@ public class IVPVectorReference extends DataObject {
 	private String vectorID;
 	private String positionID;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPVectorReference() {
+	    super("IVPVectorReference", "IVPVectorReference object.");
+    }
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -73,4 +82,12 @@ public class IVPVectorReference extends DataObject {
 	public void setPositionID(String positionID) {
 		this.positionID = positionID;
 	}
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 }

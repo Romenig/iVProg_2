@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.value;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -21,6 +23,13 @@ public class IVPVariable extends Expression {
 	private String variableType;
 	private String variableName;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPVariable() {
+	    super("IVPVariable", "IVPVariable object.");
+    }
 	
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		DataObject dO = (DataObject) map.get(valueID);
@@ -74,5 +83,14 @@ public class IVPVariable extends Expression {
 	public String getVariableName() {
 		return variableName;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

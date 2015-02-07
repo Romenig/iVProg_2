@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.strings;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -24,6 +26,14 @@ public class StringLength extends Expression {
 	private String string;
 
 	/**
+	 * @param name
+	 * @param description
+	 */
+    public StringLength() {
+	    super("StringLength", "StringLength object.");
+    }
+    
+	/**
 	 * Set the string.
 	 * 
 	 * @param str
@@ -37,5 +47,13 @@ public class StringLength extends Expression {
 		IVPNumber result = str1.strlen(c, factory);
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    return false;
+    }
 
 }

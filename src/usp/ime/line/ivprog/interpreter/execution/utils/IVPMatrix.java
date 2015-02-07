@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.utils;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
@@ -25,6 +27,14 @@ public class IVPMatrix extends DataObject {
 	private String primitiveTypeID;
 	private String[][] matrixRepresentation;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPMatrix() {
+	    super("IVPMatrix", "IVPMatrix object.");
+    }
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -153,5 +163,14 @@ public class IVPMatrix extends DataObject {
 	public String getNLinID() {
 		return nLinID;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.error;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -19,9 +21,11 @@ public class IVPError extends DataObject {
 	private String message;
 
 	public IVPError() {
+		super("IVPError", "Error class");
 	}
 
 	public IVPError(String error) {
+		super("IVPError", "Error class");
 		message = error;
 	}
 
@@ -36,5 +40,13 @@ public class IVPError extends DataObject {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		return this;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    return false;
+    }
 
 }

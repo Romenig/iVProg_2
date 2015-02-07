@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -20,6 +22,14 @@ public class While extends CodeComposite {
 
 	private String loopConditionID;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public While() {
+	    super("While", "While object.");
+    }
+	
 	/**
 	 * @param uniqueID
 	 */
@@ -55,5 +65,14 @@ public class While extends CodeComposite {
 		}
 		return null;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

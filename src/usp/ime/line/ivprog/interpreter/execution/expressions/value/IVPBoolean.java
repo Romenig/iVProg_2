@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.value;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -15,6 +17,14 @@ import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 
 public class IVPBoolean extends IVPValue {
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public IVPBoolean() {
+	    super("IVPBoolean", "IVPBoolean object.");
+    }
 
 	/**
 	 * Updates the boolean value to the given value inside the given context.
@@ -83,5 +93,14 @@ public class IVPBoolean extends IVPValue {
 		c.addBoolean(result.getUniqueID(), booleanResult);
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

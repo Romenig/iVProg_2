@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 
@@ -22,6 +24,14 @@ public class UserInput extends DataObject {
 	
 	private String type;
 	private String valueID;
+
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public UserInput() {
+	    super("UserInput", "UserInput object.");
+    }
 
 	/* (non-Javadoc)
 	 * @see usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap, usp.ime.line.ivprog.interpreter.DataFactory)
@@ -66,6 +76,15 @@ public class UserInput extends DataObject {
 	 */
     public void setValueID(String argument) {
 	    valueID = argument;
+    }
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
     }
 
 }

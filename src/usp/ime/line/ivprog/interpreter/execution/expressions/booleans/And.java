@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.booleans;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -21,6 +23,14 @@ public class And extends Expression {
 	private String expA;
 	private String expB;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public And() {
+	    super("And","And object.");
+    }
+	
 	/**
 	 * Set the left expression of and. And := expressionA && expressionB
 	 * 
@@ -45,5 +55,14 @@ public class And extends Expression {
 		IVPBoolean result = b1.and(b2, c, factory);
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

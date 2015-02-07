@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -22,6 +24,15 @@ public class Division extends Expression {
 	private String expA;
 	private String expB;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Division() {
+	    super("Division", "Division object.");
+    }
+
+	
 	/**
 	 * Set the left expression of addition. Addition := expressionA +
 	 * expressionB
@@ -48,5 +59,15 @@ public class Division extends Expression {
 		IVPNumber result = v1.divide(v2, c, factory, map);
 		return result;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
+    }
 
 }

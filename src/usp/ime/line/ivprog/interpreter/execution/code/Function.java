@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
@@ -29,6 +31,7 @@ public class Function extends CodeComposite {
 	private Vector argumentList;
 
 	public Function() {
+		super("Function", "Function object.");
 		argumentList = new Vector();
 	}
 
@@ -211,6 +214,15 @@ public class Function extends CodeComposite {
 	 */
     public void setReturning(boolean isReturning) {
 	    this.isReturning = isReturning;
+    }
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
     }
 
 }

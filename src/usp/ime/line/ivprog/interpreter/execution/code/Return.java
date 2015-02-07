@@ -8,6 +8,8 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
+import ilm.framework.assignment.model.DomainObject;
+
 import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
@@ -19,6 +21,14 @@ public class Return extends DataObject {
 	
 	private String returnable;
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Return() {
+	    super("Return", "Return object.");
+    }
+    
 	/* (non-Javadoc)
 	 * @see usp.ime.line.ivprog.interpreter.DataObject#evaluate(usp.ime.line.ivprog.interpreter.execution.Context, java.util.HashMap, usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
@@ -39,6 +49,15 @@ public class Return extends DataObject {
 	 */
     public void setReturnable(String returnable) {
 	    this.returnable = returnable;
+    }
+
+	/* (non-Javadoc)
+	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	 */
+    @Override
+    public boolean equals(DomainObject o) {
+	    // TODO Auto-generated method stub
+	    return false;
     }
 
 }

@@ -13,4 +13,12 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public abstract class Expression extends DataObject {
 
+	/**
+	 * @param name
+	 * @param description
+	 */
+    public Expression(String name, String description) {
+	    super(name, description);
+    }
+
 }
