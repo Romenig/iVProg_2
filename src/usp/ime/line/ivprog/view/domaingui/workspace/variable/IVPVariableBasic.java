@@ -22,23 +22,24 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
-import usp.ime.line.ivprog.interpreter.gui.IVPInput;
-import usp.ime.line.ivprog.interpreter.gui.IVPInputBoolean;
-import usp.ime.line.ivprog.interpreter.gui.JCustomTextField;
+import usp.ime.line.ivprog.listeners.IValueListener;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.IDomainObjectUI;
+import usp.ime.line.ivprog.view.domaingui.editinplace.EditBoolean;
+import usp.ime.line.ivprog.view.domaingui.editinplace.EditInPlace;
 import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 import java.awt.Color;
 
-public class IVPVariableBasic extends RoundedJPanel {
+public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
 	private JPanel valueContainer;
 	private JLabel equalLabel;
-	private IVPInput name;
-	private IVPInput value;
-	private IVPInputBoolean booleanValue;
+	private EditInPlace name;
+	private EditInPlace value;
+	private EditBoolean booleanValue;
 	private JLabel valueLabel;
 	private JPanel optionsContainer;
 	private JButton configBtn;
@@ -96,6 +97,7 @@ public class IVPVariableBasic extends RoundedJPanel {
 	private void initDeleteBtn() {
 		Action action = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
+				Services.getService().getController().deleteVariable(modelScopeID, currentModelID);
 			}
 		};
 		action.putValue(Action.SMALL_ICON,
@@ -131,32 +133,33 @@ public class IVPVariableBasic extends RoundedJPanel {
 	}
 
 	private void initValueContainer() {
-		value = new IVPInput();
-		value.setCurrentPattern(JCustomTextField.INTEGER);
+		value = new EditInPlace();
+		value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_INTEGER);
 		value.setValue("1");
 		value.setValueListener(new IValueListener() {
 			public void valueChanged(String value) {
-				Services.getService().getController().changeVariableInitialValue(currentModelID, value);
+				//Services.getService().getController().changeVariableInitialValue(currentModelID, value);
 			}
 		});
 		add(value);
 	}
 
 	private void initBooleanValueContainer() {
-		booleanValue = new IVPInputBoolean();
+		booleanValue = new EditBoolean();
 		booleanValue.setValue("true");
 		booleanValue.setValueListener(new IValueListener() {
 			public void valueChanged(String value) {
-				Services.getService().getController().changeVariableInitialValue(currentModelID, value);
+				//Services.getService().getController().changeVariableInitialValue(currentModelID, value);
 			}
 		});
 		add(booleanValue);
 	}
 
 	private void initName() {
-		name = new IVPInput();
+		name = new EditInPlace();
 		name.setValueListener(new IValueListener() {
 			public void valueChanged(String value) {
+				/*
 				if (Services.getService().getController().validateVariableName(modelScopeID, value)) {
 					Services.getService().getController().changeVariableName(currentModelID, value);
 				} else {
@@ -168,9 +171,10 @@ public class IVPVariableBasic extends RoundedJPanel {
 						name.resetTextField();
 					}
 				}
+				*/
 			}
 		});
-		name.setCurrentPattern(IVPInput.PATTERN_VARIABLE_NAME);
+		name.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_NAME);
 		add(name);
 	}
 
@@ -180,7 +184,7 @@ public class IVPVariableBasic extends RoundedJPanel {
 	}
 
 	public void setVariableType(short type) {
-		variable.setVariableType(type);
+		//variable.setVariableType(type);
 		changeVariableType();
 	}
 
@@ -193,20 +197,21 @@ public class IVPVariableBasic extends RoundedJPanel {
 	}
 
 	private void changeVariableType() {
+		/*
 		if (variable != null) {
 			if (variable.getVariableType() == Expression.EXPRESSION_INTEGER) {
 				value.setVisible(true);
-				value.setCurrentPattern(IVPInput.PATTERN_VARIABLE_VALUE_INTEGER);
+				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_INTEGER);
 				value.setValue("1");
 				booleanValue.setVisible(false);
 			} else if (variable.getVariableType() == Expression.EXPRESSION_DOUBLE) {
 				value.setVisible(true);
-				value.setCurrentPattern(IVPInput.PATTERN_VARIABLE_VALUE_DOUBLE);
+				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_DOUBLE);
 				value.setValue("1.0");
 				booleanValue.setVisible(false);
 			} else if (variable.getVariableType() == Expression.EXPRESSION_STRING) {
 				value.setVisible(true);
-				value.setCurrentPattern(IVPInput.PATTERN_VARIABLE_VALUE_STRING);
+				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_STRING);
 				value.setValue(ResourceBundleIVP.getString("helloWorld.text"));
 				booleanValue.setVisible(false);
 			} else if (variable.getVariableType() == Expression.EXPRESSION_BOOLEAN) {
@@ -215,13 +220,13 @@ public class IVPVariableBasic extends RoundedJPanel {
 				booleanValue.setValue("true");
 			}
 		}
+		*/
 	}
 
 	private class ConfigBtnActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			configMenu.show(configBtn, 0, configBtn.getHeight());
 			configMenu.requestFocus();
-			Tracking.getInstance().track("event=CLICK;where=BTN_CONFIG_VARIABLE;");
 		}
 	}
 
@@ -229,21 +234,17 @@ public class IVPVariableBasic extends RoundedJPanel {
 		public void actionPerformed(ActionEvent e) {
 			String command = e.getActionCommand();
 			if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.integer"))) {
-				Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_INTEGER);
+				//Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_INTEGER);
 				changeVariableType();
-				Tracking.getInstance().track("event=CLICK;where=BTN_CHANGEVARTYPE_INT;");
 			} else if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.double"))) {
-				Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_DOUBLE);
+				//Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_DOUBLE);
 				changeVariableType();
-				Tracking.getInstance().track("event=CLICK;where=BTN_CHANGEVARTYPE_DOUBLE;");
 			} else if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.string"))) {
-				Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_STRING);
+				//Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_STRING);
 				changeVariableType();
-				Tracking.getInstance().track("event=CLICK;where=BTN_CHANGEVARTYPE_STRIN;");
 			} else if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.boolean"))) {
-				Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_BOOLEAN);
+				//Services.getService().getController().changeVariableType(currentModelID, Expression.EXPRESSION_BOOLEAN);
 				changeVariableType();
-				Tracking.getInstance().track("event=CLICK;where=BTN_CHANGEVARTYPE_BOOLEAN;");
 			}
 		}
 	}
@@ -262,7 +263,7 @@ public class IVPVariableBasic extends RoundedJPanel {
 
 	public void setModelID(String id) {
 		currentModelID = id;
-		variable = (Variable) Services.getService().getModelMapping().get(id);
+		//variable = (Variable) Services.getService().getModelMapping().get(id);
 		changeVariableType();
 	}
 

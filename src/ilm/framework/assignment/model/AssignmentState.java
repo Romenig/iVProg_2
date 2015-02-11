@@ -10,6 +10,11 @@ public final class AssignmentState extends Observable {
 	public AssignmentState() {
 		_objectList = new Vector();
 	}
+	
+	public final void stateChanged(){
+		setChanged();
+		notifyObservers();
+	}
 
 	public final void add(DomainObject object) {
 		_objectList.add(object);

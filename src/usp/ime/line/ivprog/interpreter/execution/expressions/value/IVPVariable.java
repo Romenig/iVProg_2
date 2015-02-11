@@ -93,7 +93,9 @@ public class IVPVariable extends Expression {
 	 */
 	@Override
 	public boolean equals(DomainObject o) {
-		// TODO Auto-generated method stub
+		if(valueID.equals(((DataObject)o).getUniqueID())){
+			return true;
+		}
 		return false;
 	}
 

@@ -13,6 +13,7 @@ import java.util.Vector;
 
 import usp.ime.line.ivprog.model.IVPDomainConverter;
 import usp.ime.line.ivprog.model.IVPDomainModel;
+import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.IVPAuthoringGUI;
 import usp.ime.line.ivprog.view.domaingui.IVPDomainGUI;
 import ilm.framework.SystemFactory;
@@ -36,6 +37,7 @@ public class IVPSystemFactory extends SystemFactory {
 	 */
 	protected DomainModel createDomainModel() {
 		IVPDomainModel model = new IVPDomainModel();
+		Services.getService().getController().setModel(model);
 		return model;
 	}
 
@@ -59,6 +61,7 @@ public class IVPSystemFactory extends SystemFactory {
 	public DomainGUI createDomainGUI(SystemConfig config, DomainModel domainModel) {
 		IVPDomainGUI gui = new IVPDomainGUI();
 		gui.initDomainActionList(domainModel);
+		Services.getService().getController().setCurrentDomainGUI(gui);
 		return gui;
 	}
 

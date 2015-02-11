@@ -18,9 +18,8 @@ import javax.swing.border.EmptyBorder;
 
 import usp.ime.line.ivprog.listeners.IValueListener;
 import usp.ime.line.ivprog.model.utils.Services;
-import usp.ime.line.ivprog.model.utils.Tracking;
-import usp.ime.line.ivprog.view.FlatUIColors;
-import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.IDomainObjectUI;
+import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.IDomainObjectUI;
 
 import java.awt.FlowLayout;
 
@@ -91,7 +90,6 @@ public class EditBoolean extends JPanel implements IDomainObjectUI {
 	private void initInputMap() {
 		AbstractAction editDone = new AbstractAction() {
 			public void actionPerformed(ActionEvent ae) {
-				Tracking.getInstance().track("event=FOCUSLOST;where=EDIT_BOOLEAN;");
 				nameField.setFocusable(false);
 				nameField.setFocusable(true);
 			}

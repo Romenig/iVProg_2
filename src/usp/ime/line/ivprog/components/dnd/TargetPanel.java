@@ -34,8 +34,8 @@ public class TargetPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TargetPanel() {
-		isInternal = false;
+	public TargetPanel(boolean isInter) {
+		isInternal = isInter;
 		initializeLayout();
 		initializeVariables();
 		addMouseListener(Services.getService().getML());

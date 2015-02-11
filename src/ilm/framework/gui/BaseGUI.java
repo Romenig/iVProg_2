@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 
@@ -72,6 +73,7 @@ public abstract class BaseGUI extends JPanel implements Observer {
 				}
 			}
 		}
+		Services.getService().setCurrentState(_assignments.getCurrentState(index));
 	}
 
 	protected abstract void setAuthoringButton();

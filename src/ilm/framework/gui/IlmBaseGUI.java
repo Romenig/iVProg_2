@@ -10,7 +10,10 @@ import ilm.framework.assignment.Assignment;
 import ilm.framework.assignment.model.AssignmentState;
 import ilm.framework.domain.DomainGUI;
 import ilm.framework.gui.BaseGUI;
+import ilm.framework.modules.AssignmentModule;
 import ilm.framework.modules.IlmModule;
+import ilm.framework.modules.assignment.HistoryModule;
+import ilm.framework.modules.assignment.UndoRedoModule;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -28,6 +31,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+import usp.ime.line.ivprog.listeners.IFunctionListener;
+import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
@@ -45,6 +50,7 @@ public class IlmBaseGUI extends BaseGUI {
 	private JButton openAssBtn;
 	private JButton saveAssBtn;
 	private int tabCount;
+	private boolean isOpening = false;
 
 	public IlmBaseGUI() {
 		setLayout(new BorderLayout(0, 0));
@@ -81,6 +87,7 @@ public class IlmBaseGUI extends BaseGUI {
 			        _assignments.getInitialState(0), _assignments.getCurrentState(0), _assignments.getExpectedAnswer(0),
 			        _assignments.getConfig(0), _assignments.getMetadata(0)));
 			setActiveAssignment();
+			initModelAndUI(index);
 		} else {
 			panel.add(tabbedPane);
 			for (int i = 0; i < _assignments.getNumberOfAssignments(); i++) {
@@ -90,6 +97,14 @@ public class IlmBaseGUI extends BaseGUI {
 		}
 	}
 
+	//ROMENIG
+	private void initModelAndUI(int index) {
+		
+		Services.getService().getController().getModel().addFunctionListener((IFunctionListener) _domainGUIList.get(index));
+		Services.getService().getController().initializeModel();
+		//recuperandoEstado(_assignments.getIlmModuleList().values());
+	}
+		
 	private void initAssignment(AssignmentState curState) {
 		_domainGUIList.add(_factory.createDomainGUI(_config, _factory.getDomainModel(_config)));
 		int index = _domainGUIList.size() - 1;
@@ -243,9 +258,21 @@ public class IlmBaseGUI extends BaseGUI {
 				tabbedPane.setVisible(true);
 				tabbedPane.addTab("assign" + (tabCount++), (Component) _domainGUIList.get(0));
 			}
+			isOpening = true;
 			initAssignment(_assignments.getCurrentState(i));
+			isOpening = false;
 		}
 		updateCloseButton();
+		
+		int index = 0;
+		_assignments.closeAssignment(index);
+		tabbedPane.remove(index);
+		_domainGUIList.remove(index);
+		_authoringGUIList.remove(index);
+		setActiveAssignment();
+		panel.removeAll();
+		panel.add((Component) _domainGUIList.get(0));
+		((JComponent) _domainGUIList.get(0)).setVisible(true);
 	}
 
 	private String getFileNameFromWindow(String option) {

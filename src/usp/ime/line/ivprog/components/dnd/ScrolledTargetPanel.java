@@ -22,7 +22,7 @@ public class ScrolledTargetPanel extends JScrollPane {
 	 * Create the panel.
 	 */
 	public ScrolledTargetPanel() {
-		target = new TargetPanel();
+		target = new TargetPanel(false);
 		contentPanel = new JPanel();
 		contentPanel.setLayout(new BorderLayout());
 		contentPanel.add(BorderLayout.CENTER, target);

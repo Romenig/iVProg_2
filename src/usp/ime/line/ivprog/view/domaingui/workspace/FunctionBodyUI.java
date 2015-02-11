@@ -3,13 +3,10 @@ package usp.ime.line.ivprog.view.domaingui.workspace;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import usp.ime.line.ivprog.components.dnd.TargetPanel;
 import usp.ime.line.ivprog.listeners.ICodeListener;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.CodeComposite;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.DataObject;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Function;
 import usp.ime.line.ivprog.model.utils.Services;
-import usp.ime.line.ivprog.view.domaingui.domaingui.variables.IVPVariablePanel;
-import usp.ime.line.ivprog.view.domaingui.domaingui.workspace.IVPContainer;
+import usp.ime.line.ivprog.view.domaingui.workspace.variable.IVPVariablePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -24,7 +21,7 @@ public class FunctionBodyUI extends JPanel implements ICodeListener {
 	private String name = "";
 	private String type = "-1";
 	private IVPVariablePanel variablesPanel;
-	private IVPContainer container;
+	private TargetPanel container;
 	private JScrollPane canvasHolder;
 	private String functionID = "";
 
@@ -33,12 +30,12 @@ public class FunctionBodyUI extends JPanel implements ICodeListener {
 		setLayout(new BorderLayout(0, 0));
 		variablesPanel = new IVPVariablePanel(functionID, isMain);
 		add(variablesPanel, BorderLayout.NORTH);
-		container = new IVPContainer(false, functionID, "");
+		container = new TargetPanel(false);
 		canvasHolder = new JScrollPane();
 		canvasHolder.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		canvasHolder.setViewportView(container);
 		add(canvasHolder, BorderLayout.CENTER);
-		Services.getService().getController().addComponentListener(this, functionID);
+		//Services.getService().getController().addComponentListener(this, functionID);
 	}
 
 	public String getName() {
@@ -66,27 +63,28 @@ public class FunctionBodyUI extends JPanel implements ICodeListener {
 	}
 
 	public void addChild(String childID, String context) {
-		container.addChild(childID);
+		//container.addComponent(childID);
 	}
 
 	public void childRemoved(String childID, String context) {
-		container.childRemoved(childID);
+		//container.childRemoved(childID);
 	}
 
 	public void restoreChild(String childID, int index, String context) {
-		container.restoreChild(childID, index);
+		//container.restoreChild(childID, index);
 	}
 
 	public void moveChild(String childID, String context, int index) {
-		container.moveChild(childID, index);
+		//container.moveChild(childID, index);
 	}
 
 	public boolean checkContentSet() {
-		boolean isContentSet = container.isContentSet();
-		return isContentSet;
+		//boolean isContentSet = container.isContentSet();
+		//return isContentSet;
+		return true;
 	}
 
 	public void lockCodeDown() {
-		container.lockCodeDown();
+		//container.lockCodeDown();
 	}
 }
