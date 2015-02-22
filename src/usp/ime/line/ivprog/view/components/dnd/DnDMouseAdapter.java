@@ -6,7 +6,7 @@
  * Romenig da Silva Ribeiro - romenig@ime.usp.br | romenig@gmail.com
  * @author Romenig
  */
-package usp.ime.line.ivprog.components.dnd;
+package usp.ime.line.ivprog.view.components.dnd;
 
 import java.awt.Cursor;
 import java.awt.dnd.DragSource;
@@ -48,7 +48,6 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 			if (event.getSource() instanceof TargetPanel) {
 				lastEnteredComponent = (JComponent) event.getComponent();
 				lastYOnLastEnteredComponent = event.getY();
-				System.out.println("Y " + lastYOnLastEnteredComponent);
 				event.consume();
 			}
 		}

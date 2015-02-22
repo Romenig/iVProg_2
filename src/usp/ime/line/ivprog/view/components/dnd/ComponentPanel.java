@@ -6,7 +6,7 @@
  * Romenig da Silva Ribeiro - romenig@ime.usp.br | romenig@gmail.com
  * @author Romenig
  */
-package usp.ime.line.ivprog.components.dnd;
+package usp.ime.line.ivprog.view.components.dnd;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -17,7 +17,9 @@ import org.junit.Test;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.execution.Context;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPString;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
 
@@ -74,7 +76,7 @@ public class CreateIVPVariable {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 
-		IVPNumber n = factory.createIVPNumber();
+		IVPString n = factory.createIVPString();
 		n.setValueType(IVPValue.STRING_TYPE);
 		c.addString(n.getUniqueID(), "Hello, world");
 
@@ -86,7 +88,7 @@ public class CreateIVPVariable {
 		map.put(v.getUniqueID(), v);
 		map.put(n.getUniqueID(), n);
 
-		IVPNumber result = (IVPNumber) v.evaluate(c, map, factory);
+		IVPString result = (IVPString) v.evaluate(c, map, factory);
 		assertTrue(c.getString(result.getUniqueID()).equals("Hello, world"));
 	}
 
@@ -95,7 +97,7 @@ public class CreateIVPVariable {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 
-		IVPNumber n = factory.createIVPNumber();
+		IVPBoolean n = factory.createIVPBoolean();
 		n.setValueType(IVPValue.BOOLEAN_TYPE);
 		c.addBoolean(n.getUniqueID(), new Boolean(true));
 
@@ -107,7 +109,7 @@ public class CreateIVPVariable {
 		map.put(v.getUniqueID(), v);
 		map.put(n.getUniqueID(), n);
 
-		IVPNumber result = (IVPNumber) v.evaluate(c, map, factory);
+		IVPBoolean result = (IVPBoolean) v.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 

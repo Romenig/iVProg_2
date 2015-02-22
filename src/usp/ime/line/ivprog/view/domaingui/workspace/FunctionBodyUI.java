@@ -3,9 +3,9 @@ package usp.ime.line.ivprog.view.domaingui.workspace;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import usp.ime.line.ivprog.components.dnd.TargetPanel;
 import usp.ime.line.ivprog.listeners.ICodeListener;
 import usp.ime.line.ivprog.model.utils.Services;
+import usp.ime.line.ivprog.view.components.dnd.TargetPanel;
 import usp.ime.line.ivprog.view.domaingui.workspace.variable.IVPVariablePanel;
 
 import java.awt.BorderLayout;

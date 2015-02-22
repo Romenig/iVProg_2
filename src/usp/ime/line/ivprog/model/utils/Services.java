@@ -6,10 +6,10 @@ import java.util.HashMap;
 
 import javax.swing.JComponent;
 
-import usp.ime.line.ivprog.components.dnd.DnDMouseAdapter;
 import usp.ime.line.ivprog.controller.IVPController;
 import usp.ime.line.ivprog.model.IVPDomainModel;
 import usp.ime.line.ivprog.model.IVPProgramData;
+import usp.ime.line.ivprog.view.components.dnd.DnDMouseAdapter;
 import usp.ime.line.ivprog.view.domaingui.IVPRenderer;
 
 public class Services {

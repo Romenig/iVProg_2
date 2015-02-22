@@ -109,10 +109,13 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		setLayout(new BorderLayout(0, 0));
 
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setResizeWeight(1.0);
+		splitPane.setDividerSize(3);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(splitPane);
 
 		workspacePanel = new JPanel();
+		workspacePanel.setPreferredSize(new Dimension(800,600));
 		splitPane.setLeftComponent(workspacePanel);
 		workspacePanel.setLayout(new BorderLayout(0, 0));
 		
@@ -179,7 +182,6 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		ChangeVariableInitValue change = new ChangeVariableInitValue("changeVariableInitValue", "changeVariableInitValue");
 		change.setDomainModel(model);
 		_actionList.put("changevariableinitvalue", change);
-		
 	}
 
 	/*
@@ -253,10 +255,10 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
      * @param id
      * @param expressionInteger
      */
-	public void changeVariableType(String id, short expressionInteger) {
+	public void changeVariableType(String id, String expressionType) {
 		ChangeVariableType changeVarType = (ChangeVariableType) _actionList.get("changeVarType");
 		changeVarType.setVariableID(id);
-		changeVarType.setNewType(expressionInteger);
+		changeVarType.setNewType(expressionType);
 		changeVarType.execute();
 	}
 	
@@ -271,6 +273,13 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		change.setVariableID(id);
 		change.execute();
 	}
+
+	/**
+	 * @param errorMessage
+	 */
+    public void printError(String errorMessage) {
+	    console.printError(errorMessage);
+    }
 	
 	
 

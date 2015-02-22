@@ -6,14 +6,16 @@
  * Romenig da Silva Ribeiro - romenig@ime.usp.br | romenig@gmail.com
  * @author Romenig
  */
-package usp.ime.line.ivprog.components.dnd;
+package usp.ime.line.ivprog.view.components.dnd;
 
 import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import usp.ime.line.ivprog.model.utils.IVPConstants;
 import usp.ime.line.ivprog.model.utils.Services;
+import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -40,7 +42,7 @@ public class TargetPanel extends JPanel {
 		initializeVariables();
 		addMouseListener(Services.getService().getML());
 		addMouseMotionListener(Services.getService().getML());
-		setBackground(Color.blue);
+		setBackground(FlatUIColors.MAIN_BG);
 	}
 
 	private void initializeVariables() {

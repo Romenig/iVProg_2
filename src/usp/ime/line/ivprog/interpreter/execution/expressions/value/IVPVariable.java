@@ -11,6 +11,7 @@ package usp.ime.line.ivprog.interpreter.execution.expressions.value;
 import ilm.framework.assignment.model.DomainObject;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
@@ -22,6 +23,8 @@ public class IVPVariable extends Expression {
 	private String valueID;
 	private String variableType;
 	private String variableName;
+	private String scopeID; //It's a Function object id.
+	private Vector referenceList;
 
 	/**
 	 * @param name
@@ -29,6 +32,7 @@ public class IVPVariable extends Expression {
 	 */
 	public IVPVariable() {
 		super("IVPVariable", "IVPVariable object.");
+		referenceList = new Vector();
 	}
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
@@ -98,5 +102,51 @@ public class IVPVariable extends Expression {
 		}
 		return false;
 	}
+
+	/**
+	 * Return the function ID if it's a local variable.
+	 * @return the scopeID
+	 */
+    public String getScopeID() {
+	    return scopeID;
+    }
+
+	/**
+	 * Set the function's ID of which this is a local variable.
+	 * @param scopeID the scopeID to set
+	 */
+    public void setScopeID(String scopeID) {
+	    this.scopeID = scopeID;
+    }
+
+	/**
+	 * @return the referenceList
+	 */
+    public Vector getReferenceList() {
+	    return referenceList;
+    }
+
+	/**
+	 * @param referenceList the referenceList to set
+	 */
+    public void setReferenceList(Vector referenceList) {
+	    this.referenceList = referenceList;
+    }
+    
+    /**
+     * Add a reference to the reference list.
+     * @param referenceID;
+     */
+    public void addReferenceToTheList(String referenceID){
+    	referenceList.add(referenceID);
+    }
+    
+    /**
+     * Remove the given reference from the reference list.
+     * @param referenceID;
+     */
+    public void removeReferenceToTheList(String referenceID){
+    	referenceList.remove(referenceID);
+    }
 
 }

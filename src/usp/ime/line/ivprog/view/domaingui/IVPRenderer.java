@@ -125,7 +125,6 @@ public class IVPRenderer {
 		function.setName(f.getFunctionName());
 		function.setType(f.getFunctionReturnType());
 		Services.getService().getViewMapping().addToMap(f.getUniqueID(), function);
-		System.out.println("Desenhou Main e guardou..."+function);
 		return function;
 	}
 	

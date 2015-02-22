@@ -16,18 +16,12 @@ import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
 import usp.ime.line.ivprog.listeners.IFunctionListener;
 import usp.ime.line.ivprog.listeners.IVariableListener;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.AttributionLine;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Expression;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Reference;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.Variable;
-import usp.ime.line.ivprog.model.components.datafactory.dataobjetcs.VariableReference;
 import usp.ime.line.ivprog.model.utils.IVPConstants;
 import usp.ime.line.ivprog.model.utils.IVPMapping;
 import usp.ime.line.ivprog.model.utils.Services;
-import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.AttributionLineUI;
-import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.VariableSelectorUI;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 import ilm.framework.assignment.model.AssignmentState;
 import ilm.framework.assignment.model.DomainObject;
@@ -48,17 +42,32 @@ public class IVPDomainModel extends DomainModel {
 	public void initializeModel() {
 		createFunction(ResourceBundleIVP.getString("mainFunctionName"), IVPConstants.FUNC_RETURN_VOID, Services.getService().getCurrentState());
 	}
+	
+	/**
+	 * Validates if there is already a variable with the given name.
+	 * @param modelScopeID
+	 * @param name
+	 * @return
+	 */
+	public boolean validateVariableName(String modelScopeID, String name) {
+		Function f = (Function) Services.getService().getModelMapping().get(modelScopeID);
+		Vector v = f.getLocalVariables();
+		for (int i = 0; i < v.size(); i++) {
+			IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(v.get(i));
+			if (var.getVariableName().equals(name))
+				return false;
+		}
+		return true;
+	}
 
 	// Program actions
 	public void createFunction(String name, String funcReturnVoid, AssignmentState state) {
-		System.out.println("Create Function IVPDomainModel "+name);
 		Function f = (Function) factory.createFunction();
 		f.setFunctionName(name);
 		f.setFunctionReturnType(funcReturnVoid);
 		Services.getService().getModelMapping().put(f.getUniqueID(), f);
 		Services.getService().getContextMapping().put(f.getUniqueID(), new Context());
 		for (int i = 0; i < Services.getService().getProgramData().getFunctionListeners().size(); i++) {
-			System.out.println("passou por aqui...");
 			IFunctionListener listener = (IFunctionListener) Services.getService().getProgramData().getFunctionListeners().get(i);
 			listener.functionCreated(f.getUniqueID());
 		}
@@ -73,7 +82,6 @@ public class IVPDomainModel extends DomainModel {
 		AssignmentState assignment = new AssignmentState();
 		assignment.add(new IVPProgramData()); //model
 		assignment.add(new IVPMapping()); //view
-		System.out.println("Criou o estado novo.");
 		return assignment;
 	}
 
@@ -92,7 +100,6 @@ public class IVPDomainModel extends DomainModel {
 	 * @param iFunctionListener
 	 */
 	public void addFunctionListener(IFunctionListener listener) {
-		System.out.println("Adiciona function listener...");
 		AssignmentState as = (AssignmentState) Services.getService().getCurrentState();
 		((IVPProgramData)as.get(0)).getFunctionListeners().add(listener);
 	}
@@ -100,13 +107,13 @@ public class IVPDomainModel extends DomainModel {
 	//------------- DOMAIN ACTION
 	public String createVariable(String scopeID, String initialValue, AssignmentState state) {
 		Function f = (Function) Services.getService().getModelMapping().get(scopeID);
+		Context c = (Context) Services.getService().getContextMapping().get(f.getUniqueID());
 		IVPVariable newVar = (IVPVariable) factory.createIVPVariable();
 		newVar.setVariableName("variavel" + varCount);
-		varCount++;
+		newVar.setScopeID(scopeID);
 		newVar.setVariableType(IVPValue.INTEGER_TYPE);
-		Context c = (Context) Services.getService().getContextMapping().get(f.getUniqueID());
-		c.addInt(newVar.getUniqueID(), new Integer(initialValue).intValue());
-		Services.getService().getModelMapping().put(newVar.getUniqueID(), newVar);
+		varCount++;
+		f.addVariable(newVar, initialValue, c, Services.getService().getModelMapping(), factory);
 		for (int i = 0; i < Services.getService().getProgramData().getVariableListeners().size(); i++) {
 			IVariableListener listener = (IVariableListener) Services.getService().getProgramData().getVariableListeners().get(i);
 			listener.addedVariable(newVar.getUniqueID());
@@ -152,20 +159,20 @@ public class IVPDomainModel extends DomainModel {
 	public Vector changeVariableType(String id, String newType, AssignmentState state) {
 		IVPVariable v = (IVPVariable) Services.getService().getModelMapping().get(id);
 		Vector returnedVector = new Vector();
-		/*
-		for (int i = 0; i < v.getVariableReferenceList().size(); i++) {
-			Reference r = (Reference) Services.getService().getModelMapping().get(v.getVariableReferenceList().get(i));
+		for (int i = 0; i < v.getReferenceList().size(); i++) {
+			IVPVariableReference r = (IVPVariableReference) Services.getService().getModelMapping().get(v.getReferenceList().get(i));
 			r.setReferencedType(newType);
 		}
 		String lastType = v.getVariableType();
-		
 		returnedVector.add(lastType);
 		v.setVariableType(newType);
-		v.setVariableValue(getInitvalue(newType)+"");
+		Context c = (Context) Services.getService().getContextMapping().get(v.getScopeID());
+		initValueWhenTypeChanged(newType, v, c);
 		Vector attLines = new Vector();
-		for (int i = 0; i < state.getData().getVariableListeners().size(); i++) {
-			IVariableListener listener = (IVariableListener) state.getData().getVariableListeners().get(i);
+		for (int i = 0; i < Services.getService().getProgramData().getVariableListeners().size(); i++) {
+			IVariableListener listener = (IVariableListener)Services.getService().getProgramData().getVariableListeners().get(i);
 			listener.changeVariableType(id, newType);
+			/*
 			if (listener instanceof VariableSelectorUI) {
 				if (((VariableSelectorUI) listener).isIsolated()) {
 					String modelParentID = ((VariableSelectorUI) listener).getModelParent();
@@ -173,13 +180,10 @@ public class IVPDomainModel extends DomainModel {
 						attLines.add(modelParentID);
 					}
 				}
-			}
+			}*/
 		}
-		for (int i = 0; i < attLines.size(); i++) { // ta errado... sï¿½ posso
-													// mexer na attLine se eu
-													// estiver mostrando (na ref
-													// da esquerda) a var que
-													// mudou
+		/*
+		for (int i = 0; i < attLines.size(); i++) { // ta errado, só posso mexer na attline se eu estiver mostrando (na ref da esquerda) a var que mudou 
 			AttributionLine attLine = (AttributionLine) Services.getService().getModelMapping().get(attLines.get(i));
 			VariableReference varRef = (VariableReference) Services.getService().getModelMapping().get(attLine.getLeftVariableID());
 			if (attLine.getLeftVariableType() != newType && id.equals(varRef.getReferencedVariable())) {
@@ -189,11 +193,27 @@ public class IVPDomainModel extends DomainModel {
 				attLineUI.updateHoldingType(newType);
 				returnedVector.add(deleteExpression(attLine.getRightExpressionID(), attLine.getUniqueID(), "", true, false, state));
 			}
-		}
-		state.updateState(v);
-		*/
+		}*/
+		state.stateChanged();
 		return returnedVector;
 	}
+
+	/**
+	 * @param newType
+	 * @param v
+	 * @param c
+	 */
+    private void initValueWhenTypeChanged(String newType, IVPVariable v, Context c) {
+	    if(newType.equals(IVPValue.INTEGER_TYPE)){
+			c.addInt(v.getValueID(), new Integer(IVPValue.DEFAULT_INTEGER).intValue());
+		} else if(newType.equals(IVPValue.DOUBLE_TYPE)){
+			c.addDouble(v.getValueID(), new Double(IVPValue.DEFAULT_DOUBLE).doubleValue());
+		} else if(newType.equals(IVPValue.STRING_TYPE)){
+			c.addString(v.getValueID(), IVPValue.DEFAULT_STRING);
+		} else {
+			c.addBoolean(v.getValueID(), new Boolean(IVPValue.DEFAULT_BOOLEAN).booleanValue());
+		}
+    }
 
 	public void restoreVariableType(String id, Vector ret, AssignmentState state) {
 		
@@ -234,21 +254,57 @@ public class IVPDomainModel extends DomainModel {
 	}
 
 	public String changeVariableInitialValue(String id, String value, AssignmentState state) {
-		/*
-		 * O VALOR DA VARIAVEL ESTÁ NO CONTEXT, PORTNTO PRECISO TER ACESSO A ELE AQUI!
-		 */
 		IVPVariable v = (IVPVariable) Services.getService().getModelMapping().get(id);
-		String lastValue = v.getVariableValue();
-		v.setVariableValue(value);
-		for (int i = 0; i < state.getData().getVariableListeners().size(); i++) {
-			IVariableListener listener = (IVariableListener) state.getData().getVariableListeners().get(i);
+		Context c = (Context) Services.getService().getContextMapping().get(v.getScopeID());
+		String lastValue = getCurrentVariableValueAndSetNew(value, c, id, v.getVariableType());
+		for (int i = 0; i < Services.getService().getProgramData().getVariableListeners().size(); i++) {
+			IVariableListener listener = (IVariableListener) Services.getService().getProgramData().getVariableListeners().get(i);
 			listener.changeVariableValue(id, value);
 		}
-		state.updateState((DomainObject) Services.getService().getModelMapping().get(id));
+		state.stateChanged();		
 		return lastValue;
 	}
 	
-	public String getInitvalue(String type) {
+	/**
+	 * This needs an explanation. The IVPValue hold the true variable value. 
+	 * A variable has a value. (IVPVariable -> IVPValue).
+	 * @param newValue
+	 * @param c
+	 * @param variableID
+	 * @param variableType
+	 * @return
+	 */
+	private String getCurrentVariableValueAndSetNew(String newValue, Context c, String variableID, String variableType){
+		IVPVariable v = (IVPVariable) Services.getService().getModelMapping().get(variableID);
+		if(variableType.equals(IVPValue.INTEGER_TYPE)){
+			int oldValue = c.getInt(v.getValueID());
+			int intValue = new Integer(newValue).intValue();
+			c.updateInt(v.getValueID(), intValue);
+			return oldValue+"";
+		}else if(variableType.equals(IVPValue.DOUBLE_TYPE)){
+			double oldValue = c.getDouble(v.getValueID());
+			double doubleValue = new Double(newValue).doubleValue();
+			c.updateDouble(v.getValueID(), doubleValue);
+			return oldValue+"";
+		}else if(variableType.equals(IVPValue.STRING_TYPE)){
+			String oldValue = c.getString(v.getValueID());
+			c.updateString(v.getValueID(), newValue);
+			return oldValue;
+		}else if(variableType.equals(IVPValue.BOOLEAN_TYPE)){
+			boolean oldValue = c.getBoolean(v.getValueID());
+			boolean booleanValue = new Boolean(newValue).booleanValue();
+			c.updateBoolean(v.getValueID(), booleanValue);
+			return oldValue+""+"";
+		}
+		return "";
+	}
+	
+	/**
+	 * Get the default initial value for the given type of variable.
+	 * @param type
+	 * @return
+	 */
+	public String getInitValue(String type) {
 		if (type.equals(IVPValue.BOOLEAN_TYPE)) {
 			return "true";
 		} else if (type.equals(IVPValue.DOUBLE_TYPE)) {
@@ -260,4 +316,6 @@ public class IVPDomainModel extends DomainModel {
 		}
 		return "";
 	}
+	
+	
 }

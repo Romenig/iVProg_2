@@ -173,7 +173,6 @@ public class IVPVariablePanel extends JPanel implements IVariableListener {
 	public void addedVariable(String id) {
 		IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(id);
 		if (!var.getVariableName().contains("#@ivprog@#!")) {
-			System.out.println("CRIAR VARIÁVEL. "+scopeID);
 			IVPVariableBasic variable = (IVPVariableBasic) Services.getService().getRenderer().paint(id, scopeID);
 			varMap.put(id, variable);
 			repaintVarPanel();
@@ -216,7 +215,7 @@ public class IVPVariablePanel extends JPanel implements IVariableListener {
 		}
 	}
 
-	public void changeVariableType(String id, short type) {
+	public void changeVariableType(String id, String type) {
 		IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(id);
 		if (!var.getVariableName().contains("#@ivprog@#!")) {
 			IVPVariableBasic variable = (IVPVariableBasic) Services.getService().getViewMapping().getObject(id);

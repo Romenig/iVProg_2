@@ -29,10 +29,12 @@ public class Function extends CodeComposite {
 	private String functionReturnedElementID;
 	private boolean isReturning = false;
 	private Vector argumentList;
+	private Vector localVariables;
 
 	public Function() {
 		super("Function", "Function object.");
 		argumentList = new Vector();
+		localVariables = new Vector();
 	}
 
 	/*
@@ -113,6 +115,7 @@ public class Function extends CodeComposite {
 		variable.setValueID(varValue.getUniqueID());
 		map.put(variable.getUniqueID(), variable);
 		map.put(varValue.getUniqueID(), varValue);
+		localVariables.add(variable.getUniqueID());
 	}
 
 	/**
@@ -220,6 +223,14 @@ public class Function extends CodeComposite {
 		this.isReturning = isReturning;
 	}
 
+	/**
+	 * Get the local variables ID's.
+	 * @return the localVariables
+	 */
+	public Vector getLocalVariables() {
+		return localVariables;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -229,7 +240,9 @@ public class Function extends CodeComposite {
 	 */
 	@Override
 	public boolean equals(DomainObject o) {
-		// TODO Auto-generated method stub
+		if(this.getUniqueID().equals(((DataObject)o).getUniqueID())){
+			return true;
+		}
 		return false;
 	}
 
