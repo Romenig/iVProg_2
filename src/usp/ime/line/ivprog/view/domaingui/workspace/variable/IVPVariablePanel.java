@@ -31,6 +31,7 @@ import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 public class IVPVariablePanel extends JPanel implements IVariableListener {
+	
 	private static final long serialVersionUID = -2214975678822644250L;
 	private JPanel container;
 	private JButton addVarBtn;

@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import usp.ime.line.ivprog.model.utils.IVPConstants;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.workspace.IVPContextMenu;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -32,6 +33,7 @@ public class TargetPanel extends JPanel {
 
 	private Vector elementList;
 	private boolean isInternal;
+	private IVPContextMenu menu;
 
 	/**
 	 * Create the panel.
@@ -43,6 +45,9 @@ public class TargetPanel extends JPanel {
 		addMouseListener(Services.getService().getML());
 		addMouseMotionListener(Services.getService().getML());
 		setBackground(FlatUIColors.MAIN_BG);
+		menu = new IVPContextMenu(this, "");
+		elementList.add(menu);
+		relayout();
 	}
 
 	private void initializeVariables() {
@@ -80,6 +85,8 @@ public class TargetPanel extends JPanel {
 		removeAll();
 		gbc.gridy = row++;
 		gbc.insets = new Insets(4, 3, 2, 5);
+		elementList.remove(menu);
+		elementList.add(menu);
 		for (int i = 0; i < elementList.size(); i++) {
 			gbc.gridy = row++;
 			JComponent c = (JComponent) elementList.get(i);

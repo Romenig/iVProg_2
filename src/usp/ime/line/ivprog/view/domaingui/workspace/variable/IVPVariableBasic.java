@@ -37,6 +37,7 @@ import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 import java.awt.Color;
 
 public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
+	
 	private JPanel valueContainer;
 	private JLabel equalLabel;
 	private EditInPlace name;
@@ -195,29 +196,33 @@ public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
 	}
 
 	public void setVariableValue(String value) {
-		this.value.setValue(value);
+		if(this.variableType.equals(IVPValue.BOOLEAN_TYPE)){
+			this.booleanValue.setValue(value);
+		}else{
+			this.value.setValue(value);	
+		}
 	}
 
 	private void changeVariableType() {
 			if (variableType.equals(IVPValue.INTEGER_TYPE)) {
 				value.setVisible(true);
 				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_INTEGER);
-				value.setValue("1");
+				value.setValue(IVPValue.DEFAULT_INTEGER);
 				booleanValue.setVisible(false);
 			} else if (variableType.equals(IVPValue.DOUBLE_TYPE)) {
 				value.setVisible(true);
 				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_DOUBLE);
-				value.setValue("1.0");
+				value.setValue(IVPValue.DEFAULT_DOUBLE);
 				booleanValue.setVisible(false);
 			} else if (variableType.equals(IVPValue.STRING_TYPE)) {
 				value.setVisible(true);
 				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_STRING);
-				value.setValue(ResourceBundleIVP.getString("helloWorld.text"));
+				value.setValue(IVPValue.DEFAULT_STRING);
 				booleanValue.setVisible(false);
 			} else if (variableType.equals(IVPValue.BOOLEAN_TYPE)) {
 				value.setVisible(false);
 				booleanValue.setVisible(true);
-				booleanValue.setValue("true");
+				booleanValue.setValue(IVPValue.DEFAULT_BOOLEAN);
 			}
 	}
 

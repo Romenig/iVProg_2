@@ -14,6 +14,7 @@ import java.util.Vector;
 import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
@@ -182,7 +183,7 @@ public class IVPDomainModel extends DomainModel {
 				}
 			}*/
 		}
-		/*
+		/* ARRUMA AS LINHAS DE ATRIBUIÇÃO QUE TINHAM A VARIÁVEL
 		for (int i = 0; i < attLines.size(); i++) { // ta errado, só posso mexer na attline se eu estiver mostrando (na ref da esquerda) a var que mudou 
 			AttributionLine attLine = (AttributionLine) Services.getService().getModelMapping().get(attLines.get(i));
 			VariableReference varRef = (VariableReference) Services.getService().getModelMapping().get(attLine.getLeftVariableID());
@@ -218,22 +219,24 @@ public class IVPDomainModel extends DomainModel {
 	public void restoreVariableType(String id, Vector ret, AssignmentState state) {
 		
 		IVPVariable v = (IVPVariable) Services.getService().getModelMapping().get(id);
-		/*
-		v.setVariableType((Short) ret.get(0));
-		v.setVariableValue(getInitvalue((Short) ret.get(0)));
+		Context c = (Context) Services.getService().getContextMapping().get(v.getScopeID());
+		v.setVariableType((String) ret.get(0));
+		changeVariableInitialValue(v.getUniqueID(), getInitValue((String) ret.get(0)), state);
+		
 		Vector attLines = new Vector();
-		for (int i = 0; i < state.getData().getVariableListeners().size(); i++) {
-			IVariableListener listener = (IVariableListener) state.getData().getVariableListeners().get(i);
-			listener.changeVariableType(id, (Short) ret.get(0));
-			if (listener instanceof VariableSelectorUI) {
+		for (int i = 0; i < Services.getService().getProgramData().getVariableListeners().size(); i++) {
+			IVariableListener listener = (IVariableListener) Services.getService().getProgramData().getVariableListeners().get(i);
+			listener.changeVariableType(id, (String) ret.get(0));
+			/*	if (listener instanceof VariableSelectorUI) {
 				if (((VariableSelectorUI) listener).isIsolated()) {
 					String modelParentID = ((VariableSelectorUI) listener).getModelParent();
 					if (Services.getService().getModelMapping().get(modelParentID) instanceof AttributionLine) {
 						attLines.add(modelParentID);
 					}
 				}
-			}
+			}*/
 		}
+		/*
 		for (int i = 0; i < attLines.size(); i++) {
 			AttributionLine attLine = (AttributionLine) Services.getService().getModelMapping().get(attLines.get(i));
 			VariableReference varRef = (VariableReference) Services.getService().getModelMapping().get(attLine.getLeftVariableID());
@@ -306,13 +309,13 @@ public class IVPDomainModel extends DomainModel {
 	 */
 	public String getInitValue(String type) {
 		if (type.equals(IVPValue.BOOLEAN_TYPE)) {
-			return "true";
+			return IVPValue.DEFAULT_BOOLEAN;
 		} else if (type.equals(IVPValue.DOUBLE_TYPE)) {
-			return "1.0";
+			return IVPValue.DEFAULT_DOUBLE;
 		} else if (type.equals(IVPValue.INTEGER_TYPE)) {
-			return "1";
+			return IVPValue.DEFAULT_INTEGER;
 		} else if (type.equals(IVPValue.STRING_TYPE)) {
-			return ResourceBundleIVP.getString("helloWorld.text");
+			return IVPValue.DEFAULT_STRING;
 		}
 		return "";
 	}

@@ -14,6 +14,7 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
+import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 public abstract class IVPValue extends Expression {
 
@@ -31,9 +32,9 @@ public abstract class IVPValue extends Expression {
 	public static final String BOOLEAN_TYPE = "boolean";
 	public static final String NULL = "null";
 
-	public static final String DEFAULT_INTEGER = "0";
-	public static final String DEFAULT_DOUBLE = "0.0";
-	public static final String DEFAULT_STRING = "abcd";
+	public static final String DEFAULT_INTEGER = "1";
+	public static final String DEFAULT_DOUBLE = "1.0";
+	public static final String DEFAULT_STRING = ResourceBundleIVP.getString("helloWorld.text");
 	public static final String DEFAULT_BOOLEAN = "true";
 
 	private String valueType;

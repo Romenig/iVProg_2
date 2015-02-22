@@ -135,7 +135,7 @@ public class EditBoolean extends JPanel implements IDomainObjectUI {
 	}
 
 	public void setValue(String name) {
-		if (value) {
+		if (name.equals("true")) {
 			nameLabel.setText("Verdadeiro");
 		} else {
 			nameLabel.setText("Falso");
