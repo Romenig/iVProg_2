@@ -31,7 +31,7 @@ import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 public class IVPVariablePanel extends JPanel implements IVariableListener {
-	
+
 	private static final long serialVersionUID = -2214975678822644250L;
 	private JPanel container;
 	private JButton addVarBtn;
@@ -89,10 +89,11 @@ public class IVPVariablePanel extends JPanel implements IVariableListener {
 	private void initParamBtn() {
 		Action action = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addParameter(scopeID);
+				// Services.getService().getController().addParameter(scopeID);
 			}
 		};
-		action.putValue(Action.SMALL_ICON, new ImageIcon(IVPVariablePanel.class.getResource("/usp/ime/line/resources/icons/plus_param.png")));
+		action.putValue(Action.SMALL_ICON,
+		        new ImageIcon(IVPVariablePanel.class.getResource("/usp/ime/line/resources/icons/plus_param.png")));
 		action.putValue(Action.SHORT_DESCRIPTION, ResourceBundleIVP.getString("IVPVariablePanel.action.addParam") + "Principal");
 		addParamBtn = new JButton(action);
 		addParamBtn.setHorizontalAlignment(SwingConstants.LEFT);
@@ -181,7 +182,7 @@ public class IVPVariablePanel extends JPanel implements IVariableListener {
 	}
 
 	public void changeVariable(String id) {
-		
+
 	}
 
 	public void removedVariable(String id) {
@@ -195,7 +196,7 @@ public class IVPVariablePanel extends JPanel implements IVariableListener {
 	}
 
 	public void changeVariableName(String id, String name, String lastName) {
-	
+
 		IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(id);
 		if (!var.getVariableName().contains("#@ivprog@#!")) {
 			IVPVariableBasic variable = (IVPVariableBasic) Services.getService().getViewMapping().getObject(id);
@@ -227,14 +228,14 @@ public class IVPVariablePanel extends JPanel implements IVariableListener {
 	}
 
 	public void variableRestored(String id) {
-		
+
 		IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(id);
 		if (!var.getVariableName().contains("#@ivprog@#!")) {
 			IVPVariableBasic variable = (IVPVariableBasic) Services.getService().getViewMapping().getObject(id);
 			varMap.put(id, variable);
 			repaintVarPanel();
 		}
-		
+
 	}
 
 	public void updateReference(String id) {

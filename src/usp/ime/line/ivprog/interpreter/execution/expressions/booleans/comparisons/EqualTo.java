@@ -16,13 +16,11 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
-public class EqualTo extends Expression {
-
-	private String expA;
-	private String expB;
+public class EqualTo extends Operation {
 
 	/**
 	 * @param name
@@ -32,27 +30,9 @@ public class EqualTo extends Expression {
 		super("EqualTo", "EqualTo object.");
 	}
 
-	/**
-	 * Set the left expression of and. EqualTo := expressionA == expressionB
-	 * 
-	 * @param expressionA
-	 */
-	public void setExpressionA(String expressionA) {
-		expA = expressionA;
-	}
-
-	/**
-	 * Set the right expression of and. EqualTo := expressionA == expressionB
-	 * 
-	 * @param expressionB
-	 */
-	public void setExpressionB(String expressionB) {
-		expB = expressionB;
-	}
-
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPValue expressionA = (IVPValue) ((DataObject) map.get(expA)).evaluate(c, map, factory);
-		IVPValue expressionB = (IVPValue) ((DataObject) map.get(expB)).evaluate(c, map, factory);
+		IVPValue expressionA = (IVPValue) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
+		IVPValue expressionB = (IVPValue) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
 		return expressionA.ivpEqualTo(expressionB, c, map, factory);
 	}
 
@@ -67,6 +47,28 @@ public class EqualTo extends Expression {
 	public boolean equals(DomainObject o) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

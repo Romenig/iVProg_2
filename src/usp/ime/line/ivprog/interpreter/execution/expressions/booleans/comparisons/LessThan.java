@@ -16,14 +16,12 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
-public class LessThan extends Expression {
-
-	private String expA;
-	private String expB;
+public class LessThan extends Operation {
 
 	/**
 	 * @param name
@@ -33,27 +31,9 @@ public class LessThan extends Expression {
 		super("LessThan", "LessThan object.");
 	}
 
-	/**
-	 * Set the left expression of and. EqualTo := expressionA == expressionB
-	 * 
-	 * @param expressionA
-	 */
-	public void setExpressionA(String expressionA) {
-		expA = expressionA;
-	}
-
-	/**
-	 * Set the right expression of and. EqualTo := expressionA == expressionB
-	 * 
-	 * @param expressionB
-	 */
-	public void setExpressionB(String expressionB) {
-		expB = expressionB;
-	}
-
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		IVPNumber expressionA = (IVPNumber) ((DataObject) map.get(expA)).evaluate(c, map, factory);
-		IVPNumber expressionB = (IVPNumber) ((DataObject) map.get(expB)).evaluate(c, map, factory);
+		IVPNumber expressionA = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
+		IVPNumber expressionB = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
 		return expressionA.lessThan(expressionB, c, map, factory);
 	}
 
@@ -68,6 +48,28 @@ public class LessThan extends Expression {
 	public boolean equals(DomainObject o) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -28,6 +28,8 @@ public abstract class DataObject extends DomainObject {
 	}
 
 	private String uniqueID;
+	private String parentID;
+	private String scopeID;
 
 	public String getUniqueID() {
 		return uniqueID;
@@ -38,5 +40,45 @@ public abstract class DataObject extends DomainObject {
 	}
 
 	public abstract Object evaluate(Context c, HashMap map, DataFactory factory);
+
+	public abstract String toXML();
+
+	public abstract String toCString();
+
+	/**
+	 * Returns the container of this element.
+	 */
+	public String getParentID() {
+		return parentID;
+	}
+
+	/**
+	 * Set this element container.
+	 * 
+	 * @param parent
+	 */
+	public void setParentID(String fID) {
+		parentID = fID;
+	}
+
+	/**
+	 * Get the scope of this object
+	 * 
+	 * @return
+	 */
+	public String getScopeID() {
+		return scopeID;
+	}
+
+	/**
+	 * Set the scope of this object
+	 * 
+	 * @return
+	 */
+	public void setScopeID(String scopeID) {
+		this.scopeID = scopeID;
+	}
+	
+	public abstract void updateParent(String lastExp, String newExp, String operationContext);
 
 }

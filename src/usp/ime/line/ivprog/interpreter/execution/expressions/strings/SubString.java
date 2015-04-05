@@ -17,11 +17,12 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPString;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
-public class SubString extends Expression {
+public class SubString extends Operation {
 
 	private String string;
 	private String beginIndex;
@@ -79,6 +80,28 @@ public class SubString extends Expression {
 	public boolean equals(DomainObject o) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

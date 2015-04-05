@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 /**
  * @author Romenig
  */
-public class LeafPanel extends ComponentPanel {
+public abstract class LeafPanel extends ComponentPanel {
 
 	/**
 	 * Create the panel.

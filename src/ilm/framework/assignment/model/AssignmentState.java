@@ -10,8 +10,8 @@ public final class AssignmentState extends Observable {
 	public AssignmentState() {
 		_objectList = new Vector();
 	}
-	
-	public final void stateChanged(){
+
+	public final void stateChanged() {
 		setChanged();
 		notifyObservers();
 	}

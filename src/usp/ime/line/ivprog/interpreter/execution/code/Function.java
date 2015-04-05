@@ -225,6 +225,7 @@ public class Function extends CodeComposite {
 
 	/**
 	 * Get the local variables ID's.
+	 * 
 	 * @return the localVariables
 	 */
 	public Vector getLocalVariables() {
@@ -240,10 +241,45 @@ public class Function extends CodeComposite {
 	 */
 	@Override
 	public boolean equals(DomainObject o) {
-		if(this.getUniqueID().equals(((DataObject)o).getUniqueID())){
+		if (this.getUniqueID().equals(((DataObject) o).getUniqueID())) {
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * usp.ime.line.ivprog.interpreter.execution.code.CodeComposite#updateParent
+	 * (java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void updateParent(String lastExp, String newExp, String operationContext) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

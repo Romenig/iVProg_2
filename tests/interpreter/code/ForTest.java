@@ -56,7 +56,7 @@ public class ForTest {
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -114,7 +114,7 @@ public class ForTest {
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -181,7 +181,7 @@ public class ForTest {
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();

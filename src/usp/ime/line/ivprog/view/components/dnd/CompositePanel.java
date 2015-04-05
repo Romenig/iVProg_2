@@ -25,7 +25,7 @@ import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
  * @author Romenig
  * 
  */
-public class CompositePanel extends ComponentPanel {
+public abstract class CompositePanel extends ComponentPanel {
 
 	private JPanel header;
 	private JPanel content;

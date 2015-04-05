@@ -104,4 +104,35 @@ public class RecursiveCall extends DataObject {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#updateParent(java.lang.String, java.lang.String, java.lang.String)
+	 */
+    @Override
+    public void updateParent(String lastExp, String newExp, String operationContext) {
+	    // TODO Auto-generated method stub
+	    
+    }
 }

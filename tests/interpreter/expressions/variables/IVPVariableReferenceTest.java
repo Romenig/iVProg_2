@@ -24,7 +24,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableRe
 
 /**
  * @author Romenig
- *
+ * 
  */
 public class IVPVariableReferenceTest {
 
@@ -39,7 +39,7 @@ public class IVPVariableReferenceTest {
 		var.setValueID(c.getUniqueID());
 		IVPVariableReference reference = factory.createIVPVariableReference();
 		reference.setReferencedID(var.getUniqueID());
-		
+
 		a.setValueType(IVPValue.DOUBLE_TYPE);
 		b.setValueType(IVPValue.INTEGER_TYPE);
 		c.setValueType(IVPValue.INTEGER_TYPE);

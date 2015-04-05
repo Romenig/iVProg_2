@@ -16,6 +16,7 @@ import javax.swing.text.StyledDocument;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 
 public class IVPConsole extends JPanel {
+
 	private JTextPane textPane;
 	private JScrollPane scrollPane;
 	private StyledDocument doc;

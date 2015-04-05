@@ -13,9 +13,11 @@ import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import usp.ime.line.ivprog.interpreter.execution.code.CodeComposite;
 import usp.ime.line.ivprog.model.utils.IVPConstants;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.IDomainObjectUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.IVPContextMenu;
 
 import java.awt.Color;
@@ -33,19 +35,22 @@ public class TargetPanel extends JPanel {
 
 	private Vector elementList;
 	private boolean isInternal;
+	private String container;
+	private String scopeID;
 	private IVPContextMenu menu;
 
 	/**
 	 * Create the panel.
 	 */
-	public TargetPanel(boolean isInter) {
+	public TargetPanel(boolean isInter, String compositeID, String scopeID) {
 		isInternal = isInter;
+		setContainer(compositeID);
 		initializeLayout();
 		initializeVariables();
 		addMouseListener(Services.getService().getML());
 		addMouseMotionListener(Services.getService().getML());
 		setBackground(FlatUIColors.MAIN_BG);
-		menu = new IVPContextMenu(this, "");
+		menu = new IVPContextMenu(this, "", scopeID);
 		elementList.add(menu);
 		relayout();
 	}
@@ -66,8 +71,9 @@ public class TargetPanel extends JPanel {
 	 * 
 	 * @param componentPanel
 	 */
-	public void addComponent(ComponentPanel componentPanel) {
-		elementList.add(componentPanel);
+	public void addComponent(String childID) {
+		JComponent child = Services.getService().getRenderer().paint(childID, scopeID);
+		elementList.add(elementList.size() - 1, child);
 		relayout();
 	}
 
@@ -128,6 +134,88 @@ public class TargetPanel extends JPanel {
 	public void removeElement(ComponentPanel element) {
 		elementList.remove(element);
 		relayout();
+	}
+
+	/**
+	 * @return the container
+	 */
+	public String getContainer() {
+		return container;
+	}
+
+	/**
+	 * @param container
+	 *            the container to set
+	 */
+	public void setContainer(String container) {
+		this.container = container;
+	}
+
+	/**
+	 * @return the scopeID
+	 */
+	public String getScopeID() {
+		return scopeID;
+	}
+
+	/**
+	 * @param scopeID
+	 *            the scopeID to set
+	 */
+	public void setScopeID(String scopeID) {
+		this.scopeID = scopeID;
+	}
+
+	/**
+	 * @param childID
+	 */
+	public void childRemoved(String childID) {
+		JComponent c = (JComponent) Services.getService().getViewMapping().getObject(childID);
+		elementList.remove(c);
+		relayout();
+	}
+
+	/**
+	 * @param childID
+	 * @param index
+	 */
+	public void restoreChild(String childID, int index) {
+		JComponent child = (JComponent) Services.getService().getViewMapping().getObject(childID);
+		if (elementList.contains(child)) {
+			int ind = elementList.indexOf(child);
+			if (index >= ind) {
+				elementList.add(index, child);
+				if (ind != -1)
+					elementList.remove(ind);
+			} else {
+				elementList.remove(child);
+				elementList.add(index, child);
+			}
+		} else {
+			if (index != -1)
+				elementList.add(index, child);
+			else
+				elementList.add(child);
+		}
+		relayout();
+	}
+
+	public boolean isContentSet() {
+		boolean isCSet = true;
+		for (int i = 0; i < elementList.size() - 1; i++) {
+			if (!((IDomainObjectUI) elementList.get(i)).isContentSet()) {
+				if (isCSet) {
+					isCSet = false;
+				}
+			}
+		}
+		return isCSet;
+	}
+
+	public void lockCodeDown() {
+		for (int i = 0; i < elementList.size() - 1; i++) {
+			((IDomainObjectUI) elementList.get(i)).lockDownCode();
+		}
 	}
 
 }

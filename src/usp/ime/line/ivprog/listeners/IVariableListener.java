@@ -16,6 +16,6 @@ public interface IVariableListener {
 	public void variableRestored(String id);
 
 	public void updateReference(String id); // the context says if its an
-											// "undo/redo/do for the first time"
-											// action.
+	                                        // "undo/redo/do for the first time"
+	                                        // action.
 }

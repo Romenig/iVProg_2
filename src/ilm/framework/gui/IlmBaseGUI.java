@@ -97,14 +97,14 @@ public class IlmBaseGUI extends BaseGUI {
 		}
 	}
 
-	//ROMENIG
+	// ROMENIG
 	private void initModelAndUI(int index) {
-		
+
 		Services.getService().getController().getModel().addFunctionListener((IFunctionListener) _domainGUIList.get(index));
 		Services.getService().getController().initializeModel();
-		//recuperandoEstado(_assignments.getIlmModuleList().values());
+		// recuperandoEstado(_assignments.getIlmModuleList().values());
 	}
-		
+
 	private void initAssignment(AssignmentState curState) {
 		_domainGUIList.add(_factory.createDomainGUI(_config, _factory.getDomainModel(_config)));
 		int index = _domainGUIList.size() - 1;
@@ -263,7 +263,7 @@ public class IlmBaseGUI extends BaseGUI {
 			isOpening = false;
 		}
 		updateCloseButton();
-		
+
 		int index = 0;
 		_assignments.closeAssignment(index);
 		tabbedPane.remove(index);

@@ -196,6 +196,18 @@ public class For extends CodeComposite {
 		this.increment = increment;
 	}
 
+	public void removeExpression(String expression, String context) {
+		if (context.equals("forUpperBound")) {
+			upperBound = "";
+		} else if (context.equals("forIndex")) {
+			index = "";
+		} else if (context.equals("forLowerBound")) {
+			lowerBound = "";
+		} else if (context.equals("forIncrement")) {
+			increment = "";
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -205,6 +217,38 @@ public class For extends CodeComposite {
 	 */
 	public boolean equals(DomainObject o) {
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		return null;
+	}
+
+	public void updateParent(String lastExp, String newExp, String operationContext) {
+		if (upperBound.equals(lastExp))
+			upperBound = newExp;
+		else if (increment.equals(lastExp))
+			increment = newExp;
+		else if (index.equals(lastExp))
+			index = newExp;
+		else if (increment.equals(lastExp))
+			increment = newExp;
 	}
 
 }

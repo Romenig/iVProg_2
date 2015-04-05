@@ -20,10 +20,14 @@ public class IVPMapping extends DomainObject {
 		mapping.put(key, o);
 	}
 
-	/* (non-Javadoc)
-	 * @see ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment.model.DomainObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
+	 * .model.DomainObject)
 	 */
-    public boolean equals(DomainObject o) {
-	    return false;
-    }
+	public boolean equals(DomainObject o) {
+		return false;
+	}
 }

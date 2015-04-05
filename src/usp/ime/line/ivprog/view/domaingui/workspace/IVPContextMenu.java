@@ -32,7 +32,7 @@ import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 public class IVPContextMenu extends RoundedJPanel {
-	
+
 	private static final long serialVersionUID = 3814837809047109772L;
 	private TargetPanel container = null;
 	private JPanel btnPanel;
@@ -41,10 +41,11 @@ public class IVPContextMenu extends RoundedJPanel {
 	private JButton plusBtn;
 	private JPopupMenu menu;
 	private String context;
+	private String scopeID;
 
-	// começar a transformar em context menu
-	public IVPContextMenu(TargetPanel c, String context) {
+	public IVPContextMenu(TargetPanel c, String context, String scopeID) {
 		this.context = context;
+		this.scopeID = scopeID;
 		container = c;
 		initialization();
 		initPanels();
@@ -57,7 +58,8 @@ public class IVPContextMenu extends RoundedJPanel {
 		menu.setBackground(FlatUIColors.MAIN_BG);
 		Action createWhile = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addChild(container.getCodeComposite(), IVPConstants.MODEL_WHILE, context);
+				// Services.getService().getController().addChild(container.getCodeComposite(),
+				// IVPConstants.MODEL_WHILE, context);
 			}
 		};
 		createWhile.putValue(Action.SMALL_ICON,
@@ -66,7 +68,8 @@ public class IVPContextMenu extends RoundedJPanel {
 		createWhile.putValue(Action.NAME, ResourceBundleIVP.getString("IVPContextMenu.while.text"));
 		Action createfOR = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addChild(container.getCodeComposite(), IVPConstants.MODEL_FOR, context);
+				// Services.getService().getController().addChild(container.getCodeComposite(),
+				// IVPConstants.MODEL_FOR, context);
 			}
 		};
 		createfOR.putValue(Action.SMALL_ICON, new ImageIcon(IVPContextMenu.class.getResource("/usp/ime/line/resources/icons/loop-n.png")));
@@ -74,7 +77,8 @@ public class IVPContextMenu extends RoundedJPanel {
 		createfOR.putValue(Action.NAME, ResourceBundleIVP.getString("IVPContextMenu.for.text"));
 		Action createifElse = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addChild(container.getCodeComposite(), IVPConstants.MODEL_IFELSE, context);
+				// Services.getService().getController().addChild(container.getCodeComposite(),
+				// IVPConstants.MODEL_IFELSE, context);
 			}
 		};
 		createifElse.putValue(Action.SMALL_ICON, new ImageIcon(IVPContextMenu.class.getResource("/usp/ime/line/resources/icons/if.png")));
@@ -82,7 +86,8 @@ public class IVPContextMenu extends RoundedJPanel {
 		createifElse.putValue(Action.NAME, ResourceBundleIVP.getString("IVPContextMenu.if.text"));
 		Action createRead = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addChild(container.getCodeComposite(), IVPConstants.MODEL_READ, context);
+				// Services.getService().getController().addChild(container.getCodeComposite(),
+				// IVPConstants.MODEL_READ, context);
 			}
 		};
 		createRead.putValue(Action.SMALL_ICON,
@@ -91,7 +96,7 @@ public class IVPContextMenu extends RoundedJPanel {
 		createRead.putValue(Action.NAME, ResourceBundleIVP.getString("IVPContextMenu.read.text"));
 		Action createPrint = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addChild(container.getCodeComposite(), IVPConstants.MODEL_WRITE, context);
+				Services.getService().getController().addChild(scopeID, container.getContainer(), IVPConstants.MODEL_WRITE, context);
 			}
 		};
 		createPrint.putValue(Action.SMALL_ICON,
@@ -100,7 +105,7 @@ public class IVPContextMenu extends RoundedJPanel {
 		createPrint.putValue(Action.NAME, ResourceBundleIVP.getString("IVPContextMenu.escrita.text"));
 		Action createAtt = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				//Services.getService().getController().addChild(container.getCodeComposite(), IVPConstants.MODEL_ATTLINE, context);
+				Services.getService().getController().addChild(scopeID, container.getContainer(), IVPConstants.MODEL_ATTLINE, context);
 			}
 		};
 		createAtt.putValue(Action.SMALL_ICON, new ImageIcon(IVPContextMenu.class.getResource("/usp/ime/line/resources/icons/att.png")));
@@ -178,5 +183,20 @@ public class IVPContextMenu extends RoundedJPanel {
 				buttonsContainer.setLocation(p);
 			}
 		});
+	}
+
+	/**
+	 * @return the scopeID
+	 */
+	public String getScopeID() {
+		return scopeID;
+	}
+
+	/**
+	 * @param scopeID
+	 *            the scopeID to set
+	 */
+	public void setScopeID(String scopeID) {
+		this.scopeID = scopeID;
 	}
 }

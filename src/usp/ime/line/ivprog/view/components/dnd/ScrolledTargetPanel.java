@@ -17,19 +17,21 @@ public class ScrolledTargetPanel extends JScrollPane {
 
 	TargetPanel target;
 	JPanel contentPanel;
+	String scopeID;
 
 	/**
 	 * Create the panel.
 	 */
-	public ScrolledTargetPanel() {
-		target = new TargetPanel(false);
+	public ScrolledTargetPanel(String compositeID, String scopeID) {
+		target = new TargetPanel(false, compositeID, scopeID);
+		this.scopeID = scopeID;
 		contentPanel = new JPanel();
 		contentPanel.setLayout(new BorderLayout());
 		contentPanel.add(BorderLayout.CENTER, target);
 		this.setViewportView(contentPanel);
 	}
 
-	public void addComponent(ComponentPanel p) {
+	public void addComponent(String p) {
 		target.addComponent(p);
 	}
 }

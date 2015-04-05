@@ -8,7 +8,6 @@
  */
 package usp.ime.line.ivprog.interpreter.execution.code;
 
-import java.math.BigDecimal;
 import java.util.Vector;
 
 import usp.ime.line.ivprog.interpreter.DataObject;
@@ -34,14 +33,26 @@ public abstract class CodeComposite extends DataObject {
 	/**
 	 * Append a child at the at the specified position in the children list.
 	 * 
-	 * @param index
 	 * @param childID
+	 * @param index
 	 * @return lastChild
 	 */
-	public String addChildAtIndex(BigDecimal index, String childID) {
-		String lastChild = (String) children.remove(index.intValue());
-		children.add(index.intValue(), childID);
-		return lastChild;
+	public int addChildAtIndex(String childID, int index) {
+		int lastIndex = -1;
+		if (children.contains(childID)) {
+			lastIndex = children.indexOf(childID);
+			if (index >= lastIndex) {
+				children.add(index, childID);
+				children.remove(lastIndex);
+			} else {
+				children.remove(childID);
+				children.add(index, childID);
+			}
+			return lastIndex;
+		} else {
+			children.add(index, childID);
+			return lastIndex;
+		}
 	}
 
 	/**
@@ -50,15 +61,17 @@ public abstract class CodeComposite extends DataObject {
 	 * @param childID
 	 * @return
 	 */
-	public String removeChild(String childID) {
+	public int removeChild(String childID) {
 		String childRemoved = null;
+		int index = 0;
 		for (int i = 0; i < children.size(); i++) {
 			if (childID.equals(children.get(i))) {
 				childRemoved = childID;
 				children.remove(i);
+				index = i;
 			}
 		}
-		return childRemoved;
+		return index;
 	}
 
 	/**
@@ -67,9 +80,11 @@ public abstract class CodeComposite extends DataObject {
 	 * @param index
 	 * @return
 	 */
-	public String removeChildAtIndex(BigDecimal index) {
-		String lastChild = (String) children.remove(index.intValue());
+	public String removeChildFromIndex(int index) {
+		String lastChild = (String) children.remove(index);
 		return lastChild;
 	}
+
+	public abstract void updateParent(String lastExp, String newExp, String operationContext);
 
 }

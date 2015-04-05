@@ -61,11 +61,11 @@ public class IfElseTest {
 		leq.setExpressionB(comparisonValue.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariable(v.getUniqueID());
+		attLine1.setVariableID(v.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariable(v.getUniqueID());
+		attLine2.setVariableID(v.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -130,11 +130,11 @@ public class IfElseTest {
 		leq.setExpressionB(comparisonValue.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariable(v.getUniqueID());
+		attLine1.setVariableID(v.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariable(v.getUniqueID());
+		attLine2.setVariableID(v.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -153,7 +153,7 @@ public class IfElseTest {
 		ifElse.setFlowCondition(leq.getUniqueID());
 		ifElse.addIfChild(attLine1.getUniqueID());
 		ifElse.addIfChild(attLine2.getUniqueID());
-		ifElse.removeIfChildAtIndex(new BigDecimal(1));
+		ifElse.removeIfChildAtIndex(1);
 
 		ifElse.evaluate(context, map, factory);
 
@@ -195,11 +195,11 @@ public class IfElseTest {
 		leq.setExpressionB(comparisonValue.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariable(v.getUniqueID());
+		attLine1.setVariableID(v.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariable(v.getUniqueID());
+		attLine2.setVariableID(v.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -260,11 +260,11 @@ public class IfElseTest {
 		leq.setExpressionB(comparisonValue.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariable(v.getUniqueID());
+		attLine1.setVariableID(v.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariable(v.getUniqueID());
+		attLine2.setVariableID(v.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();

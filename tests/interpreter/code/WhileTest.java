@@ -62,7 +62,7 @@ public class WhileTest {
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();

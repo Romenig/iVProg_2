@@ -10,7 +10,6 @@ package usp.ime.line.ivprog.interpreter.execution.code;
 
 import ilm.framework.assignment.model.DomainObject;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -103,28 +102,28 @@ public class IfElse extends CodeComposite {
 	 * 
 	 * @param uniqueID
 	 */
-	public String addIfChildAtIndex(BigDecimal index, String uniqueID) {
-		return addChildAtIndex(index, uniqueID);
+	public int addIfChildAtIndex(int index, String uniqueID) {
+		return addChildAtIndex(uniqueID, index);
 	}
 
 	/**
 	 * Append a child in the end of the list.
 	 * 
-	 * @param uniqueID
+	 * @param index
 	 */
-	public String addElseChildAtIndex(BigDecimal index, String uniqueID) {
-		String lastChild = (String) children.remove(index.intValue());
-		children.add(index.intValue(), uniqueID);
+	public String addElseChildAtIndex(String childID, int index) {
+		String lastChild = (String) children.remove(index);
+		children.add(index, childID);
 		return lastChild;
 	}
 
 	/**
 	 * Remove an 'if' child at the specified position;
 	 * 
-	 * @param bigDecimal
+	 * @param index
 	 */
-	public String removeIfChildAtIndex(BigDecimal bigDecimal) {
-		return removeChildAtIndex(bigDecimal);
+	public String removeIfChildAtIndex(int index) {
+		return removeChildFromIndex(index);
 	}
 
 	/**
@@ -132,17 +131,17 @@ public class IfElse extends CodeComposite {
 	 * 
 	 * @param bigDecimal
 	 */
-	public String removeElseChildAtIndex(BigDecimal index) {
-		String lastChild = (String) elseChildren.remove(index.intValue());
+	public String removeElseChildAtIndex(int index) {
+		String lastChild = (String) elseChildren.remove(index);
 		return lastChild;
 	}
 
 	/**
 	 * Remove a given child of the 'if' statement flow.
 	 * 
-	 * @param bigDecimal
+	 * @param childID
 	 */
-	public String removeIfChild(String childID) {
+	public int removeIfChild(String childID) {
 		return removeChild(childID);
 	}
 
@@ -151,15 +150,17 @@ public class IfElse extends CodeComposite {
 	 * 
 	 * @param bigDecimal
 	 */
-	public String removeElseChild(String childID) {
+	public int removeElseChild(String childID) {
 		String childRemoved = null;
+		int index = 0;
 		for (int i = 0; i < elseChildren.size(); i++) {
 			if (childID.equals(elseChildren.get(i))) {
 				childRemoved = childID;
 				elseChildren.remove(i);
+				index = i;
 			}
 		}
-		return childRemoved;
+		return index;
 	}
 
 	/*
@@ -175,4 +176,52 @@ public class IfElse extends CodeComposite {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void updateParent(String lastExp, String newExp, String operationContext) {
+		if (flowConditionID.equals(lastExp)) {
+			flowConditionID = newExp;
+		}
+	}
+
+	/**
+	 * @param childID
+	 * @return
+	 */
+	public String getChildContext(String childID) {
+		if (elseChildren.contains(childID)) {
+			return "else";
+		} else if (children.contains(childID)) {
+			return "if";
+		} else
+			return "";
+	}
+
+	/**
+	 * @param childID
+	 * @param index
+	 */
+	public void addElseChildToIndex(String childID, int index) {
+		elseChildren.add(index, childID);
+	}
 }

@@ -26,17 +26,6 @@ public abstract class IVPValue extends Expression {
 		super(name, description);
 	}
 
-	public static final String INTEGER_TYPE = "int";
-	public static final String DOUBLE_TYPE = "double";
-	public static final String STRING_TYPE = "String";
-	public static final String BOOLEAN_TYPE = "boolean";
-	public static final String NULL = "null";
-
-	public static final String DEFAULT_INTEGER = "1";
-	public static final String DEFAULT_DOUBLE = "1.0";
-	public static final String DEFAULT_STRING = ResourceBundleIVP.getString("helloWorld.text");
-	public static final String DEFAULT_BOOLEAN = "true";
-
 	private String valueType;
 
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {

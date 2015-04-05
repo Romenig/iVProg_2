@@ -54,27 +54,30 @@ public class Services {
 	/**
 	 * @return
 	 */
-    public IVPController getController() {
-	    return controller;
-    }
+	public IVPController getController() {
+		return controller;
+	}
 
 	/**
-	 * @param controller the controller to set
+	 * @param controller
+	 *            the controller to set
 	 */
-    public void setController(IVPController controller) {
-	    this.controller = controller;
-    }
-    
-    /**
-     * Return the current assignment state (the opened assignment tab).
-     * @return
-     */
+	public void setController(IVPController controller) {
+		this.controller = controller;
+	}
+
+	/**
+	 * Return the current assignment state (the opened assignment tab).
+	 * 
+	 * @return
+	 */
 	public AssignmentState getCurrentState() {
 		return currentState;
 	}
 
 	/**
 	 * Set the current assignment state (the opened assignement tab).
+	 * 
 	 * @param current
 	 */
 	public void setCurrentState(AssignmentState current) {
@@ -84,58 +87,61 @@ public class Services {
 	/**
 	 * @return the model
 	 */
-    public IVPDomainModel getModel() {
-	    return model;
-    }
+	public IVPDomainModel getModel() {
+		return model;
+	}
 
 	/**
-	 * @param model the model to set
+	 * @param model
+	 *            the model to set
 	 */
-    public void setModel(IVPDomainModel model) {
-	    this.model = model;
-    }
-    
-    /**
-     * Returns the data about relationships
-     * @return
-     */
-    public IVPProgramData getProgramData(){
-    	return (IVPProgramData) getCurrentState().get(0);
-    }
-    
-    /**
-     * Get the model hashmap.
-     * @return
-     */
-    public HashMap getModelMapping(){
-    	IVPProgramData data = (IVPProgramData) getCurrentState().get(0);
-    	return data.getModelMapping();
-    }
-    
-    /**
-     * Get the view hashmap.
-     * @return
-     */
-    public IVPMapping getViewMapping(){
-    	IVPMapping data = (IVPMapping) getCurrentState().get(1);
-    	return data;
-    }
+	public void setModel(IVPDomainModel model) {
+		this.model = model;
+	}
+
+	/**
+	 * Returns the data about relationships
+	 * 
+	 * @return
+	 */
+	public IVPProgramData getProgramData() {
+		return (IVPProgramData) getCurrentState().get(0);
+	}
+
+	/**
+	 * Get the model hashmap.
+	 * 
+	 * @return
+	 */
+	public HashMap getModelMapping() {
+		IVPProgramData data = (IVPProgramData) getCurrentState().get(0);
+		return data.getModelMapping();
+	}
+
+	/**
+	 * Get the view hashmap.
+	 * 
+	 * @return
+	 */
+	public IVPMapping getViewMapping() {
+		IVPMapping data = (IVPMapping) getCurrentState().get(1);
+		return data;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
-    public IVPRenderer getRenderer() {
-	    return render;
-    }
+	public IVPRenderer getRenderer() {
+		return render;
+	}
 
 	/**
 	 * @return
 	 */
-    public HashMap getContextMapping() {
-    	IVPProgramData data = (IVPProgramData) getCurrentState().get(0);
-	    return (HashMap) data.getContextMap();
-    }
-    
-    
+	public HashMap getContextMapping() {
+		IVPProgramData data = (IVPProgramData) getCurrentState().get(0);
+		return (HashMap) data.getContextMap();
+	}
+
 }

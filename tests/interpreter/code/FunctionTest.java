@@ -60,7 +60,7 @@ public class FunctionTest {
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		map.put(add.getUniqueID(), add);

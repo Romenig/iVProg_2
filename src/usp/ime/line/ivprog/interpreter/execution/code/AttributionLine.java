@@ -20,10 +20,15 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPMatrixReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPVectorReference;
 
 public class AttributionLine extends DataObject {
+
+	private String variableID;
+	private String expressionID = "";
+	private String leftVariableType;
 
 	/**
 	 * @param name
@@ -32,9 +37,6 @@ public class AttributionLine extends DataObject {
 	public AttributionLine() {
 		super("AttLine", "AttLine object.");
 	}
-
-	private String variableID;
-	private String expressionID;
 
 	/*
 	 * (non-Javadoc)
@@ -45,8 +47,9 @@ public class AttributionLine extends DataObject {
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		if (map.get(variableID) instanceof IVPVariable) {
-			IVPVariable variable = (IVPVariable) map.get(variableID);
+		if (map.get(variableID) instanceof IVPVariableReference) {
+			IVPVariableReference variableReference = (IVPVariableReference) map.get(variableID);
+			IVPVariable variable = (IVPVariable) map.get(variableReference.getReferencedID());
 			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
 			IVPValue copyOfValue = createCopy(value, c, map, factory);
 			variable.setValueID(copyOfValue.getUniqueID());
@@ -73,6 +76,7 @@ public class AttributionLine extends DataObject {
 	private IVPValue createCopy(IVPValue value, Context c, HashMap map, DataFactory factory) {
 		IVPValue copy = null;
 		if (value instanceof IVPNumber) {
+			System.out.println("Sabe que é número.");
 			copy = factory.createIVPNumber();
 			if (value.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 				c.addInt(copy.getUniqueID(), c.getInt(value.getUniqueID()));
@@ -88,7 +92,6 @@ public class AttributionLine extends DataObject {
 		}
 		copy.setValueType(value.getValueType());
 		map.put(copy.getUniqueID(), copy);
-
 		return copy;
 	}
 
@@ -98,8 +101,15 @@ public class AttributionLine extends DataObject {
 	 * 
 	 * @param uniqueID
 	 */
-	public void setVariable(String uniqueID) {
-		variableID = uniqueID;
+	public void setVariableID(String variableID) {
+		this.variableID = variableID;
+	}
+
+	/**
+	 * @return the variableID
+	 */
+	public String getVariableID() {
+		return variableID;
 	}
 
 	/**
@@ -110,6 +120,16 @@ public class AttributionLine extends DataObject {
 	 */
 	public void setExpression(String uniqueID) {
 		expressionID = uniqueID;
+	}
+
+	/**
+	 * Set the right member of this attribution line. attribution line:=
+	 * variable = expression
+	 * 
+	 * @return expressionID
+	 */
+	public String getExpressionID() {
+		return expressionID;
 	}
 
 	/*
@@ -123,5 +143,55 @@ public class AttributionLine extends DataObject {
 	public boolean equals(DomainObject o) {
 		return false;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
+	 */
+	@Override
+	public String toXML() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
+	 */
+	@Override
+	public String toCString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * Set the left variable type. It will be useful for the domain model.
+	 * 
+	 * @param type
+	 */
+	public void setLeftVariableType(String type) {
+		leftVariableType = type;
+	}
+
+	/**
+	 * Get the left variable type. It will be useful for the domain model.
+	 * 
+	 * @return
+	 */
+	public String getLeftVariableType() {
+		return leftVariableType;
+	}
+
+	/* (non-Javadoc)
+	 * @see usp.ime.line.ivprog.interpreter.DataObject#updateParent(java.lang.String, java.lang.String, java.lang.String)
+	 */
+    @Override
+    public void updateParent(String lastExp, String newExp, String operationContext) {
+    	if (expressionID == lastExp || expressionID == "") {
+    		expressionID = newExp;
+		}
+    }
 
 }

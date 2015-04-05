@@ -69,7 +69,7 @@ public class FunctionReferenceTest {
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		map.put(add.getUniqueID(), add);
@@ -91,7 +91,7 @@ public class FunctionReferenceTest {
 		f.addChild(w.getUniqueID());
 		f.addChild(r.getUniqueID());
 
-		attLine2.setVariable(result.getUniqueID());
+		attLine2.setVariableID(result.getUniqueID());
 		attLine2.setExpression(fr.getUniqueID());
 
 		attLine2.evaluate(context, map, factory);

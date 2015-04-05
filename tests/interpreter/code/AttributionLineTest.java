@@ -49,7 +49,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -83,7 +83,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -117,7 +117,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -151,7 +151,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -189,7 +189,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v1.getUniqueID());
+		attLine.setVariableID(v1.getUniqueID());
 		attLine.setExpression(v2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -228,7 +228,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v1.getUniqueID());
+		attLine.setVariableID(v1.getUniqueID());
 		attLine.setExpression(and.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -267,7 +267,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariable(v.getUniqueID());
+		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();

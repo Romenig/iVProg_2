@@ -34,16 +34,22 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import usp.ime.line.ivprog.listeners.IFunctionListener;
+import usp.ime.line.ivprog.model.domainaction.ChangeExpressionSign;
 import usp.ime.line.ivprog.model.domainaction.ChangeVariableInitValue;
 import usp.ime.line.ivprog.model.domainaction.ChangeVariableName;
 import usp.ime.line.ivprog.model.domainaction.ChangeVariableType;
+import usp.ime.line.ivprog.model.domainaction.CreateChild;
+import usp.ime.line.ivprog.model.domainaction.CreateExpression;
 import usp.ime.line.ivprog.model.domainaction.CreateVariable;
+import usp.ime.line.ivprog.model.domainaction.DeleteExpression;
 import usp.ime.line.ivprog.model.domainaction.DeleteVariable;
+import usp.ime.line.ivprog.model.domainaction.RemoveChild;
+import usp.ime.line.ivprog.model.domainaction.UpdateReferencedVariable;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.console.IVPConsole;
 import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
-import usp.ime.line.ivprog.view.domaingui.workspace.FunctionBodyUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.FunctionBodyUI;
 
 import javax.swing.JTabbedPane;
 
@@ -78,7 +84,7 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		playAndConsolePanel.setLayout(new BoxLayout(playAndConsolePanel, BoxLayout.Y_AXIS));
 		Action playAction = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Services.getService().getController().playCode();
 			}
 		};
 		playAction.putValue(Action.SMALL_ICON, new ImageIcon(IVPDomainGUI.class.getResource("/usp/ime/line/resources/icons/play.png")));
@@ -115,10 +121,10 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		add(splitPane);
 
 		workspacePanel = new JPanel();
-		workspacePanel.setPreferredSize(new Dimension(800,600));
+		workspacePanel.setPreferredSize(new Dimension(800, 600));
 		splitPane.setLeftComponent(workspacePanel);
 		workspacePanel.setLayout(new BorderLayout(0, 0));
-		
+
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		workspacePanel.add(tabbedPane, BorderLayout.CENTER);
 
@@ -155,7 +161,7 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 	 * @see ilm.framework.domain.DomainGUI#initDomainGUI()
 	 */
 	protected void initDomainGUI() {
-		
+
 	}
 
 	/*
@@ -182,6 +188,18 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		ChangeVariableInitValue change = new ChangeVariableInitValue("changeVariableInitValue", "changeVariableInitValue");
 		change.setDomainModel(model);
 		_actionList.put("changevariableinitvalue", change);
+		CreateChild createChild = new CreateChild("createChild", "createChild");
+		createChild.setDomainModel(model);
+		_actionList.put("createChild", createChild);
+		UpdateReferencedVariable updateRefVar = new UpdateReferencedVariable("updateReferenceVariable", "updateReferenceVariable");
+		updateRefVar.setDomainModel(model);
+		_actionList.put("updateReferenceVariable", updateRefVar);
+		RemoveChild removeChild = new RemoveChild("removeChild", "removeChild");
+		removeChild.setDomainModel(model);
+		_actionList.put("removeChild", removeChild);
+		CreateExpression createExpression = new CreateExpression("createExpression", "createExpression");
+		createExpression.setDomainModel(model);
+		_actionList.put("createExpression", createExpression);
 	}
 
 	/*
@@ -193,14 +211,18 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see usp.ime.line.ivprog.listeners.IFunctionListener#functionCreated(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * usp.ime.line.ivprog.listeners.IFunctionListener#functionCreated(java.
+	 * lang.String)
 	 */
-    public void functionCreated(String id) {
-    	updateFunction((FunctionBodyUI) Services.getService().getRenderer().paint(id,""));
-    }
-    
-    public void updateFunction(FunctionBodyUI function) {
+	public void functionCreated(String id) {
+		updateFunction((FunctionBodyUI) Services.getService().getRenderer().paint(id, ""));
+	}
+
+	public void updateFunction(FunctionBodyUI function) {
 		if (tabbedPane.getTabCount() == 0) {
 			tabbedPane.add(function.getName(), function);
 			return;
@@ -213,55 +235,55 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		}
 	}
 
-    
-    //DOMAIN ACTION LIST
-    
+	// DOMAIN ACTION LIST
+
 	/**
 	 * @param scopeID
 	 * @param value
 	 */
-    public void createVariable(String scopeID, String value) {
+	public void createVariable(String scopeID, String value) {
 		CreateVariable newVar = (CreateVariable) _actionList.get("createVariable");
 		newVar.setScopeID(scopeID);
 		newVar.setInitValue(value);
 		newVar.execute();
-    }
+	}
 
 	/**
 	 * @param scopeID
 	 * @param variableID
 	 */
-    public void deleteVariable(String scopeID, String id) {
+	public void deleteVariable(String scopeID, String id) {
 		DeleteVariable delVar = (DeleteVariable) _actionList.get("delvar");
 		delVar.setScopeID(scopeID);
 		delVar.setVariableID(id);
 		delVar.execute();
 	}
-    
-    /**
-     * 
-     * @param id
-     * @param name
-     */
-    public void changeVariableName(String id, String name) {
+
+	/**
+	 * 
+	 * @param id
+	 * @param name
+	 */
+	public void changeVariableName(String id, String name) {
 		ChangeVariableName changeVarName = (ChangeVariableName) _actionList.get("changeVarName");
 		changeVarName.setVariableID(id);
 		changeVarName.setNewName(name);
 		changeVarName.execute();
 	}
 
-    /**
-     * 
-     * @param id
-     * @param expressionInteger
-     */
-	public void changeVariableType(String id, String expressionType) {
+	/**
+	 * 
+	 * @param id
+	 * @param expressionInteger
+	 */
+	public void changeVariableType(String scopeID, String id, String expressionType) {
 		ChangeVariableType changeVarType = (ChangeVariableType) _actionList.get("changeVarType");
 		changeVarType.setVariableID(id);
+		changeVarType.setScopeID(scopeID);
 		changeVarType.setNewType(expressionType);
 		changeVarType.execute();
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -277,10 +299,102 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 	/**
 	 * @param errorMessage
 	 */
-    public void printError(String errorMessage) {
-	    console.printError(errorMessage);
-    }
-	
-	
+	public void printError(String errorMessage) {
+		console.printError(errorMessage);
+	}
+
+	public void printMessage(String message) {
+		console.println(message);
+	}
+
+	/**
+	 * @param leftExpID
+	 * @param holder
+	 * @param expressionType
+	 * @param primitiveType
+	 * @param context
+	 * @param context2 
+	 */
+	public void createExpression(String scopeID, String leftExpID, String holder, String expressionType, String primitiveType, String context) {
+		CreateExpression createExpression = (CreateExpression) _actionList.get("createExpression");
+		createExpression.setExp1(leftExpID);
+		createExpression.setHolder(holder);
+		createExpression.setScopeID(scopeID);
+		createExpression.setExpressionType(expressionType);
+		createExpression.setContext(context);
+		createExpression.setPrimitiveType(primitiveType);
+		createExpression.execute();
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param holder
+	 * @param context
+	 * @param isClean
+	 * @param isComparison
+	 */
+	public void deleteExpression(String id, String holder, String context, boolean isClean, boolean isComparison) {
+		DeleteExpression deleteExpression = (DeleteExpression) _actionList.get("deleteexpression");
+		deleteExpression.setExpression(id);
+		deleteExpression.setHolder(holder);
+		deleteExpression.setContext(context);
+		deleteExpression.setClean(isClean);
+		deleteExpression.setComparison(isComparison);
+		deleteExpression.execute();
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @param expressionType
+	 * @param context
+	 */
+	public void changeExpressionSign(String id, String expressionType, String context) {
+		ChangeExpressionSign changeExpression = (ChangeExpressionSign) _actionList.get("changeexpressionsign");
+		changeExpression.setExpressionID(id);
+		changeExpression.setContext(context);
+		changeExpression.setNewType(expressionType);
+		changeExpression.execute();
+	}
+
+	/**
+	 * @param currentModelID
+	 * @param newRefID
+	 */
+	public void updateVariableReference(String currentModelID, String newRefID) {
+		UpdateReferencedVariable upVar = (UpdateReferencedVariable) _actionList.get("updateReferenceVariable");
+		upVar.setReferenceID(currentModelID);
+		upVar.setNewVarID(newRefID);
+		upVar.execute();
+	}
+
+	/**
+	 * @param parentModelID
+	 * @param childID
+	 * @param string
+	 */
+	public void removeChild(String scopeID, String parentModelID, String childID, String context) {
+		RemoveChild removeChild = (RemoveChild) _actionList.get("removeChild");
+		removeChild.setChildID(childID);
+		removeChild.setContext(context);
+		removeChild.setScopeID(scopeID);
+		removeChild.setContainerID(parentModelID);
+		removeChild.execute();
+	}
+
+	/**
+	 * @param containerID
+	 * @param childType
+	 * @param context
+	 */
+	public void addChild(String scopeID, String containerID, String childType, String context) {
+		CreateChild newChild = (CreateChild) _actionList.get("createChild");
+		newChild.setClassID(childType);
+		newChild.setContainerID(containerID);
+		newChild.setScopeID(scopeID);
+		newChild.setContext(context);
+		newChild.execute();
+	}
 
 }

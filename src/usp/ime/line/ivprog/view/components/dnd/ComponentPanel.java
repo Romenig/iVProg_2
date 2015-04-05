@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
+import usp.ime.line.ivprog.view.domaingui.IDomainObjectUI;
 import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 import usp.ime.line.ivprog.view.domaingui.utils.RoundedJPanel;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
@@ -31,12 +32,15 @@ import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 /**
  * @author Romenig
  */
-public class ComponentPanel extends RoundedJPanel {
+public abstract class ComponentPanel extends RoundedJPanel implements IDomainObjectUI {
 
 	protected JPanel contentPanel;
 	private JPanel gripArea;
 	private JPanel trashCanPanel;
 	private ComponentPanel instance;
+	private String parentModelID;
+	private String thisModelID;
+	private String scopeModelID;
 
 	public ComponentPanel() {
 		instance = this;
@@ -91,6 +95,34 @@ public class ComponentPanel extends RoundedJPanel {
 		gripArea.add(grip, BorderLayout.CENTER);
 		gripArea.setOpaque(false);
 		add(gripArea, BorderLayout.WEST);
+	}
+
+	public String getModelID() {
+		return thisModelID;
+	}
+
+	public String getModelParent() {
+		return parentModelID;
+	}
+
+	public String getModelScope() {
+		return scopeModelID;
+	}
+
+	public void setModelID(String id) {
+		thisModelID = id;
+	}
+
+	public void setModelParent(String id) {
+		parentModelID = id;
+	}
+
+	public void setModelScope(String id) {
+		scopeModelID = id;
+	}
+
+	protected void addContentPanel(JPanel panel) {
+		contentPanel.add(panel);
 	}
 
 }

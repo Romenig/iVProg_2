@@ -8,7 +8,6 @@
  */
 package usp.ime.line.ivprog.interpreter;
 
-
 import java.math.BigDecimal;
 import java.util.Random;
 import java.util.Vector;
@@ -47,6 +46,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPMatrix;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPMatrixReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPPrinter;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPVector;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPVectorReference;
 import usp.ime.line.ivprog.language.Messages;
@@ -440,10 +440,21 @@ public class DataFactory {
 	 * 
 	 * @return
 	 */
-    public IVPVariableReference createIVPVariableReference() {
-    	IVPVariableReference vref = new IVPVariableReference();
-    	vref.setUniqueID(getID());
-	    return vref;
-    }
+	public IVPVariableReference createIVPVariableReference() {
+		IVPVariableReference vref = new IVPVariableReference();
+		vref.setUniqueID(getID());
+		return vref;
+	}
+
+	/**
+	 * Get a new IVPPrinter object.
+	 * 
+	 * @return
+	 */
+	public IVPPrinter createIVPPrinter() {
+		IVPPrinter p = new IVPPrinter();
+		p.setUniqueID(getID());
+		return p;
+	}
 
 }

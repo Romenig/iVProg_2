@@ -68,7 +68,7 @@ public class IVPVectorReferenceTest {
 		add.setExpressionA(a.getUniqueID());
 		add.setExpressionB(b.getUniqueID());
 
-		attLine.setVariable(ref.getUniqueID());
+		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		attLine.evaluate(context, map, factory);
@@ -118,7 +118,7 @@ public class IVPVectorReferenceTest {
 		ref.setVectorID(vect.getUniqueID());
 		ref.setPositionID(position.getUniqueID());
 
-		attLine.setVariable(var.getUniqueID());
+		attLine.setVariableID(var.getUniqueID());
 		attLine.setExpression(ref.getUniqueID());
 
 		IVPNumber result = (IVPNumber) var.evaluate(context, map, factory);

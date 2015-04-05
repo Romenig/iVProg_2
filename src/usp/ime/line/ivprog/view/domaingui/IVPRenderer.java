@@ -3,81 +3,98 @@ package usp.ime.line.ivprog.view.domaingui;
 import javax.swing.JComponent;
 
 import usp.ime.line.ivprog.interpreter.DataObject;
+import usp.ime.line.ivprog.interpreter.execution.code.AttributionLine;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPPrinter;
 import usp.ime.line.ivprog.model.utils.Services;
-import usp.ime.line.ivprog.view.domaingui.workspace.FunctionBodyUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.ArithmeticOperationUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.AttributionLineUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.BooleanOperationUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.ConstantUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.FunctionBodyUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.OperationUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.PrintUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.StringOperationUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.VariableSelectorUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.variable.IVPVariableBasic;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 public class IVPRenderer {
-	
+
 	public JComponent paint(String objectKey, String scope) {
 		DataObject codeElementModel = (DataObject) Services.getService().getModelMapping().get((String) objectKey);
 		if (codeElementModel instanceof Function) {
 			return renderFunction((Function) codeElementModel);
-		} 
-		else if (codeElementModel instanceof IVPVariable) {
+		} else if (codeElementModel instanceof IVPVariable) {
 			return renderVariable((IVPVariable) codeElementModel, scope);
-		} 
-		/*else if (codeElementModel instanceof While) {
-			return renderWhile((While) codeElementModel);
-		} else if (codeElementModel instanceof IfElse) {
-			return renderIfElse((IfElse) codeElementModel);
-		} else if (codeElementModel instanceof Print) {
-			return renderWrite((Print) codeElementModel);
-		} else if (codeElementModel instanceof AttributionLine) {
-			return renderAttributionLine((AttributionLine) codeElementModel);
+		} else if (codeElementModel instanceof IVPPrinter) {
+			return renderWrite((IVPPrinter) codeElementModel);
 		} else if (codeElementModel instanceof Expression) {
 			return renderExpresion((Expression) codeElementModel);
-		} else if (codeElementModel instanceof Reference) {
-			return renderReference((Reference) codeElementModel);
-		} else if (codeElementModel instanceof ReadData) {
-			return renderRead((ReadData) codeElementModel);
-		} else if (codeElementModel instanceof For) {
-			return renderFor((For) codeElementModel);
+		} else if (codeElementModel instanceof AttributionLine) {
+			return renderAttributionLine((AttributionLine) codeElementModel);
 		}
-		*/
+		/*
+		 * else if (codeElementModel instanceof Reference) { return
+		 * renderReference((Reference) codeElementModel); }else if
+		 * (codeElementModel instanceof While) { return renderWhile((While)
+		 * codeElementModel); } else if (codeElementModel instanceof IfElse) {
+		 * return renderIfElse((IfElse) codeElementModel); } else if
+		 * (codeElementModel instanceof ReadData) { return renderRead((ReadData)
+		 * codeElementModel); } else if (codeElementModel instanceof For) {
+		 * return renderFor((For) codeElementModel); }
+		 */
 		return null;
 	}
 
 	/*
-	private JComponent renderReference(Reference referenceModel) {
-		return null;
-	}
+	 * private JComponent renderReference(Reference referenceModel) { return
+	 * null; }
+	 */
 
 	private JComponent renderExpresion(Expression expressionModel) {
 		VariableSelectorUI var;
 		OperationUI exp;
 		ConstantUI constant;
-		if (expressionModel instanceof VariableReference) {
+		if (expressionModel instanceof IVPVariableReference) {
 			var = new VariableSelectorUI(expressionModel.getParentID());
 			var.setModelID(expressionModel.getUniqueID());
 			var.setScopeID(expressionModel.getScopeID());
-			Services.getService().getViewMapping().put(expressionModel.getUniqueID(), var);
+			Services.getService().getViewMapping().addToMap(expressionModel.getUniqueID(), var);
 			return var;
-		} else if (expressionModel instanceof Constant) {
+		} else if (expressionModel instanceof IVPValue) {
 			constant = new ConstantUI(expressionModel.getUniqueID());
 			constant.setExpressionType(expressionModel.getExpressionType());
 			constant.setModelScope(expressionModel.getScopeID());
-			Services.getService().getViewMapping().put(expressionModel.getUniqueID(), constant);
+			Services.getService().getViewMapping().addToMap(expressionModel.getUniqueID(), constant);
 			return constant;
 		} else {// It's an operation
-			if (expressionModel.getExpressionType() >= Expression.EXPRESSION_OPERATION_AND
-			        && expressionModel.getExpressionType() != Expression.EXPRESSION_OPERATION_CONCAT
-			        && expressionModel.getExpressionType() != Expression.EXPRESSION_OPERATION_INTDIV) {
+			if ((expressionModel.getExpressionType().equals(Expression.OPERATION_AND)
+			        || expressionModel.getExpressionType().equals(Expression.OPERATION_OR)
+			        || expressionModel.getExpressionType().equals(Expression.OPERATION_LES)
+			        || expressionModel.getExpressionType().equals(Expression.OPERATION_LEQ)
+			        || expressionModel.getExpressionType().equals(Expression.OPERATION_EQU)
+			        || expressionModel.getExpressionType().equals(Expression.OPERATION_GEQ) || expressionModel.getExpressionType().equals(
+			        Expression.OPERATION_GRE))
+			        && expressionModel.getExpressionType() != Expression.OPERATION_CONCAT
+			        && expressionModel.getExpressionType() != Expression.OPERATION_INTDIV) {
 				exp = new BooleanOperationUI(expressionModel.getParentID(), expressionModel.getScopeID(), expressionModel.getUniqueID());
-			} else if (expressionModel.getExpressionType() == Expression.EXPRESSION_OPERATION_CONCAT) {
+			} else if (expressionModel.getExpressionType() == Expression.OPERATION_CONCAT) {
 				exp = new StringOperationUI(expressionModel.getParentID(), expressionModel.getScopeID(), expressionModel.getUniqueID());
 			} else {
 				exp = new ArithmeticOperationUI(expressionModel.getParentID(), expressionModel.getScopeID(), expressionModel.getUniqueID());
 			}
 			if (((Operation) expressionModel).getExpressionA() != null && !"".equals(((Operation) expressionModel).getExpressionA())) {
 				exp.setExpressionBaseUI_1((JComponent) Services.getService().getViewMapping()
-				        .get(((Operation) expressionModel).getExpressionA()));
+				        .getObject(((Operation) expressionModel).getExpressionA()));
 			}
 			((OperationUI) exp).setModelScope(expressionModel.getScopeID());
-			Services.getService().getViewMapping().put(expressionModel.getUniqueID(), exp);
+			Services.getService().getViewMapping().addToMap(expressionModel.getUniqueID(), exp);
 			return exp;
 		}
 	}
@@ -86,35 +103,32 @@ public class IVPRenderer {
 		AttributionLineUI attLine = new AttributionLineUI(attLineModel.getUniqueID(), attLineModel.getScopeID(), attLineModel.getParentID());
 		attLine.setModelParent(attLineModel.getParentID());
 		attLine.setModelScope(attLineModel.getScopeID());
-		attLine.setLeftVarModelID(attLineModel.getLeftVariableID());
-		Services.getService().getViewMapping().put(attLineModel.getUniqueID(), attLine);
+		attLine.setLeftVarModelID(attLineModel.getVariableID());
+		Services.getService().getViewMapping().addToMap(attLineModel.getUniqueID(), attLine);
 		return attLine;
 	}
 
-	private JComponent renderWhile(While object) {
-		WhileUI w = new WhileUI(object.getUniqueID());
-		w.setModelParent(object.getParentID());
-		w.setModelScope(object.getScopeID());
-		Services.getService().getViewMapping().put(object.getUniqueID(), w);
-		return w;
-	}
-
-	private JComponent renderFor(For object) {
-		ForUI f = new ForUI(object.getUniqueID());
-		f.setModelParent(object.getParentID());
-		f.setModelScope(object.getScopeID());
-		Services.getService().getViewMapping().put(object.getUniqueID(), f);
-		return f;
-	}
-
-	private JComponent renderIfElse(IfElse object) {
-		IfElseUI i = new IfElseUI(object.getUniqueID());
-		i.setModelParent(object.getParentID());
-		i.setModelScope(object.getScopeID());
-		Services.getService().getViewMapping().put(object.getUniqueID(), i);
-		return i;
-	}
-	*/
+	/*
+	 * 
+	 * 
+	 * private JComponent renderWhile(While object) { WhileUI w = new
+	 * WhileUI(object.getUniqueID()); w.setModelParent(object.getParentID());
+	 * w.setModelScope(object.getScopeID());
+	 * Services.getService().getViewMapping().put(object.getUniqueID(), w);
+	 * return w; }
+	 * 
+	 * private JComponent renderFor(For object) { ForUI f = new
+	 * ForUI(object.getUniqueID()); f.setModelParent(object.getParentID());
+	 * f.setModelScope(object.getScopeID());
+	 * Services.getService().getViewMapping().put(object.getUniqueID(), f);
+	 * return f; }
+	 * 
+	 * private JComponent renderIfElse(IfElse object) { IfElseUI i = new
+	 * IfElseUI(object.getUniqueID()); i.setModelParent(object.getParentID());
+	 * i.setModelScope(object.getScopeID());
+	 * Services.getService().getViewMapping().put(object.getUniqueID(), i);
+	 * return i; }
+	 */
 	public FunctionBodyUI renderFunction(Function f) {
 		FunctionBodyUI function;
 		if (f.getFunctionName().equals(ResourceBundleIVP.getString("mainFunctionName"))) {
@@ -127,25 +141,24 @@ public class IVPRenderer {
 		Services.getService().getViewMapping().addToMap(f.getUniqueID(), function);
 		return function;
 	}
-	
-	/*
-	private JComponent renderWrite(Print p) {
+
+	private JComponent renderWrite(IVPPrinter p) {
 		PrintUI print = new PrintUI(p.getUniqueID(), p.getParentID(), p.getScopeID());
-		Services.getService().getViewMapping().put(p.getUniqueID(), print);
+		Services.getService().getViewMapping().addToMap(p.getUniqueID(), print);
 		return print;
 	}
 
-	private JComponent renderRead(ReadData r) {
-		ReadUI read = new ReadUI(r.getUniqueID(), r.getParentID(), r.getScopeID());
-		Services.getService().getViewMapping().put(r.getUniqueID(), read);
-		return read;
-	}
-	 */	
+	/*
+	 * private JComponent renderRead(ReadData r) { ReadUI read = new
+	 * ReadUI(r.getUniqueID(), r.getParentID(), r.getScopeID());
+	 * Services.getService().getViewMapping().put(r.getUniqueID(), read); return
+	 * read; }
+	 */
 	private JComponent renderVariable(IVPVariable object, String scope) {
 		IVPVariableBasic variable = new IVPVariableBasic(object.getUniqueID(), scope);
 		variable.setVariableName(object.getVariableName());
 		Services.getService().getViewMapping().addToMap(object.getUniqueID(), variable);
 		return variable;
 	}
-	
+
 }

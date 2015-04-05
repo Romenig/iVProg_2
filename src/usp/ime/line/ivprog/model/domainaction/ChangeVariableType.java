@@ -7,12 +7,13 @@ import ilm.framework.assignment.model.DomainAction;
 import ilm.framework.domain.DomainModel;
 
 public class ChangeVariableType extends DomainAction {
-	
+
 	private IVPDomainModel model;
 	private String lastType;
 	private Vector returnedVector;
 	private String newType;
 	private String variableID;
+	private String scopeID;
 
 	public ChangeVariableType(String name, String description) {
 		super(name, description);
@@ -24,14 +25,14 @@ public class ChangeVariableType extends DomainAction {
 
 	protected void executeAction() {
 		if (isRedo()) {
-			model.changeVariableType(variableID, newType, _currentState);
+			model.changeVariableType(scopeID, variableID, newType, _currentState);
 		} else {
-			returnedVector = model.changeVariableType(variableID, newType, _currentState);
+			returnedVector = model.changeVariableType(scopeID, variableID, newType, _currentState);
 		}
 	}
 
 	protected void undoAction() {
-		model.restoreVariableType(variableID, returnedVector, _currentState);
+		model.restoreVariableType(scopeID, variableID, returnedVector, _currentState);
 	}
 
 	public boolean equals(DomainAction a) {
@@ -77,4 +78,20 @@ public class ChangeVariableType extends DomainAction {
 	public void setReturnedVector(Vector returnedVector) {
 		this.returnedVector = returnedVector;
 	}
+
+	/**
+	 * @return the scopeID
+	 */
+	public String getScopeID() {
+		return scopeID;
+	}
+
+	/**
+	 * @param scopeID
+	 *            the scopeID to set
+	 */
+	public void setScopeID(String scopeID) {
+		this.scopeID = scopeID;
+	}
+
 }

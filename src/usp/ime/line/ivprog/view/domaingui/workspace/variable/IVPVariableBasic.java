@@ -37,7 +37,7 @@ import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 import java.awt.Color;
 
 public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
-	
+
 	private JPanel valueContainer;
 	private JLabel equalLabel;
 	private EditInPlace name;
@@ -53,7 +53,7 @@ public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
 	private String context;
 	private JPopupMenu configMenu;
 	private String variableType;
-	
+
 	public IVPVariableBasic(String id, String scope) {
 		this.modelScopeID = scope;
 		setBackgroundColor(FlatUIColors.MAIN_BG);
@@ -174,7 +174,7 @@ public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
 						name.resetTextField();
 					}
 				}
-				
+
 			}
 		});
 		name.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_NAME);
@@ -196,34 +196,34 @@ public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
 	}
 
 	public void setVariableValue(String value) {
-		if(this.variableType.equals(IVPValue.BOOLEAN_TYPE)){
+		if (this.variableType.equals(IVPValue.BOOLEAN_TYPE)) {
 			this.booleanValue.setValue(value);
-		}else{
-			this.value.setValue(value);	
+		} else {
+			this.value.setValue(value);
 		}
 	}
 
 	private void changeVariableType() {
-			if (variableType.equals(IVPValue.INTEGER_TYPE)) {
-				value.setVisible(true);
-				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_INTEGER);
-				value.setValue(IVPValue.DEFAULT_INTEGER);
-				booleanValue.setVisible(false);
-			} else if (variableType.equals(IVPValue.DOUBLE_TYPE)) {
-				value.setVisible(true);
-				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_DOUBLE);
-				value.setValue(IVPValue.DEFAULT_DOUBLE);
-				booleanValue.setVisible(false);
-			} else if (variableType.equals(IVPValue.STRING_TYPE)) {
-				value.setVisible(true);
-				value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_STRING);
-				value.setValue(IVPValue.DEFAULT_STRING);
-				booleanValue.setVisible(false);
-			} else if (variableType.equals(IVPValue.BOOLEAN_TYPE)) {
-				value.setVisible(false);
-				booleanValue.setVisible(true);
-				booleanValue.setValue(IVPValue.DEFAULT_BOOLEAN);
-			}
+		if (variableType.equals(IVPValue.INTEGER_TYPE)) {
+			value.setVisible(true);
+			value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_INTEGER);
+			value.setValue(IVPValue.DEFAULT_INTEGER);
+			booleanValue.setVisible(false);
+		} else if (variableType.equals(IVPValue.DOUBLE_TYPE)) {
+			value.setVisible(true);
+			value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_DOUBLE);
+			value.setValue(IVPValue.DEFAULT_DOUBLE);
+			booleanValue.setVisible(false);
+		} else if (variableType.equals(IVPValue.STRING_TYPE)) {
+			value.setVisible(true);
+			value.setCurrentPattern(EditInPlace.PATTERN_VARIABLE_VALUE_STRING);
+			value.setValue(IVPValue.DEFAULT_STRING);
+			booleanValue.setVisible(false);
+		} else if (variableType.equals(IVPValue.BOOLEAN_TYPE)) {
+			value.setVisible(false);
+			booleanValue.setVisible(true);
+			booleanValue.setValue(IVPValue.DEFAULT_BOOLEAN);
+		}
 	}
 
 	private class ConfigBtnActionListener implements ActionListener {
@@ -237,16 +237,16 @@ public class IVPVariableBasic extends RoundedJPanel implements IDomainObjectUI {
 		public void actionPerformed(ActionEvent e) {
 			String command = e.getActionCommand();
 			if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.integer"))) {
-				Services.getService().getController().changeVariableType(currentModelID, IVPValue.INTEGER_TYPE);
+				Services.getService().getController().changeVariableType(modelScopeID, currentModelID, IVPValue.INTEGER_TYPE);
 				changeVariableType();
 			} else if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.double"))) {
-				Services.getService().getController().changeVariableType(currentModelID, IVPValue.DOUBLE_TYPE);
+				Services.getService().getController().changeVariableType(modelScopeID, currentModelID, IVPValue.DOUBLE_TYPE);
 				changeVariableType();
 			} else if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.string"))) {
-				Services.getService().getController().changeVariableType(currentModelID, IVPValue.STRING_TYPE);
+				Services.getService().getController().changeVariableType(modelScopeID, currentModelID, IVPValue.STRING_TYPE);
 				changeVariableType();
 			} else if (command.equals(ResourceBundleIVP.getString("IVPVariableBasic.config.boolean"))) {
-				Services.getService().getController().changeVariableType(currentModelID, IVPValue.BOOLEAN_TYPE);
+				Services.getService().getController().changeVariableType(modelScopeID, currentModelID, IVPValue.BOOLEAN_TYPE);
 				changeVariableType();
 			}
 		}
