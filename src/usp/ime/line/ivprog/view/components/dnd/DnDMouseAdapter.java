@@ -16,6 +16,11 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComponent;
 
+import usp.ime.line.ivprog.interpreter.DataObject;
+import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
+import usp.ime.line.ivprog.model.utils.Services;
+import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
+
 public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener {
 
 	private String currentProtocol = INTERACTION_PROTOCOL_DND;
@@ -100,6 +105,24 @@ public class DnDMouseAdapter extends MouseAdapter implements MouseMotionListener
 	}
 
 	private void dropComponent(TargetPanel target, int dropY) {
-
+		String origin = ((DataObject) Services.getService().getModelMapping().get(holdingComponent)).getParentID();
+		String destiny = target.getContainer();
+		DataObject holdingParent = ((DataObject) Services.getService().getModelMapping().get(origin));
+		String originContext = (holdingParent instanceof IfElse) ? ((IfElse) holdingParent).getChildContext(holdingComponent) : "";
+		String destinyContext = ("".equals(target.getContext())) ? "" : target.getContext();
+		JComponent holdingJComponent = (JComponent) Services.getService().getViewMapping().getObject(holdingComponent);
+		if (holdingJComponent.isAncestorOf(target)) {
+			Services.getService().getController().printError(ResourceBundleIVP.getString("Error.dropCodeInsideItSelf"));
+		} else {
+			Services.getService()
+			        .getController()
+			        .moveChild(holdingComponent, origin, target.getContainer(), originContext, destinyContext,
+			                target.getDropIndex(dropY, holdingJComponent));
+		}
+		holdingComponent = "";
+		isHolding = false;
+		lastEnteredComponent = null;
+		lastYOnLastEnteredComponent = 0;
+		Services.getService().getController().changeCursor(Cursor.DEFAULT_CURSOR);
 	}
 }

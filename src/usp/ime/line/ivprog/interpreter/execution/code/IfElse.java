@@ -144,6 +144,18 @@ public class IfElse extends CodeComposite {
 	public int removeIfChild(String childID) {
 		return removeChild(childID);
 	}
+	
+	public int moveElseChild(String child, int index) {
+		int lastIndex = elseChildren.indexOf(child);
+		if (index >= lastIndex) {
+			elseChildren.add(index, child);
+			elseChildren.remove(lastIndex);
+		} else {
+			elseChildren.remove(child);
+			elseChildren.add(index, child);
+		}
+		return lastIndex;
+	}
 
 	/**
 	 * Remove a given child of the 'else' statement flow.

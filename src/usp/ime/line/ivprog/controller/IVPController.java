@@ -1,5 +1,7 @@
 package usp.ime.line.ivprog.controller;
 
+import java.awt.Cursor;
+
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.listeners.ICodeListener;
 import usp.ime.line.ivprog.model.IVPDomainModel;
@@ -184,6 +186,14 @@ public class IVPController {
 
 	public void addCodeListener(ICodeListener listener, String id) {
 		model.addComponentListener(listener, id);
+	}
+	
+	public void moveChild(String child, String origin, String destiny, String originContext, String destinyContext, int dropIndex) {
+		currentDomainGUI.moveChild(child, origin, destiny, originContext, destinyContext, dropIndex);
+	}
+	
+	public void changeCursor(int cursor) {
+		currentDomainGUI.setCursor(Cursor.getPredefinedCursor(cursor));
 	}
 
 	/**

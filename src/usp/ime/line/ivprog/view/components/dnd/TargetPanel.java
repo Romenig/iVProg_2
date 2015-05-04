@@ -35,6 +35,7 @@ public class TargetPanel extends JPanel {
 
 	private Vector elementList;
 	private boolean isInternal;
+	private String context;
 	private String container;
 	private String scopeID;
 	private IVPContextMenu menu;
@@ -42,7 +43,8 @@ public class TargetPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TargetPanel(boolean isInter, String compositeID, String scopeID) {
+	public TargetPanel(boolean isInter, String compositeID, String scopeID, String context) {
+		context = context;
 		isInternal = isInter;
 		setContainer(compositeID);
 		initializeLayout();
@@ -217,5 +219,41 @@ public class TargetPanel extends JPanel {
 			((IDomainObjectUI) elementList.get(i)).lockDownCode();
 		}
 	}
+	
+	public int getDropIndex(int dropY, JComponent c) {
+		elementList.remove(menu);
+		int index;
+		for (index = 0; index < elementList.size(); index++) {
+			if (dropY < ((JPanel) elementList.get(index)).getY()) {
+				if (index > 0) {
+					if (c.equals(elementList.get(index - 1))) {
+						return index - 1;
+					}
+				}
+				return index;
+			}
+		}
+		if (index > 0) {
+			if (c.equals(elementList.get(index - 1))) {
+				return index - 1;
+			}
+		}
+		elementList.add(menu);
+		return index;
+	}
+
+	/**
+	 * @return the context
+	 */
+    public String getContext() {
+	    return context;
+    }
+
+	/**
+	 * @param context the context to set
+	 */
+    public void setContext(String context) {
+	    this.context = context;
+    }
 
 }

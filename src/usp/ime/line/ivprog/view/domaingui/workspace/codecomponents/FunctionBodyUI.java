@@ -30,7 +30,7 @@ public class FunctionBodyUI extends JPanel implements ICodeListener {
 		setLayout(new BorderLayout(0, 0));
 		variablesPanel = new IVPVariablePanel(functionID, isMain);
 		add(variablesPanel, BorderLayout.NORTH);
-		container = new TargetPanel(false, functionID, functionID);
+		container = new TargetPanel(false, functionID, functionID,"");
 		canvasHolder = new JScrollPane();
 		canvasHolder.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		canvasHolder.setViewportView(container);

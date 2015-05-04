@@ -84,6 +84,19 @@ public abstract class CodeComposite extends DataObject {
 		String lastChild = (String) children.remove(index);
 		return lastChild;
 	}
+	
+	public int moveChild(String child, int index) {
+		int lastIndex = children.indexOf(child);
+		if (index >= lastIndex) {
+			children.add(index, child);
+			if (lastIndex != -1)
+				children.remove(lastIndex);
+		} else {
+			children.remove(child);
+			children.add(index, child);
+		}
+		return lastIndex;
+	}
 
 	public abstract void updateParent(String lastExp, String newExp, String operationContext);
 

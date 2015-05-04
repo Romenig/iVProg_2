@@ -698,6 +698,51 @@ public class IVPDomainModel extends DomainModel {
 		state.remove((DomainObject) Services.getService().getModelMapping().get(childID));
 		return index;
 	}
+	
+	public int moveChild(String component, String origin, String destiny, String originContext, String destinyContext, int dropIndex,
+	        AssignmentState _currentState) {
+		CodeComposite destinyCode = (CodeComposite) Services.getService().getModelMapping().get(destiny);
+		CodeComposite originCode = (CodeComposite) Services.getService().getModelMapping().get(origin);
+		DataObject componentCode = (DataObject) Services.getService().getModelMapping().get(component);
+		int lastIndex = -1;
+		ICodeListener destinyListener = (ICodeListener) Services.getService().getViewMapping().getObject(destiny);
+		ICodeListener originListener = (ICodeListener) Services.getService().getViewMapping().getObject(origin);
+		if (origin != destiny) {
+			if (originCode instanceof IfElse) {
+				if (originContext.equals("if")) {
+					lastIndex = originCode.removeChild(component);
+				} else if (originContext.equals("else")) {
+					lastIndex = ((IfElse) originCode).removeElseChild(component);
+				}
+			} else {
+				lastIndex = originCode.removeChild(component);
+			}
+			if (destinyCode instanceof IfElse) {
+				if (destinyContext.equals("if")) {
+					destinyCode.addChildAtIndex(component, dropIndex);
+				} else if (destinyContext.equals("else")) {
+					((IfElse) destinyCode).addElseChildToIndex(component, dropIndex);
+				}
+			} else {
+				destinyCode.addChildAtIndex(component, dropIndex);
+			}
+			originListener.childRemoved(component, originContext);
+			destinyListener.restoreChild(component, dropIndex, destinyContext);
+		} else {
+			if (originCode instanceof IfElse) {
+				if (originContext.equals("if")) {
+					lastIndex = originCode.moveChild(component, dropIndex);
+				} else if (originContext.equals("else")) {
+					lastIndex = ((IfElse) originCode).moveElseChild(component, dropIndex);
+				}
+			} else {
+				lastIndex = originCode.moveChild(component, dropIndex);
+			}
+			originListener.moveChild(component, originContext, dropIndex);
+		}
+		componentCode.setParentID(destiny);
+		return lastIndex;
+	}
 
 	/**
 	 * @param containerID

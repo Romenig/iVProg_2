@@ -43,6 +43,7 @@ import usp.ime.line.ivprog.model.domainaction.CreateExpression;
 import usp.ime.line.ivprog.model.domainaction.CreateVariable;
 import usp.ime.line.ivprog.model.domainaction.DeleteExpression;
 import usp.ime.line.ivprog.model.domainaction.DeleteVariable;
+import usp.ime.line.ivprog.model.domainaction.MoveComponent;
 import usp.ime.line.ivprog.model.domainaction.RemoveChild;
 import usp.ime.line.ivprog.model.domainaction.UpdateReferencedVariable;
 import usp.ime.line.ivprog.model.utils.Services;
@@ -200,6 +201,9 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		CreateExpression createExpression = new CreateExpression("createExpression", "createExpression");
 		createExpression.setDomainModel(model);
 		_actionList.put("createExpression", createExpression);
+		MoveComponent mChild = new MoveComponent("moveChild", "moveChild");
+		mChild.setDomainModel(model);
+		_actionList.put("moveComponent", mChild);
 	}
 
 	/*
@@ -396,5 +400,24 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		newChild.setContext(context);
 		newChild.execute();
 	}
+
+	/**
+	 * @param child
+	 * @param origin
+	 * @param destiny
+	 * @param originContext
+	 * @param destinyContext
+	 * @param dropIndex
+	 */
+    public void moveChild(String child, String origin, String destiny, String originContext, String destinyContext, int dropIndex) {
+    	MoveComponent mv = (MoveComponent) _actionList.get("moveComponent");
+		mv.setComponent(child);
+		mv.setOrigin(origin);
+		mv.setOriginContext(originContext);
+		mv.setDestinyContext(destinyContext);
+		mv.setDestiny(destiny);
+		mv.setDropY(dropIndex);
+		mv.execute();
+    }
 
 }
