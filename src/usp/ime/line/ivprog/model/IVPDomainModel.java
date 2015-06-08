@@ -429,8 +429,6 @@ public class IVPDomainModel extends DomainModel {
 	private Expression getNewExpression(String scopeID, String leftExpID, String holder, String expressionType, String primitiveType,
 	        AssignmentState state) {
 		Expression exp = null;
-		
-		
 		Context c = (Context) Services.getService().getContextMapping().get(scopeID);
 		if (expressionType.equals(Expression.VARIABLE)) {
 			exp = (Expression) factory.createIVPVariableReference();
@@ -443,6 +441,15 @@ public class IVPDomainModel extends DomainModel {
 		} else {
 			exp = (Expression) createOperationToExpression(expressionType);
 			exp.setExpressionType(expressionType);
+			if(expressionType.equals(Expression.OPERATION_ADDITION)||
+					expressionType.equals(Expression.OPERATION_SUBTRACTION)||
+					expressionType.equals(Expression.OPERATION_DIVISION)||
+					expressionType.equals(Expression.OPERATION_INTDIV)||
+					expressionType.equals(Expression.OPERATION_MULTIPLICATION)){ //não estará no contexto ainda
+				IVPValue operationValue = factory.createIVPNumber();
+				Services.getService().getModelMapping().put(operationValue.getUniqueID(), operationValue);
+				((Operation)exp).setOperationResultID(operationValue.getUniqueID());
+			}
 			if (leftExpID != "") {
 				((Expression) Services.getService().getModelMapping().get(leftExpID)).setParentID(exp.getUniqueID());
 				((Operation) exp).setExpressionA(leftExpID);
@@ -880,14 +887,20 @@ public class IVPDomainModel extends DomainModel {
 	public void playCode() {
 		if (Services.getService().getController().isContentSet()) {
 			Services.getService().getController().lockCodeDown();
-			String code = "";
 			Object[] functionList = Services.getService().getProgramData().getFunctionMap().values().toArray();
 			Function mainFunction = Services.getService().getProgramData().getMainFunction();
 			Context mainContext = (Context) Services.getService().getContextMapping().get(mainFunction.getUniqueID());
-			Context clone = (Context) mainContext.clone();
 			HashMap modelMapping = (HashMap) Services.getService().getModelMapping();
-			mainFunction.evaluate(mainContext, modelMapping, factory);
-			mainContext.resetWithValues(clone);
+			
+			Context cloneContext = (Context) mainContext.clone();
+			HashMap cloneModel = (HashMap) modelMapping.clone();
+			
+			System.out.println("model mapping e clone antes \n"+modelMapping+"\n"+cloneModel);
+			
+			mainFunction.evaluate(cloneContext, cloneModel, factory);
+			//mainContext.resetWithValues(cloneContext);
+			
+			System.out.println("model mapping e clone depois \n"+modelMapping+"\n"+cloneModel);
 		}
 	}
 

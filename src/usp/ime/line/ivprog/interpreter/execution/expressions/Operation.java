@@ -11,6 +11,7 @@ public abstract class Operation extends Expression {
 
 	protected String expressionAID = "";
 	protected String expressionBID = "";
+	protected String operationResultID = "";
 
 	public Operation(String name, String description) {
 		super(name, description);
@@ -164,7 +165,24 @@ public abstract class Operation extends Expression {
 	 */
 	@Override
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * Each operation has it's result. A result maybe a IVPNumber, IVPBoolean or IVPString.
+	 * This method returns the operation result object id.
+	 * @return
+	 */
+	public String getOperationResultID() {
+		return operationResultID;
+	}
+
+	 /**
+	  * Each operation has it's result. A result maybe a IVPNumber, IVPBoolean or IVPString.
+	  * This method sets the operation result ID.
+	  * @param operationResultID
+	  */
+	public void setOperationResultID(String operationResultID) {
+		this.operationResultID = operationResultID;
 	}
 }
