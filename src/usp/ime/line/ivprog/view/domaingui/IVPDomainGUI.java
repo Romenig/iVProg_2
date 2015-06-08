@@ -35,6 +35,7 @@ import javax.swing.border.EmptyBorder;
 
 import usp.ime.line.ivprog.listeners.IFunctionListener;
 import usp.ime.line.ivprog.model.domainaction.ChangeExpressionSign;
+import usp.ime.line.ivprog.model.domainaction.ChangeValue;
 import usp.ime.line.ivprog.model.domainaction.ChangeVariableInitValue;
 import usp.ime.line.ivprog.model.domainaction.ChangeVariableName;
 import usp.ime.line.ivprog.model.domainaction.ChangeVariableType;
@@ -204,6 +205,12 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		MoveComponent mChild = new MoveComponent("moveChild", "moveChild");
 		mChild.setDomainModel(model);
 		_actionList.put("moveComponent", mChild);
+		ChangeExpressionSign changeExpression = new ChangeExpressionSign("changeexpressionsign","changeexpressionsign");
+		changeExpression.setDomainModel(model);
+		_actionList.put("changeexpressionsign", changeExpression);
+		ChangeValue changeValue = new ChangeValue("changeValue", "changeValue");
+		changeValue.setDomainModel(model);
+		_actionList.put("changeValue", changeValue);
 	}
 
 	/*
@@ -419,5 +426,18 @@ public class IVPDomainGUI extends DomainGUI implements IFunctionListener {
 		mv.setDropY(dropIndex);
 		mv.execute();
     }
+    
+    /**
+     * 
+     * @param id
+     * @param newValue
+     */
+    public void changeValue(String scopeID, String id, String newValue) {
+		ChangeValue chV = (ChangeValue) _actionList.get("changeValue");
+		chV.setId(id);
+		chV.setNewValue(newValue);
+		chV.setScopeID(scopeID);
+		chV.execute();
+	}
 
 }

@@ -48,8 +48,7 @@ public class ConstantUI extends JPanel implements IDomainObjectUI, IValueListene
 		editInPlace = new EditInPlace(FlatUIColors.CODE_BG);
 		editInPlace.setValueListener(new IValueListener() {
 			public void valueChanged(String value) {
-				// Services.getService().getController().changeValue(currentModelID,
-				// value);
+				Services.getService().getController().changeValue(scopeModelID, currentModelID, value);
 			}
 		});
 	}
@@ -58,8 +57,7 @@ public class ConstantUI extends JPanel implements IDomainObjectUI, IValueListene
 		editBool = new EditBoolean(FlatUIColors.CODE_BG);
 		editBool.setValueListener(new IValueListener() {
 			public void valueChanged(String value) {
-				// Services.getService().getController().changeValue(currentModelID,
-				// value);
+				Services.getService().getController().changeValue(scopeModelID, currentModelID, value);
 			}
 		});
 	}

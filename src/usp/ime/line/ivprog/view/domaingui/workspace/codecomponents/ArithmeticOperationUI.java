@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ArithmeticOperationUI extends OperationUI {
+	
 	public ArithmeticOperationUI(String parent, String scope, String id) {
 		super(parent, scope, id);
 	}

@@ -19,6 +19,7 @@ import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 import usp.ime.line.ivprog.view.domaingui.IDomainObjectUI;
 
 public abstract class OperationUI extends JPanel implements IDomainObjectUI, IOperationListener {
+	
 	private JLabel leftPar;
 	protected ExpressionHolderUI expressionBaseUI_1;
 	protected JLabel expSign;

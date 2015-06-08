@@ -219,8 +219,10 @@ public class Context implements Cloneable {
 	 * The clone method will be used only during a recursive call.
 	 */
 	public Object clone() {
-		Context c = new Context((HashMap) integerMap.clone(), (HashMap) doubleMap.clone(), (HashMap) stringMap.clone(),
-		        (HashMap) booleanMap.clone());
+		Context c = new Context(((HashMap)integerMap.clone()), (HashMap) doubleMap.clone(), (HashMap) stringMap.clone(),(HashMap) booleanMap.clone());
+		System.out.println(c.getIntegerMap().keySet());
+		System.out.println(c.getIntegerMap().values());
+		System.out.println("-------------------------------------------");
 		return c;
 	}
 
@@ -237,6 +239,69 @@ public class Context implements Cloneable {
 	 */
 	public void setFunctionID(String functionID) {
 		this.functionID = functionID;
+	}
+	
+	public void resetWithValues(Context c){
+		this.integerMap.putAll(c.getIntegerMap());
+		this.doubleMap.putAll(c.getDoubleMap());
+		this.stringMap.putAll(c.getStringMap());
+		this.booleanMap.putAll(c.getBooleanMap());
+	}
+
+	/**
+	 * @return the integerMap
+	 */
+	public HashMap getIntegerMap() {
+		return integerMap;
+	}
+
+	/**
+	 * @param integerMap the integerMap to set
+	 */
+	public void setIntegerMap(HashMap integerMap) {
+		this.integerMap = integerMap;
+	}
+
+	/**
+	 * @return the doubleMap
+	 */
+	public HashMap getDoubleMap() {
+		return doubleMap;
+	}
+
+	/**
+	 * @param doubleMap the doubleMap to set
+	 */
+	public void setDoubleMap(HashMap doubleMap) {
+		this.doubleMap = doubleMap;
+	}
+
+	/**
+	 * @return the stringMap
+	 */
+	public HashMap getStringMap() {
+		return stringMap;
+	}
+
+	/**
+	 * @param stringMap the stringMap to set
+	 */
+	public void setStringMap(HashMap stringMap) {
+		this.stringMap = stringMap;
+	}
+
+	/**
+	 * @return the booleanMap
+	 */
+	public HashMap getBooleanMap() {
+		return booleanMap;
+	}
+
+	/**
+	 * @param booleanMap the booleanMap to set
+	 */
+	public void setBooleanMap(HashMap booleanMap) {
+		this.booleanMap = booleanMap;
 	}
 
 }

@@ -30,6 +30,7 @@ import usp.ime.line.ivprog.listeners.ICodeListener;
 import usp.ime.line.ivprog.listeners.IExpressionListener;
 import usp.ime.line.ivprog.listeners.IFunctionListener;
 import usp.ime.line.ivprog.listeners.IOperationListener;
+import usp.ime.line.ivprog.listeners.IValueListener;
 import usp.ime.line.ivprog.listeners.IVariableListener;
 import usp.ime.line.ivprog.model.domainaction.CreateExpression;
 import usp.ime.line.ivprog.model.utils.IVPConstants;
@@ -102,6 +103,15 @@ public class IVPDomainModel extends DomainModel {
 		assignment.add(new IVPProgramData()); // model
 		assignment.add(new IVPMapping()); // view
 		return assignment;
+	}
+	
+	public String changeValue(String scopeID, String id, String constantValue, AssignmentState state) {
+		IVPValue c = (IVPValue) Services.getService().getModelMapping().get(id);
+		Context context =  (Context) Services.getService().getContextMapping().get(scopeID);
+		String lastValue = getCurrentValueAndSetNew(constantValue, context, id, c.getValueType());
+		IValueListener v = (IValueListener) Services.getService().getViewMapping().getObject(id);
+		v.valueChanged(constantValue);
+		return lastValue;
 	}
 
 	/*
@@ -319,6 +329,31 @@ public class IVPDomainModel extends DomainModel {
 			boolean oldValue = c.getBoolean(v.getValueID());
 			boolean booleanValue = new Boolean(newValue).booleanValue();
 			c.updateBoolean(v.getValueID(), booleanValue);
+			return oldValue + "" + "";
+		}
+		return "";
+	}
+	
+	private String getCurrentValueAndSetNew(String newValue, Context c, String valueID, String valueType) {
+		IVPValue v = (IVPValue) Services.getService().getModelMapping().get(valueID);
+		if (valueType.equals(IVPValue.INTEGER_TYPE)) {
+			int oldValue = c.getInt(v.getUniqueID());
+			int intValue = new Integer(newValue).intValue();
+			c.updateInt(v.getUniqueID(), intValue);
+			return oldValue + "";
+		} else if (valueType.equals(IVPValue.DOUBLE_TYPE)) {
+			double oldValue = c.getDouble(v.getUniqueID());
+			double doubleValue = new Double(newValue).doubleValue();
+			c.updateDouble(v.getUniqueID(), doubleValue);
+			return oldValue + "";
+		} else if (valueType.equals(IVPValue.STRING_TYPE)) {
+			String oldValue = c.getString(v.getUniqueID());
+			c.updateString(v.getUniqueID(), newValue);
+			return oldValue;
+		} else if (valueType.equals(IVPValue.BOOLEAN_TYPE)) {
+			boolean oldValue = c.getBoolean(v.getUniqueID());
+			boolean booleanValue = new Boolean(newValue).booleanValue();
+			c.updateBoolean(v.getUniqueID(), booleanValue);
 			return oldValue + "" + "";
 		}
 		return "";
@@ -847,16 +882,13 @@ public class IVPDomainModel extends DomainModel {
 			Services.getService().getController().lockCodeDown();
 			String code = "";
 			Object[] functionList = Services.getService().getProgramData().getFunctionMap().values().toArray();
-
 			Function mainFunction = Services.getService().getProgramData().getMainFunction();
-
 			Context mainContext = (Context) Services.getService().getContextMapping().get(mainFunction.getUniqueID());
+			Context clone = (Context) mainContext.clone();
 			HashMap modelMapping = (HashMap) Services.getService().getModelMapping();
-
 			mainFunction.evaluate(mainContext, modelMapping, factory);
-
+			mainContext.resetWithValues(clone);
 		}
-
 	}
 
 }

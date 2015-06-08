@@ -90,6 +90,15 @@ public class IVPController {
 	public void changeVariableInitialValue(String variableID, String newValueAsString) {
 		currentDomainGUI.changeVariableInitialValue(variableID, newValueAsString);
 	}
+	
+	/**
+	 * Change the ConstantUI value.
+	 * @param id
+	 * @param newValue
+	 */
+	public void changeValue(String scopeID, String id, String newValue) {
+		currentDomainGUI.changeValue(scopeID, id, newValue);
+	}
 
 	/**
 	 * Change the variable name to the given one.
