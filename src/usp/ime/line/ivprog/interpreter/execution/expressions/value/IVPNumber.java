@@ -54,9 +54,15 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
+<<<<<<< HEAD
 	public IVPNumber add(IVPNumber result, IVPNumber number, Context context, DataFactory factory, HashMap map) {
 		//IVPNumber result = factory.createIVPNumber();
 		//map.put(result.getUniqueID(), result);
+=======
+	public IVPNumber add(IVPNumber number, String operationResultID, Context context, DataFactory factory, HashMap map) {
+		IVPNumber result = (IVPNumber) map.get(operationResultID);
+		map.put(result.getUniqueID(), result);
+>>>>>>> branch 'master' of https://github.com/Romenig/iVProg_2.git
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			System.out.println("TESTE 1 > "+context);
 			System.out.println("TESTE 2 > "+getUniqueID());
