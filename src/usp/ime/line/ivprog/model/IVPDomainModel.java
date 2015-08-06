@@ -21,7 +21,9 @@ import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
+import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
@@ -441,7 +443,7 @@ public class IVPDomainModel extends DomainModel {
 			exp = (Expression) createValueToExpression(expressionType, c);
 			exp.setExpressionType(expressionType);
 		} else {
-			exp = (Expression) createOperationToExpression(expressionType);
+			exp = (Expression) createOperationToExpression(expressionType, state);
 			exp.setExpressionType(expressionType);
 			if (leftExpID != "") {
 				((Expression) Services.getService().getModelMapping().get(leftExpID)).setParentID(exp.getUniqueID());
@@ -469,7 +471,7 @@ public class IVPDomainModel extends DomainModel {
 			        exp.getUniqueID(), context);
 		}
 		if (expressionType == Expression.OPERATION_AND || expressionType == Expression.OPERATION_OR) {
-			Expression newExp = (Expression) createOperationToExpression(Expression.OPERATION_EQU);
+			Expression newExp = (Expression) createOperationToExpression(Expression.OPERATION_EQU, state);
 			newExp.setParentID(exp.getUniqueID());
 			newExp.setScopeID(scopeID);
 			((Operation) exp).setExpressionB(newExp.getUniqueID());
@@ -482,10 +484,14 @@ public class IVPDomainModel extends DomainModel {
 		}
 	}
 
-	private Operation createOperationToExpression(String operationType) {
+	private Operation createOperationToExpression(String operationType, AssignmentState state) {
 		Operation op = null;
 		if (operationType.equals(Operation.OPERATION_ADDITION)) {
 			op = factory.createAddition();
+			IVPNumber result = factory.createIVPNumber();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Addition)op).setAdditionResult(result);
 		} else if (operationType.equals(Operation.OPERATION_SUBTRACTION)) {
 			op = factory.createSubtraction();
 		} else if (operationType.equals(Operation.OPERATION_MULTIPLICATION)) {
@@ -642,7 +648,7 @@ public class IVPDomainModel extends DomainModel {
 					((IVPVariableReference) newExp).setReferencedType(theOperationType);
 				}
 			} else {
-				newExp = (Expression) createOperationToExpression(Expression.OPERATION_EQU);
+				newExp = (Expression) createOperationToExpression(Expression.OPERATION_EQU,state);
 			}
 			newExp.setParentID(holder);
 			newExp.setScopeID(currentScope);
@@ -885,9 +891,13 @@ public class IVPDomainModel extends DomainModel {
 			Function mainFunction = Services.getService().getProgramData().getMainFunction();
 			Context mainContext = (Context) Services.getService().getContextMapping().get(mainFunction.getUniqueID());
 			Context clone = (Context) mainContext.clone();
+
+			System.out.println("Lu... "+mainContext.getIntegerMap());
+			System.out.println("Lu... "+clone.getIntegerMap());
+			
 			HashMap modelMapping = (HashMap) Services.getService().getModelMapping();
-			mainFunction.evaluate(mainContext, modelMapping, factory);
-			mainContext.resetWithValues(clone);
+			mainFunction.evaluate(clone, modelMapping, factory);
+			//mainContext.resetWithValues(clone);
 		}
 	}
 

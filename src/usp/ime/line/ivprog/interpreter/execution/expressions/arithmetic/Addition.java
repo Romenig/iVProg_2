@@ -23,6 +23,8 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class Addition extends Operation {
 
+	private IVPNumber additionResult;
+	
 	/**
 	 * @param name
 	 * @param description
@@ -34,13 +36,14 @@ public class Addition extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		IVPNumber result = v1.add(v2, c, factory, map);
+		v1.add(additionResult, v2, c, factory, map);
+		/*
 		if (v1.getValueType() == IVPValue.DOUBLE_TYPE || v2.getValueType() == IVPValue.DOUBLE_TYPE) {
-			result.setValueType(IVPValue.DOUBLE_TYPE);
+			additionResult.setValueType(IVPValue.DOUBLE_TYPE);
 		} else {
-			result.setValueType(IVPValue.INTEGER_TYPE);
-		}
-		return result;
+			additionResult.setValueType(IVPValue.INTEGER_TYPE);
+		}*/
+		return additionResult;
 	}
 
 	/*
@@ -52,8 +55,21 @@ public class Addition extends Operation {
 	 */
 	@Override
 	public boolean equals(DomainObject o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
+
+	/**
+	 * @return the additionResult
+	 */
+    public IVPNumber getAdditionResult() {
+	    return additionResult;
+    }
+
+	/**
+	 * @param additionResult the additionResult to set
+	 */
+    public void setAdditionResult(IVPNumber additionResult) {
+	    this.additionResult = additionResult;
+    }
 
 }

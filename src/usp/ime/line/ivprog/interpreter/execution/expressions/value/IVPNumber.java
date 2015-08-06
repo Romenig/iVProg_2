@@ -54,10 +54,14 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPNumber add(IVPNumber number, Context context, DataFactory factory, HashMap map) {
-		IVPNumber result = factory.createIVPNumber();
-		map.put(result.getUniqueID(), result);
+	public IVPNumber add(IVPNumber result, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		//IVPNumber result = factory.createIVPNumber();
+		//map.put(result.getUniqueID(), result);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			System.out.println("TESTE 1 > "+context);
+			System.out.println("TESTE 2 > "+getUniqueID());
+			System.out.println("TESTE 3 > "+context.getInt(getUniqueID()));
+			System.out.println("TESTE 4 > "+context.getInt(number.getUniqueID()));
 			int resultInt = context.getInt(getUniqueID()) + context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
 			context.addInt(result.getUniqueID(), resultInt);
