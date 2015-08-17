@@ -895,31 +895,18 @@ public class IVPDomainModel extends DomainModel {
 			Services.getService().getController().lockCodeDown();
 			Object[] functionList = Services.getService().getProgramData().getFunctionMap().values().toArray();
 			Function mainFunction = Services.getService().getProgramData().getMainFunction();
-			Context mainContext = (Context) Services.getService().getContextMapping().get(mainFunction.getUniqueID());
-<<<<<<< HEAD
-			Context clone = (Context) mainContext.clone();
-
-			System.out.println("Lu... "+mainContext.getIntegerMap());
-			System.out.println("Lu... "+clone.getIntegerMap());
 			
-=======
->>>>>>> branch 'master' of https://github.com/Romenig/iVProg_2.git
+			Context mainContext = (Context) Services.getService().getContextMapping().get(mainFunction.getUniqueID());
+			Context clone = (Context) mainContext.clone();
+			
 			HashMap modelMapping = (HashMap) Services.getService().getModelMapping();
-<<<<<<< HEAD
+			
+			
+			System.out.println(modelMapping+" \n "+clone);
+			
 			mainFunction.evaluate(clone, modelMapping, factory);
 			//mainContext.resetWithValues(clone);
-=======
 			
-			Context cloneContext = (Context) mainContext.clone();
-			HashMap cloneModel = (HashMap) modelMapping.clone();
-			
-			System.out.println("model mapping e clone antes \n"+modelMapping+"\n"+cloneModel);
-			
-			mainFunction.evaluate(cloneContext, cloneModel, factory);
-			//mainContext.resetWithValues(cloneContext);
-			
-			System.out.println("model mapping e clone depois \n"+modelMapping+"\n"+cloneModel);
->>>>>>> branch 'master' of https://github.com/Romenig/iVProg_2.git
 		}
 	}
 

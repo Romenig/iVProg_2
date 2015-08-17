@@ -61,7 +61,7 @@ public class Context implements Cloneable {
 	 * @return IVPError
 	 */
 	public double getDouble(String key) {
-		return (double) doubleMap.get(key);
+		return (Double) doubleMap.get(key);
 	}
 
 	/**
@@ -107,7 +107,8 @@ public class Context implements Cloneable {
 	 * @return IVPError
 	 */
 	public int getInt(String key) {
-		return (int) integerMap.get(key);
+		System.out.println(key+" "+integerMap);
+		return (Integer) integerMap.get(key);
 	}
 
 	/**
@@ -195,7 +196,7 @@ public class Context implements Cloneable {
 	 * @return IVPError
 	 */
 	public boolean getBoolean(String key) {
-		return (boolean) booleanMap.get(key);
+		return (Boolean) booleanMap.get(key);
 	}
 
 	/**
@@ -220,9 +221,6 @@ public class Context implements Cloneable {
 	 */
 	public Object clone() {
 		Context c = new Context(((HashMap)integerMap.clone()), (HashMap) doubleMap.clone(), (HashMap) stringMap.clone(),(HashMap) booleanMap.clone());
-		System.out.println(integerMap.keySet());
-		System.out.println(c.getIntegerMap().keySet());
-		System.out.println("-------------------------------------------");
 		return c;
 	}
 

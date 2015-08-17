@@ -36,17 +36,7 @@ public class Addition extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-<<<<<<< HEAD
 		v1.add(additionResult, v2, c, factory, map);
-		/*
-=======
-		IVPNumber result = v1.add(v2, operationResultID, c, factory, map);
->>>>>>> branch 'master' of https://github.com/Romenig/iVProg_2.git
-		if (v1.getValueType() == IVPValue.DOUBLE_TYPE || v2.getValueType() == IVPValue.DOUBLE_TYPE) {
-			additionResult.setValueType(IVPValue.DOUBLE_TYPE);
-		} else {
-			additionResult.setValueType(IVPValue.INTEGER_TYPE);
-		}*/
 		return additionResult;
 	}
 

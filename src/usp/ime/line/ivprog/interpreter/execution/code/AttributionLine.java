@@ -51,10 +51,6 @@ public class AttributionLine extends DataObject {
 			IVPVariableReference variableReference = (IVPVariableReference) map.get(variableID);
 			IVPVariable variable = (IVPVariable) map.get(variableReference.getReferencedID());
 			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
-			//IVPValue copyOfValue = createCopy(value, c, map, factory);
-			//System.out.println("AttLine > "+value.getUniqueID());
-			//System.out.println("AttLine > "+copyOfValue.getUniqueID());
-			
 			variable.setValueID(value.getUniqueID());
 		} else if (map.get(variableID) instanceof IVPVectorReference) {
 			IVPVectorReference ref = (IVPVectorReference) map.get(variableID);
@@ -79,7 +75,6 @@ public class AttributionLine extends DataObject {
 	private IVPValue createCopy(IVPValue value, Context c, HashMap map, DataFactory factory) {
 		IVPValue copy = null;
 		if (value instanceof IVPNumber) {
-			System.out.println("Sabe que é número.");
 			copy = factory.createIVPNumber();
 			if (value.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 				c.addInt(copy.getUniqueID(), c.getInt(value.getUniqueID()));

@@ -54,22 +54,15 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-<<<<<<< HEAD
 	public IVPNumber add(IVPNumber result, IVPNumber number, Context context, DataFactory factory, HashMap map) {
-		//IVPNumber result = factory.createIVPNumber();
-		//map.put(result.getUniqueID(), result);
-=======
-	public IVPNumber add(IVPNumber number, String operationResultID, Context context, DataFactory factory, HashMap map) {
-		IVPNumber result = (IVPNumber) map.get(operationResultID);
-		map.put(result.getUniqueID(), result);
->>>>>>> branch 'master' of https://github.com/Romenig/iVProg_2.git
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			System.out.println("TESTE 1 > "+context);
-			System.out.println("TESTE 2 > "+getUniqueID());
-			System.out.println("TESTE 3 > "+context.getInt(getUniqueID()));
-			System.out.println("TESTE 4 > "+context.getInt(number.getUniqueID()));
+			
+			System.out.println("Procurou os caras > "+getUniqueID()+" + "+number.getUniqueID());
+			
 			int resultInt = context.getInt(getUniqueID()) + context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
+			
+			System.out.println("result > "+result.getUniqueID()+" "+resultInt);
 			context.addInt(result.getUniqueID(), resultInt);
 		} else {
 			double resultDouble = 0.0;
@@ -409,7 +402,6 @@ public class IVPNumber extends IVPValue {
 	 * ilm.framework.assignment.model.DomainObject#equals(ilm.framework.assignment
 	 * .model.DomainObject)
 	 */
-	@Override
 	public boolean equals(DomainObject o) {
 		// TODO Auto-generated method stub
 		return false;
@@ -420,7 +412,6 @@ public class IVPNumber extends IVPValue {
 	 * 
 	 * @see usp.ime.line.ivprog.interpreter.DataObject#toXML()
 	 */
-	@Override
 	public String toXML() {
 		// TODO Auto-generated method stub
 		return null;
@@ -431,7 +422,6 @@ public class IVPNumber extends IVPValue {
 	 * 
 	 * @see usp.ime.line.ivprog.interpreter.DataObject#toCString()
 	 */
-	@Override
 	public String toCString() {
 		// TODO Auto-generated method stub
 		return null;
@@ -440,7 +430,6 @@ public class IVPNumber extends IVPValue {
 	/* (non-Javadoc)
 	 * @see usp.ime.line.ivprog.interpreter.DataObject#updateParent(java.lang.String, java.lang.String, java.lang.String)
 	 */
-    @Override
     public void updateParent(String lastExp, String newExp, String operationContext) {
 	    // TODO Auto-generated method stub
 	    
