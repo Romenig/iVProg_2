@@ -23,7 +23,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class Addition extends Operation {
 
-	private IVPNumber additionResult;
+	private String additionResultID;
 	
 	/**
 	 * @param name
@@ -36,8 +36,7 @@ public class Addition extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		v1.add(additionResult, v2, c, factory, map);
-		return additionResult;
+		return v1.add(additionResultID, v2, c, factory, map);
 	}
 
 	/*
@@ -55,15 +54,27 @@ public class Addition extends Operation {
 	/**
 	 * @return the additionResult
 	 */
-    public IVPNumber getAdditionResult() {
-	    return additionResult;
+    public String getAdditionResult() {
+	    return additionResultID;
     }
 
 	/**
 	 * @param additionResult the additionResult to set
 	 */
-    public void setAdditionResult(IVPNumber additionResult) {
-	    this.additionResult = additionResult;
+    public void setAdditionResult(String additionResult) {
+	    this.additionResultID = additionResult;
     }
 
+    public Object clone(){
+    	Addition a = new Addition();
+    	a.setAdditionResult(additionResultID);
+    	a.setExpressionA(getExpressionA());
+    	a.setExpressionB(getExpressionB());
+    	a.setExpressionType(getExpressionType());
+    	a.setOperationResultID(getOperationResultID());
+    	a.setParentID(getParentID());
+    	a.setScopeID(getScopeID());
+    	a.setUniqueID(getUniqueID());
+    	return a;
+    }
 }

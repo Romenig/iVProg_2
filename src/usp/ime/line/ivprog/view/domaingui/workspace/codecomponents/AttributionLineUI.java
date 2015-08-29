@@ -6,7 +6,7 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.components.dnd.ComponentPanel;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;

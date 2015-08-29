@@ -281,5 +281,18 @@ public class Function extends CodeComposite {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public Object clone(){
+		Function newF = new Function();
+		newF.setFunctionName(functionName);
+		newF.setFunctionReturnType(functionReturnType);
+		newF.setParentID(getParentID());
+		newF.setScopeID(getScopeID());
+		newF.setUniqueID(getUniqueID());
+		newF.localVariables = (Vector) localVariables.clone();
+		newF.argumentList = (Vector) argumentList.clone();
+		newF.children = (Vector) children.clone();
+		return newF;
+	}
 
 }

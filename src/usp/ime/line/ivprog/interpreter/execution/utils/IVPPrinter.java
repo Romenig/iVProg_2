@@ -128,4 +128,12 @@ public class IVPPrinter extends DataObject {
 	    
     }
 
+    public Object clone(){
+    	IVPPrinter p = new IVPPrinter();
+    	p.setParentID(getParentID());
+    	p.setPrintableID(getPrintableID());
+    	p.setScopeID(getScopeID());
+    	p.setUniqueID(getUniqueID());
+    	return p;
+    }
 }

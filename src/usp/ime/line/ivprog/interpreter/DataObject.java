@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.execution.Context;
 
-public abstract class DataObject extends DomainObject {
+public abstract class DataObject extends DomainObject implements Cloneable {
 
 	/**
 	 * This method is inheritance from LPS. If you are going to use the
@@ -80,5 +80,7 @@ public abstract class DataObject extends DomainObject {
 	}
 	
 	public abstract void updateParent(String lastExp, String newExp, String operationContext);
+	
+	
 
 }

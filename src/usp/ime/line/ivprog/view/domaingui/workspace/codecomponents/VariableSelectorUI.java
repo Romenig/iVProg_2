@@ -21,7 +21,7 @@ import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
-import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 import usp.ime.line.ivprog.listeners.IVariableListener;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;

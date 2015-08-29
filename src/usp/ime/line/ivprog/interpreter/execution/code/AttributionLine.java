@@ -20,8 +20,8 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
-import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPMatrixReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPVectorReference;
 
 public class AttributionLine extends DataObject {
@@ -50,8 +50,14 @@ public class AttributionLine extends DataObject {
 		if (map.get(variableID) instanceof IVPVariableReference) {
 			IVPVariableReference variableReference = (IVPVariableReference) map.get(variableID);
 			IVPVariable variable = (IVPVariable) map.get(variableReference.getReferencedID());
+			
 			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
-			variable.setValueID(value.getUniqueID());
+			
+			variable.updateVariableType(value.getValueType(), map, c);
+			if(value.getValueType().equals(IVPValue.INTEGER_TYPE)){
+				c.updateInt(variable.getValueID(), c.getInt(value.getUniqueID()));
+			}
+			
 		} else if (map.get(variableID) instanceof IVPVectorReference) {
 			IVPVectorReference ref = (IVPVectorReference) map.get(variableID);
 			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
@@ -190,6 +196,17 @@ public class AttributionLine extends DataObject {
     	if (expressionID == lastExp || expressionID == "") {
     		expressionID = newExp;
 		}
+    }
+    
+    public Object clone(){
+    	AttributionLine att = new AttributionLine();
+    	att.setExpression(getExpressionID());
+    	att.setLeftVariableType(getLeftVariableType());
+    	att.setParentID(getParentID());
+    	att.setScopeID(getScopeID());
+    	att.setUniqueID(getUniqueID());
+    	att.setVariableID(getVariableID());
+    	return att;
     }
 
 }

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 import usp.ime.line.ivprog.listeners.IOperationListener;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;

@@ -107,7 +107,6 @@ public class Context implements Cloneable {
 	 * @return IVPError
 	 */
 	public int getInt(String key) {
-		System.out.println(key+" "+integerMap);
 		return (Integer) integerMap.get(key);
 	}
 

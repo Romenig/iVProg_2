@@ -26,8 +26,8 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
-import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
 import usp.ime.line.ivprog.interpreter.execution.utils.IVPPrinter;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 import usp.ime.line.ivprog.listeners.ICodeListener;
 import usp.ime.line.ivprog.listeners.IExpressionListener;
 import usp.ime.line.ivprog.listeners.IFunctionListener;
@@ -498,7 +498,7 @@ public class IVPDomainModel extends DomainModel {
 			IVPNumber result = factory.createIVPNumber();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Addition)op).setAdditionResult(result);
+			((Addition)op).setAdditionResult(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_SUBTRACTION)) {
 			op = factory.createSubtraction();
 		} else if (operationType.equals(Operation.OPERATION_MULTIPLICATION)) {
@@ -897,15 +897,12 @@ public class IVPDomainModel extends DomainModel {
 			Function mainFunction = Services.getService().getProgramData().getMainFunction();
 			
 			Context mainContext = (Context) Services.getService().getContextMapping().get(mainFunction.getUniqueID());
-			Context clone = (Context) mainContext.clone();
+			Context cloneContext = (Context) mainContext.clone();
 			
 			HashMap modelMapping = (HashMap) Services.getService().getModelMapping();
+			HashMap cloneModel = (HashMap) modelMapping.clone();
 			
-			
-			System.out.println(modelMapping+" \n "+clone);
-			
-			mainFunction.evaluate(clone, modelMapping, factory);
-			//mainContext.resetWithValues(clone);
+			mainFunction.evaluate(cloneContext, cloneModel, factory);
 			
 		}
 	}

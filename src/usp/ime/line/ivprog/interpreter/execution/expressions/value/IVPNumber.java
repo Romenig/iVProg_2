@@ -54,15 +54,13 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPNumber add(IVPNumber result, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+	public IVPNumber add(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			
-			System.out.println("Procurou os caras > "+getUniqueID()+" + "+number.getUniqueID());
 			
 			int resultInt = context.getInt(getUniqueID()) + context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
 			
-			System.out.println("result > "+result.getUniqueID()+" "+resultInt);
 			context.addInt(result.getUniqueID(), resultInt);
 		} else {
 			double resultDouble = 0.0;
@@ -434,5 +432,16 @@ public class IVPNumber extends IVPValue {
 	    // TODO Auto-generated method stub
 	    
     }
+    
+    public Object clone(){
+    	IVPNumber n = new IVPNumber();
+    	n.setParentID(getParentID());
+    	n.setScopeID(getScopeID());
+    	n.setUniqueID(getUniqueID());
+    	n.setExpressionType(getExpressionType());
+    	n.setValueType(getValueType());
+    	return n;
+    }
 
+    
 }

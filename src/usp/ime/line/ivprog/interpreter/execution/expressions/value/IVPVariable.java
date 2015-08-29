@@ -220,4 +220,16 @@ public class IVPVariable extends Expression {
 	    
     }
 
+    public Object clone(){
+    	IVPVariable v = new IVPVariable();
+    	v.setExpressionType(getExpressionType());
+    	v.setParentID(getParentID());
+    	v.setReferenceList((Vector)getReferenceList().clone());
+    	v.setScopeID(getScopeID());
+    	v.setUniqueID(getUniqueID());
+    	v.setValueID(getValueID());
+    	v.setVariableName(getVariableName());
+    	v.setVariableType(getVariableType());
+    	return v;
+    }
 }

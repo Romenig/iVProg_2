@@ -6,7 +6,7 @@
  * Romenig da Silva Ribeiro - romenig@ime.usp.br | romenig@gmail.com
  * @author Romenig
  */
-package usp.ime.line.ivprog.interpreter.execution.expressions.value;
+package usp.ime.line.ivprog.interpreter.execution.utils;
 
 import ilm.framework.assignment.model.DomainObject;
 
@@ -16,6 +16,7 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
 import usp.ime.line.ivprog.model.utils.Services;
 
 /**
@@ -146,6 +147,18 @@ public class IVPVariableReference extends Expression {
     public void updateParent(String lastExp, String newExp, String operationContext) {
 	    // TODO Auto-generated method stub
 	    
+    }
+    
+    public Object clone(){
+    	IVPVariableReference v = new IVPVariableReference();
+    	v.setExpressionType(getExpressionType());
+    	v.setParentID(getParentID());
+    	v.setReferencedID(getReferencedID());
+    	v.setReferencedName(getReferencedName());
+    	v.setReferencedType(getReferencedType());
+    	v.setScopeID(getScopeID());
+    	v.setUniqueID(getUniqueID());
+    	return v;
     }
 
 }
