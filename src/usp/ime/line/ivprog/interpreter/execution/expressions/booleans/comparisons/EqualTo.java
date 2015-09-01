@@ -33,7 +33,7 @@ public class EqualTo extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPValue expressionA = (IVPValue) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPValue expressionB = (IVPValue) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		return expressionA.ivpEqualTo(expressionB, c, map, factory);
+		return expressionA.ivpEqualTo(resultID, expressionB, c, factory, map);
 	}
 
 	/*

@@ -34,7 +34,7 @@ public class GreaterThanOrEqualTo extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPNumber expressionA = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPNumber expressionB = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		return expressionA.greaterThanOrEqualTo(expressionB, c, map, factory);
+		return expressionA.greaterThanOrEqualTo(resultID, expressionB, c, factory, map);
 	}
 
 	/*

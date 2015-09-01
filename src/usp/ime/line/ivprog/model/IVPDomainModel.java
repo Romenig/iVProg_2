@@ -498,7 +498,7 @@ public class IVPDomainModel extends DomainModel {
 			IVPNumber result = factory.createIVPNumber();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Addition)op).setAdditionResult(result.getUniqueID());
+			((Addition)op).setResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_SUBTRACTION)) {
 			op = factory.createSubtraction();
 		} else if (operationType.equals(Operation.OPERATION_MULTIPLICATION)) {

@@ -22,6 +22,7 @@ import usp.ime.line.ivprog.interpreter.execution.code.RecursiveCall;
 import usp.ime.line.ivprog.interpreter.execution.code.Return;
 import usp.ime.line.ivprog.interpreter.execution.code.UserInput;
 import usp.ime.line.ivprog.interpreter.execution.code.While;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Division;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Multiplication;
@@ -143,8 +144,8 @@ public class DataFactory {
 	 * 
 	 * @return
 	 */
-	public Division createDivision() {
-		Division div = new Division();
+	public Operation createDivision() {
+		Operation div = new Division();
 		div.setUniqueID("" + getID());
 		return div;
 	}

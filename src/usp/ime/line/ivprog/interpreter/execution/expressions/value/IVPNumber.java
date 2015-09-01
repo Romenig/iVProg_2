@@ -57,10 +57,8 @@ public class IVPNumber extends IVPValue {
 	public IVPNumber add(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
 		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			
 			int resultInt = context.getInt(getUniqueID()) + context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
-			
 			context.addInt(result.getUniqueID(), resultInt);
 		} else {
 			double resultDouble = 0.0;
@@ -87,9 +85,8 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPNumber multiply(IVPNumber number, Context context, DataFactory factory, HashMap map) {
-		IVPNumber result = factory.createIVPNumber();
-		map.put(result.getUniqueID(), result);
+	public IVPNumber multiply(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) * context.getInt(number.getUniqueID());
 			context.addInt(result.getUniqueID(), resultInt);
@@ -119,9 +116,8 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPNumber divide(IVPNumber number, Context context, DataFactory factory, HashMap map) {
-		IVPNumber result = factory.createIVPNumber();
-		map.put(result.getUniqueID(), result);
+	public IVPNumber divide(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) / context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
@@ -152,9 +148,8 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPNumber subtract(IVPNumber number, Context context, DataFactory factory, HashMap map) {
-		IVPNumber result = factory.createIVPNumber();
-		map.put(result.getUniqueID(), result);
+	public IVPNumber subtract(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) - context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
@@ -184,9 +179,8 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPNumber remainder(IVPNumber number, Context context, DataFactory factory, HashMap map) {
-		IVPNumber result = factory.createIVPNumber();
-		map.put(result.getUniqueID(), result);
+	public IVPNumber remainder(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) % context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
@@ -218,24 +212,23 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPBoolean lessThan(IVPNumber num, Context c, HashMap map, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
-		map.put(result.getUniqueID(), result);
+	public IVPBoolean lessThan(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		boolean resultBoolean = false;
-		if (getValueType().equals(IVPValue.INTEGER_TYPE) && num.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			resultBoolean = c.getInt(getUniqueID()) < c.getInt(num.getUniqueID());
+		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			resultBoolean = context.getInt(getUniqueID()) < context.getInt(number.getUniqueID());
 		} else {
-			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && num.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-				resultBoolean = c.getDouble(getUniqueID()) < c.getDouble(num.getUniqueID());
+			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
+				resultBoolean = context.getDouble(getUniqueID()) < context.getDouble(number.getUniqueID());
 			} else {
 				if (getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-					resultBoolean = c.getDouble(getUniqueID()) < c.getInt(num.getUniqueID());
+					resultBoolean = context.getDouble(getUniqueID()) < context.getInt(number.getUniqueID());
 				} else {
-					resultBoolean = c.getInt(getUniqueID()) < c.getDouble(num.getUniqueID());
+					resultBoolean = context.getInt(getUniqueID()) < context.getDouble(number.getUniqueID());
 				}
 			}
 		}
-		c.addBoolean(result.getUniqueID(), resultBoolean);
+		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
 
@@ -248,24 +241,23 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPBoolean lessThanOrEqualTo(IVPNumber num, Context c, HashMap map, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
-		map.put(result.getUniqueID(), result);
+	public IVPBoolean lessThanOrEqualTo(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		boolean resultBoolean = false;
-		if (getValueType().equals(IVPValue.INTEGER_TYPE) && num.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			resultBoolean = c.getInt(getUniqueID()) <= c.getInt(num.getUniqueID());
+		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			resultBoolean = context.getInt(getUniqueID()) <= context.getInt(number.getUniqueID());
 		} else {
-			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && num.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-				resultBoolean = c.getDouble(getUniqueID()) <= c.getDouble(num.getUniqueID());
+			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
+				resultBoolean = context.getDouble(getUniqueID()) <= context.getDouble(number.getUniqueID());
 			} else {
 				if (getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-					resultBoolean = c.getDouble(getUniqueID()) <= c.getInt(num.getUniqueID());
+					resultBoolean = context.getDouble(getUniqueID()) <= context.getInt(number.getUniqueID());
 				} else {
-					resultBoolean = c.getInt(getUniqueID()) <= c.getDouble(num.getUniqueID());
+					resultBoolean = context.getInt(getUniqueID()) <= context.getDouble(number.getUniqueID());
 				}
 			}
 		}
-		c.addBoolean(result.getUniqueID(), resultBoolean);
+		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
 
@@ -278,24 +270,23 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPBoolean greaterThan(IVPNumber num, Context c, HashMap map, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
-		map.put(result.getUniqueID(), result);
+	public IVPBoolean greaterThan(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		boolean resultBoolean = false;
-		if (getValueType().equals(IVPValue.INTEGER_TYPE) && num.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			resultBoolean = c.getInt(getUniqueID()) > c.getInt(num.getUniqueID());
+		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			resultBoolean = context.getInt(getUniqueID()) > context.getInt(number.getUniqueID());
 		} else {
-			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && num.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-				resultBoolean = c.getDouble(getUniqueID()) > c.getDouble(num.getUniqueID());
+			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
+				resultBoolean = context.getDouble(getUniqueID()) > context.getDouble(number.getUniqueID());
 			} else {
 				if (getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-					resultBoolean = c.getDouble(getUniqueID()) > c.getInt(num.getUniqueID());
+					resultBoolean = context.getDouble(getUniqueID()) > context.getInt(number.getUniqueID());
 				} else {
-					resultBoolean = c.getInt(getUniqueID()) > c.getDouble(num.getUniqueID());
+					resultBoolean = context.getInt(getUniqueID()) > context.getDouble(number.getUniqueID());
 				}
 			}
 		}
-		c.addBoolean(result.getUniqueID(), resultBoolean);
+		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
 
@@ -308,24 +299,23 @@ public class IVPNumber extends IVPValue {
 	 * @param factory
 	 * @return
 	 */
-	public IVPBoolean greaterThanOrEqualTo(IVPNumber num, Context c, HashMap map, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
-		map.put(result.getUniqueID(), result);
+	public IVPBoolean greaterThanOrEqualTo(String resultID, IVPNumber number, Context context, DataFactory factory, HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		boolean resultBoolean = false;
-		if (getValueType().equals(IVPValue.INTEGER_TYPE) && num.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			resultBoolean = c.getInt(getUniqueID()) >= c.getInt(num.getUniqueID());
+		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			resultBoolean = context.getInt(getUniqueID()) >= context.getInt(number.getUniqueID());
 		} else {
-			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && num.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-				resultBoolean = c.getDouble(getUniqueID()) >= c.getDouble(num.getUniqueID());
+			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
+				resultBoolean = context.getDouble(getUniqueID()) >= context.getDouble(number.getUniqueID());
 			} else {
 				if (getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-					resultBoolean = c.getDouble(getUniqueID()) >= c.getInt(num.getUniqueID());
+					resultBoolean = context.getDouble(getUniqueID()) >= context.getInt(number.getUniqueID());
 				} else {
-					resultBoolean = c.getInt(getUniqueID()) >= c.getDouble(num.getUniqueID());
+					resultBoolean = context.getInt(getUniqueID()) >= context.getDouble(number.getUniqueID());
 				}
 			}
 		}
-		c.addBoolean(result.getUniqueID(), resultBoolean);
+		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
 
@@ -340,24 +330,24 @@ public class IVPNumber extends IVPValue {
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
 
-	public IVPBoolean ivpEqualTo(IVPValue num, Context c, HashMap map, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
-		map.put(result.getUniqueID(), result);
+	public IVPBoolean ivpEqualTo(String resultID, IVPValue number, Context context, DataFactory factory,
+			HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		boolean resultBoolean = false;
-		if (getValueType().equals(IVPValue.INTEGER_TYPE) && num.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			resultBoolean = c.getInt(getUniqueID()) == c.getInt(num.getUniqueID());
+		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			resultBoolean = context.getInt(getUniqueID()) == context.getInt(number.getUniqueID());
 		} else {
-			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && num.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-				resultBoolean = c.getDouble(getUniqueID()) == c.getDouble(num.getUniqueID());
+			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
+				resultBoolean = context.getDouble(getUniqueID()) == context.getDouble(number.getUniqueID());
 			} else {
 				if (getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-					resultBoolean = c.getDouble(getUniqueID()) == c.getInt(num.getUniqueID());
+					resultBoolean = context.getDouble(getUniqueID()) == context.getInt(number.getUniqueID());
 				} else {
-					resultBoolean = c.getInt(getUniqueID()) == c.getDouble(num.getUniqueID());
+					resultBoolean = context.getInt(getUniqueID()) == context.getDouble(number.getUniqueID());
 				}
 			}
 		}
-		c.addBoolean(result.getUniqueID(), resultBoolean);
+		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
 
@@ -372,26 +362,27 @@ public class IVPNumber extends IVPValue {
 	 * usp.ime.line.ivprog.interpreter.DataFactory)
 	 */
 
-	public IVPBoolean ivpNotEqualTo(IVPValue num, Context c, HashMap map, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
-		map.put(result.getUniqueID(), result);
+	public IVPBoolean ivpNotEqualTo(String resultID, IVPValue n, Context context, DataFactory factory, HashMap map) {
+		IVPNumber number = (IVPNumber) n;
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		boolean resultBoolean = false;
-		if (getValueType().equals(IVPValue.INTEGER_TYPE) && num.getValueType().equals(IVPValue.INTEGER_TYPE)) {
-			resultBoolean = c.getInt(getUniqueID()) != c.getInt(num.getUniqueID());
+		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
+			resultBoolean = context.getInt(getUniqueID()) != context.getInt(number.getUniqueID());
 		} else {
-			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && num.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-				resultBoolean = c.getDouble(getUniqueID()) != c.getDouble(num.getUniqueID());
+			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
+				resultBoolean = context.getDouble(getUniqueID()) != context.getDouble(number.getUniqueID());
 			} else {
 				if (getValueType().equals(IVPValue.DOUBLE_TYPE)) {
-					resultBoolean = c.getDouble(getUniqueID()) != c.getInt(num.getUniqueID());
+					resultBoolean = context.getDouble(getUniqueID()) != context.getInt(number.getUniqueID());
 				} else {
-					resultBoolean = c.getInt(getUniqueID()) != c.getDouble(num.getUniqueID());
+					resultBoolean = context.getInt(getUniqueID()) != context.getDouble(number.getUniqueID());
 				}
 			}
 		}
-		c.addBoolean(result.getUniqueID(), resultBoolean);
+		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -443,5 +434,4 @@ public class IVPNumber extends IVPValue {
     	return n;
     }
 
-    
 }

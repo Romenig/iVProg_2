@@ -23,8 +23,6 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
 public class Addition extends Operation {
 
-	private String additionResultID;
-	
 	/**
 	 * @param name
 	 * @param description
@@ -36,7 +34,7 @@ public class Addition extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		return v1.add(additionResultID, v2, c, factory, map);
+		return v1.add(resultID, v2, c, factory, map);
 	}
 
 	/*
@@ -51,23 +49,9 @@ public class Addition extends Operation {
 		return false;
 	}
 
-	/**
-	 * @return the additionResult
-	 */
-    public String getAdditionResult() {
-	    return additionResultID;
-    }
-
-	/**
-	 * @param additionResult the additionResult to set
-	 */
-    public void setAdditionResult(String additionResult) {
-	    this.additionResultID = additionResult;
-    }
-
-    public Object clone(){
+	public Object clone(){
     	Addition a = new Addition();
-    	a.setAdditionResult(additionResultID);
+    	a.setResultID(resultID);
     	a.setExpressionA(getExpressionA());
     	a.setExpressionB(getExpressionB());
     	a.setExpressionType(getExpressionType());

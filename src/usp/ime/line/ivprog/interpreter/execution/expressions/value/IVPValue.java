@@ -57,7 +57,7 @@ public abstract class IVPValue extends Expression {
 	 * 
 	 * @return
 	 */
-	public abstract IVPBoolean ivpEqualTo(IVPValue v, Context c, HashMap map, DataFactory factory);
+	public abstract IVPBoolean ivpEqualTo(String resultID, IVPValue expressionB, Context context, DataFactory factory, HashMap map);
 
 	/**
 	 * Verify if this object is not equal to the given IVPValue v. This method
@@ -65,6 +65,6 @@ public abstract class IVPValue extends Expression {
 	 * 
 	 * @return
 	 */
-	public abstract IVPBoolean ivpNotEqualTo(IVPValue v, Context c, HashMap map, DataFactory factory);
+	public abstract IVPBoolean ivpNotEqualTo(String resultID, IVPValue number, Context context, DataFactory factory, HashMap map);
 
 }
