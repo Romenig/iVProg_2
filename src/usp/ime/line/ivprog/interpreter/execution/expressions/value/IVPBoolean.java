@@ -37,26 +37,33 @@ public class IVPBoolean extends IVPValue {
 	}
 
 	/**
+	 * @param operationResultID 
 	 * @param b2
 	 * @return
 	 */
-	public IVPBoolean and(IVPBoolean b2, Context context, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
+	public IVPBoolean and(String operationResultID, IVPBoolean b2, Context context, DataFactory factory, HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(operationResultID);
 		Boolean res = new Boolean(context.getBoolean(getUniqueID()) && context.getBoolean(b2.getUniqueID()));
-		context.addBoolean(result.getUniqueID(), res);
+		if(context.addBoolean(result.getUniqueID(), res) != null){
+			context.updateBoolean(result.getUniqueID(), res);
+		}
 		return result;
 	}
 
 	/**
+	 * @param operationResultID 
 	 * @param b2
 	 * @param c
 	 * @param factory
+	 * @param map 
 	 * @return
 	 */
-	public IVPBoolean or(IVPBoolean b2, Context context, DataFactory factory) {
-		IVPBoolean result = factory.createIVPBoolean();
+	public IVPBoolean or(String operationResultID, IVPBoolean b2, Context context, DataFactory factory, HashMap map) {
+		IVPBoolean result = (IVPBoolean) map.get(operationResultID);
 		Boolean res = new Boolean(context.getBoolean(getUniqueID()) || context.getBoolean(b2.getUniqueID()));
-		context.addBoolean(result.getUniqueID(), res);
+		if(context.addBoolean(result.getUniqueID(), res) != null){
+			context.updateBoolean(result.getUniqueID(), res);
+		}
 		return result;
 	}
 
@@ -72,9 +79,11 @@ public class IVPBoolean extends IVPValue {
 	 */
 	public IVPBoolean ivpEqualTo(String resultID, IVPValue v, Context c, DataFactory factory,
 			HashMap map) {
-		IVPBoolean result = factory.createIVPBoolean();
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		Boolean booleanResult = new Boolean(c.getBoolean(getUniqueID()) == c.getBoolean(v.getUniqueID()));
-		c.addBoolean(result.getUniqueID(), booleanResult);
+		if(c.addBoolean(result.getUniqueID(), booleanResult) != null){
+			c.updateBoolean(result.getUniqueID(), booleanResult);
+		}
 		return result;
 	}
 

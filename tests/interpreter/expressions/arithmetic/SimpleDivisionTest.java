@@ -19,6 +19,7 @@ import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.error.IVPError;
 import usp.ime.line.ivprog.interpreter.execution.Context;
+import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Division;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
@@ -38,7 +39,7 @@ public class SimpleDivisionTest {
 		c.addInt(a.getUniqueID(), 10);
 		c.addInt(b.getUniqueID(), 2);
 
-		Division division = factory.createDivision();
+		Division division = (Division) factory.createDivision();
 		division.setExpressionA(a.getUniqueID());
 		division.setExpressionB(b.getUniqueID());
 
@@ -46,9 +47,13 @@ public class SimpleDivisionTest {
 		map.put(division.getUniqueID(), division);
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
+		
+		IVPNumber result = factory.createIVPNumber();
+		((Division)division).setOperationResultID(result.getUniqueID());
+		map.put(result.getUniqueID(), result);
 
-		IVPNumber result = (IVPNumber) division.evaluate(c, map, factory);
-
+		division.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
 		assertTrue(c.getInt(result.getUniqueID()) == 5);
 	}
@@ -66,7 +71,7 @@ public class SimpleDivisionTest {
 		c.addInt(a.getUniqueID(), 6);
 		c.addDouble(b.getUniqueID(), 1.5);
 
-		Division division = factory.createDivision();
+		Division division = (Division) factory.createDivision();
 		division.setExpressionA(a.getUniqueID());
 		division.setExpressionB(b.getUniqueID());
 
@@ -75,7 +80,12 @@ public class SimpleDivisionTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) division.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		((Division)division).setOperationResultID(result.getUniqueID());
+		map.put(result.getUniqueID(), result);
+
+		division.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 4.0);
 
@@ -94,7 +104,7 @@ public class SimpleDivisionTest {
 		c.addDouble(a.getUniqueID(), 1.5);
 		c.addInt(b.getUniqueID(), 2);
 
-		Division division = factory.createDivision();
+		Division division = (Division) factory.createDivision();
 		division.setExpressionA(a.getUniqueID());
 		division.setExpressionB(b.getUniqueID());
 
@@ -103,7 +113,12 @@ public class SimpleDivisionTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) division.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		((Division)division).setOperationResultID(result.getUniqueID());
+		map.put(result.getUniqueID(), result);
+
+		division.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 0.75);
 	}
@@ -121,7 +136,7 @@ public class SimpleDivisionTest {
 		c.addDouble(a.getUniqueID(), 2.5);
 		c.addDouble(b.getUniqueID(), 0.25);
 
-		Division division = factory.createDivision();
+		Division division = (Division) factory.createDivision();
 		division.setExpressionA(a.getUniqueID());
 		division.setExpressionB(b.getUniqueID());
 
@@ -130,7 +145,12 @@ public class SimpleDivisionTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) division.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		((Division)division).setOperationResultID(result.getUniqueID());
+		map.put(result.getUniqueID(), result);
+
+		division.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 10.0);
 

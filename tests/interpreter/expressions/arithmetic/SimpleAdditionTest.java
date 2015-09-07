@@ -22,6 +22,7 @@ import usp.ime.line.ivprog.interpreter.execution.Context;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
+import usp.ime.line.ivprog.model.utils.Services;
 
 public class SimpleAdditionTest {
 
@@ -46,8 +47,11 @@ public class SimpleAdditionTest {
 		map.put(addition.getUniqueID(), addition);
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
-
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		addition.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
 		assertTrue(c.getInt(result.getUniqueID()) == 13);
 	}
@@ -74,7 +78,11 @@ public class SimpleAdditionTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		map.put(result.getUniqueID(), result);
+		addition.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 13.4313);
 	}
@@ -101,7 +109,11 @@ public class SimpleAdditionTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		addition.setOperationResultID(result.getUniqueID());
+		addition.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 13.4313);
 	}
@@ -128,7 +140,11 @@ public class SimpleAdditionTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		addition.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 13.5424);
 

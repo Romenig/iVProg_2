@@ -26,7 +26,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 public class ComparisonGreaterThan {
 
 	@Test
-	public void testEqualForIntNumbers() {
+	public void testGreaterThanForIntNumbers() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();
@@ -54,7 +54,7 @@ public class ComparisonGreaterThan {
 	}
 
 	@Test
-	public void testEqualForDoubleNumbers() {
+	public void testGreaterThanForDoubleNumbers() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();
@@ -82,7 +82,7 @@ public class ComparisonGreaterThan {
 	}
 
 	@Test
-	public void testEqualForIntAndDouble() {
+	public void testGreaterThanForIntAndDouble() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();

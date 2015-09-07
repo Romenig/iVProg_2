@@ -33,9 +33,12 @@ public class ComparisonEqualTo {
 		IVPNumber a = factory.createIVPNumber();
 		IVPNumber b = factory.createIVPNumber();
 		EqualTo eq = factory.createEqualTo();
+		IVPBoolean result = factory.createIVPBoolean();
+		eq.setOperationResultID(result.getUniqueID());
+		
 		eq.setExpressionA(a.getUniqueID());
 		eq.setExpressionB(b.getUniqueID());
-
+		
 		a.setValueType(IVPValue.INTEGER_TYPE);
 		b.setValueType(IVPValue.INTEGER_TYPE);
 
@@ -46,8 +49,10 @@ public class ComparisonEqualTo {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 		map.put(eq.getUniqueID(), eq);
+		map.put(result.getUniqueID(), result);
 
-		IVPBoolean result = (IVPBoolean) eq.evaluate(c, map, factory);
+		eq.evaluate(c, map, factory);
+		
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 
@@ -72,7 +77,11 @@ public class ComparisonEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(eq.getUniqueID(), eq);
 
-		IVPBoolean result = (IVPBoolean) eq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		eq.setOperationResultID(result.getUniqueID());
+		eq.evaluate(c, map, factory);
+		
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 
@@ -96,8 +105,12 @@ public class ComparisonEqualTo {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 		map.put(eq.getUniqueID(), eq);
-
-		IVPBoolean result = (IVPBoolean) eq.evaluate(c, map, factory);
+		
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		eq.setOperationResultID(result.getUniqueID());
+		eq.evaluate(c, map, factory);
+		
 		assertFalse(c.getBoolean(result.getUniqueID()));
 	}
 
@@ -122,10 +135,15 @@ public class ComparisonEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(eq.getUniqueID(), eq);
 
-		IVPBoolean result = (IVPBoolean) eq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		eq.setOperationResultID(result.getUniqueID());
+		eq.evaluate(c, map, factory);
+
 		assertFalse(c.getBoolean(result.getUniqueID()));
 		b.updateValue(c, "hello");
-		result = (IVPBoolean) eq.evaluate(c, map, factory);
+		
+		eq.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 
@@ -152,11 +170,15 @@ public class ComparisonEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(eq.getUniqueID(), eq);
 
-		IVPBoolean result = (IVPBoolean) eq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		eq.setOperationResultID(result.getUniqueID());
+		
+		eq.evaluate(c, map, factory);
 
 		assertFalse(c.getBoolean(result.getUniqueID()));
 		b.updateValue(c, new Boolean(true));
-		result = (IVPBoolean) eq.evaluate(c, map, factory);
+		eq.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 

@@ -57,7 +57,10 @@ public class SimpleAdditionTestWithVariable {
 		map.put(b_var.getUniqueID(), b_var);
 		map.put(v.getUniqueID(), v);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		String resultID = (String) addition.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
 		assertTrue(c.getInt(result.getUniqueID()) == 13);
 	}

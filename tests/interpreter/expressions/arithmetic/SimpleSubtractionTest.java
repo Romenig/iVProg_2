@@ -26,7 +26,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 public class SimpleSubtractionTest {
 
 	@Test
-	public void addIntToInt() {
+	public void subtractIntFromInt() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();
@@ -53,7 +53,7 @@ public class SimpleSubtractionTest {
 	}
 
 	@Test
-	public void addIntToDouble() {
+	public void subtractIntFromDouble() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();

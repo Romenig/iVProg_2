@@ -32,7 +32,7 @@ public class And extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPBoolean b1 = (IVPBoolean) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPBoolean b2 = (IVPBoolean) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		IVPBoolean result = b1.and(b2, c, factory);
+		IVPBoolean result = b1.and(operationResultID, b2, c, factory,map);
 		return result;
 	}
 

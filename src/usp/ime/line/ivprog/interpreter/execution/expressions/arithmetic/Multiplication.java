@@ -33,7 +33,7 @@ public class Multiplication extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPNumber v1 = (IVPNumber) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPNumber v2 = (IVPNumber) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		return v1.multiply(resultID, v2, c, factory, map);
+		return v1.multiply(operationResultID, v2, c, factory, map);
 	}
 
 	/*

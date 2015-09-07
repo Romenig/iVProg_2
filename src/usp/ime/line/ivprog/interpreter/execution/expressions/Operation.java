@@ -12,7 +12,6 @@ public abstract class Operation extends Expression {
 	protected String expressionAID = "";
 	protected String expressionBID = "";
 	protected String operationResultID = "";
-	protected String resultID;
 
 	public Operation(String name, String description) {
 		super(name, description);
@@ -187,11 +186,4 @@ public abstract class Operation extends Expression {
 		this.operationResultID = operationResultID;
 	}
 
-	public String getResultID() {
-		return resultID;
-	}
-
-	public void setResultID(String resultID) {
-		this.resultID = resultID;
-	}
 }

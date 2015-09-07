@@ -286,7 +286,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
-		context.addBoolean(result.getUniqueID(), resultBoolean);
+		if(context.addBoolean(result.getUniqueID(), resultBoolean) != null){
+			context.updateBoolean(result.getUniqueID(), resultBoolean);
+		}
 		return result;
 	}
 
@@ -347,6 +349,7 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
+		
 		context.addBoolean(result.getUniqueID(), resultBoolean);
 		return result;
 	}

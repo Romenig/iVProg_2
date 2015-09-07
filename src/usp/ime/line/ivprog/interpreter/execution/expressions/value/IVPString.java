@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
+import usp.ime.line.ivprog.interpreter.error.IVPError;
 import usp.ime.line.ivprog.interpreter.execution.Context;
 
 public class IVPString extends IVPValue {
@@ -50,9 +51,11 @@ public class IVPString extends IVPValue {
 
 	public IVPBoolean ivpEqualTo(String resultID, IVPValue v, Context c, DataFactory factory,
 			HashMap map) {
-		IVPBoolean result = factory.createIVPBoolean();
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		Boolean booleanResult = new Boolean(c.getString(getUniqueID()).equals(c.getString(v.getUniqueID())));
-		c.addBoolean(result.getUniqueID(), booleanResult);
+		if(c.addBoolean(result.getUniqueID(), booleanResult) != null){
+			c.updateBoolean(result.getUniqueID(), booleanResult);
+		}
 		return result;
 	}
 
@@ -71,7 +74,9 @@ public class IVPString extends IVPValue {
 			HashMap map) {
 		IVPBoolean result = factory.createIVPBoolean();
 		Boolean booleanResult = new Boolean(!context.getString(getUniqueID()).equals(context.getString(str.getUniqueID())));
-		context.addBoolean(result.getUniqueID(), booleanResult);
+		if(context.addBoolean(result.getUniqueID(), booleanResult) != null){
+			context.updateBoolean(result.getUniqueID(), booleanResult);
+		}
 		return result;
 	}
 

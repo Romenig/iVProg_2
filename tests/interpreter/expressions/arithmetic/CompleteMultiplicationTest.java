@@ -18,6 +18,7 @@ import org.junit.Test;
 import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
+import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Division;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Multiplication;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
@@ -55,9 +56,15 @@ public class CompleteMultiplicationTest {
 		map.put(c.getUniqueID(), c);
 		// multiplication2(c * multiplication1(a * b))
 		// c * (a * b)
-		IVPNumber result = (IVPNumber) multiplication2.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
-		assertTrue(context.getDouble(result.getUniqueID()) == 68.62599999999999);
+		IVPNumber result1 = factory.createIVPNumber();
+		((Multiplication)multiplication1).setOperationResultID(result1.getUniqueID());
+		
+		IVPNumber result2 = factory.createIVPNumber();
+		((Multiplication)multiplication2).setOperationResultID(result2.getUniqueID());
+		String resultID = (String) multiplication2.evaluate(context, map, factory);
+		
+		assertTrue(result2.getValueType().equals(IVPValue.DOUBLE_TYPE));
+		assertTrue(context.getDouble(result2.getUniqueID()) == 68.62599999999999);
 
 	}
 

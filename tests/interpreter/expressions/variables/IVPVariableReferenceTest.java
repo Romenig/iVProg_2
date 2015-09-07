@@ -20,7 +20,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
-import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariableReference;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 /**
  * @author Romenig

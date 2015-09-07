@@ -33,7 +33,7 @@ public class EqualTo extends Operation {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPValue expressionA = (IVPValue) ((DataObject) map.get(expressionAID)).evaluate(c, map, factory);
 		IVPValue expressionB = (IVPValue) ((DataObject) map.get(expressionBID)).evaluate(c, map, factory);
-		return expressionA.ivpEqualTo(resultID, expressionB, c, factory, map);
+		return expressionA.ivpEqualTo(operationResultID, expressionB, c, factory, map);
 	}
 
 	/*
@@ -45,7 +45,6 @@ public class EqualTo extends Operation {
 	 */
 	@Override
 	public boolean equals(DomainObject o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -498,31 +498,79 @@ public class IVPDomainModel extends DomainModel {
 			IVPNumber result = factory.createIVPNumber();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Addition)op).setResultID(result.getUniqueID());
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_SUBTRACTION)) {
+			IVPNumber result = factory.createIVPNumber();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createSubtraction();
 		} else if (operationType.equals(Operation.OPERATION_MULTIPLICATION)) {
+			IVPNumber result = factory.createIVPNumber();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createMultiplication();
 		} else if (operationType.equals(Operation.OPERATION_DIVISION)) {
+			IVPNumber result = factory.createIVPNumber();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createDivision();
 		} else if (operationType.equals(Operation.OPERATION_AND)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createAnd();
 		} else if (operationType.equals(Operation.OPERATION_OR)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createOr();
 		} else if (operationType.equals(Operation.OPERATION_LEQ)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createLessThanOrEqualTo();
 		} else if (operationType.equals(Operation.OPERATION_LES)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createLessThan();
 		} else if (operationType.equals(Operation.OPERATION_EQU)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createEqualTo();
 		} else if (operationType.equals(Operation.OPERATION_GRE)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createGreaterThan();
 		} else if (operationType.equals(Operation.OPERATION_GEQ)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createGreaterThanOrEqualTo();
 		} else if (operationType.equals(Operation.OPERATION_NEQ)) {
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createNotEqualTo();
 		} else if (operationType.equals(Operation.OPERATION_INTDIV)) {
-			// op = factory.createDivision();
+			IVPBoolean result = factory.createIVPBoolean();
+			Services.getService().getModelMapping().put(result.getUniqueID(), result);
+			state.add(result);
+			((Operation)op).setOperationResultID(result.getUniqueID());
+			//op = factory.create();
 		}
 		return op;
 	}
