@@ -50,14 +50,17 @@ public class AttributionLine extends DataObject {
 		if (map.get(variableID) instanceof IVPVariableReference) {
 			IVPVariableReference variableReference = (IVPVariableReference) map.get(variableID);
 			IVPVariable variable = (IVPVariable) map.get(variableReference.getReferencedID());
-			
 			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);
-			
 			variable.updateVariableType(value.getValueType(), map, c);
 			if(value.getValueType().equals(IVPValue.INTEGER_TYPE)){
 				c.updateInt(variable.getValueID(), c.getInt(value.getUniqueID()));
+			}else if(value.getValueType().equals(IVPValue.BOOLEAN_TYPE)){
+				c.updateBoolean(variable.getValueID(), c.getBoolean(value.getUniqueID()));
+			}else if(value.getValueType().equals(IVPValue.DOUBLE_TYPE)){
+				c.updateDouble(variable.getValueID(), c.getDouble(value.getUniqueID()));
+			}else if(value.getValueType().equals(IVPValue.STRING_TYPE)){
+				c.updateString(variable.getValueID(), c.getString(value.getUniqueID()));
 			}
-			
 		} else if (map.get(variableID) instanceof IVPVectorReference) {
 			IVPVectorReference ref = (IVPVectorReference) map.get(variableID);
 			IVPValue value = (IVPValue) ((DataObject) map.get(expressionID)).evaluate(c, map, factory);

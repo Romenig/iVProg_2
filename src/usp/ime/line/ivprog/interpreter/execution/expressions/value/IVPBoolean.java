@@ -99,9 +99,11 @@ public class IVPBoolean extends IVPValue {
 	 */
 	public IVPBoolean ivpNotEqualTo(String resultID, IVPValue v, Context c, DataFactory factory,
 			HashMap map) {
-		IVPBoolean result = factory.createIVPBoolean();
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		Boolean booleanResult = new Boolean(c.getBoolean(getUniqueID()) != c.getBoolean(v.getUniqueID()));
-		c.addBoolean(result.getUniqueID(), booleanResult);
+		if(c.addBoolean(result.getUniqueID(), booleanResult) != null){
+			c.updateBoolean(result.getUniqueID(), booleanResult);
+		}
 		return result;
 	}
 

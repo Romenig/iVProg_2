@@ -57,9 +57,18 @@ public class CompleteSubtractionTest {
 		map.put(c.getUniqueID(), c);
 		// subtraction2(c - subtraction1(a - b))
 		// c - (a - b)
-		IVPNumber result = (IVPNumber) subtraction2.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
-		assertTrue(context.getDouble(result.getUniqueID()) == 8.5687);
+		IVPNumber result = (IVPNumber)factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		IVPNumber result2 = (IVPNumber)factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
+		
+		subtraction1.setOperationResultID(result.getUniqueID());
+		subtraction2.setOperationResultID(result2.getUniqueID());
+		
+				
+		subtraction2.evaluate(context, map, factory);
+		assertTrue(result2.getValueType().equals(IVPValue.DOUBLE_TYPE));
+		assertTrue(context.getDouble(result2.getUniqueID()) == 8.5687);
 
 	}
 
@@ -95,9 +104,17 @@ public class CompleteSubtractionTest {
 		map.put(c.getUniqueID(), c);
 		// subtraction2(c - subtraction1(a - b))
 		// c - (a - b)
-		IVPNumber result = (IVPNumber) subtraction2.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
-		assertTrue(context.getInt(result.getUniqueID()) == 5);
+		IVPNumber result = (IVPNumber)factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		IVPNumber result2 = (IVPNumber)factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
+		
+		subtraction1.setOperationResultID(result.getUniqueID());
+		subtraction2.setOperationResultID(result2.getUniqueID());
+		
+		subtraction2.evaluate(context, map, factory);
+		assertTrue(result2.getValueType().equals(IVPValue.INTEGER_TYPE));
+		assertTrue(context.getInt(result2.getUniqueID()) == 5);
 	}
 
 	@Test
@@ -141,9 +158,20 @@ public class CompleteSubtractionTest {
 		map.put(d.getUniqueID(), d);
 		// subtraction3(subtraction1(a - b) - subtraction2(c - d))
 		// ((a - b) - (c - d))
-		IVPNumber result = (IVPNumber) subtraction3.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
-		assertTrue(context.getInt(result.getUniqueID()) == -3);
+		IVPNumber result = (IVPNumber)factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		IVPNumber result2 = (IVPNumber)factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
+		IVPNumber result3 = (IVPNumber)factory.createIVPNumber();
+		map.put(result3.getUniqueID(), result3);
+		
+		subtraction1.setOperationResultID(result.getUniqueID());
+		subtraction2.setOperationResultID(result2.getUniqueID());
+		subtraction3.setOperationResultID(result3.getUniqueID());
+		
+		subtraction3.evaluate(context, map, factory);
+		assertTrue(result3.getValueType().equals(IVPValue.INTEGER_TYPE));
+		assertTrue(context.getInt(result3.getUniqueID()) == -3);
 	}
 
 }

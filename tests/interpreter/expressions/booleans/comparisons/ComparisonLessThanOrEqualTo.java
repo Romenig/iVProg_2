@@ -46,7 +46,11 @@ public class ComparisonLessThanOrEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(lt.getUniqueID(), lt);
 
-		IVPBoolean result = (IVPBoolean) lt.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		lt.setOperationResultID(result.getUniqueID());
+
+		lt.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateIntegerValue(c, 3);
 		result = (IVPBoolean) lt.evaluate(c, map, factory);
@@ -75,7 +79,11 @@ public class ComparisonLessThanOrEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(lt.getUniqueID(), lt);
 
-		IVPBoolean result = (IVPBoolean) lt.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		lt.setOperationResultID(result.getUniqueID());
+		
+		lt.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateDoubleValue(c, 3.0001);
 		result = (IVPBoolean) lt.evaluate(c, map, factory);
@@ -103,7 +111,11 @@ public class ComparisonLessThanOrEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(lt.getUniqueID(), lt);
 
-		IVPBoolean result = (IVPBoolean) lt.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		lt.setOperationResultID(result.getUniqueID());
+		
+		lt.evaluate(c, map, factory);
 		assertFalse(c.getBoolean(result.getUniqueID()));
 		b.updateDoubleValue(c, 3.0001);
 		result = (IVPBoolean) lt.evaluate(c, map, factory);

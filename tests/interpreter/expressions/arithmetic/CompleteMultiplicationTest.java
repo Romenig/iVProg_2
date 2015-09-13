@@ -57,15 +57,17 @@ public class CompleteMultiplicationTest {
 		// multiplication2(c * multiplication1(a * b))
 		// c * (a * b)
 		IVPNumber result1 = factory.createIVPNumber();
+		map.put(result1.getUniqueID(), result1);
 		((Multiplication)multiplication1).setOperationResultID(result1.getUniqueID());
 		
 		IVPNumber result2 = factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
 		((Multiplication)multiplication2).setOperationResultID(result2.getUniqueID());
-		String resultID = (String) multiplication2.evaluate(context, map, factory);
+		
+		multiplication2.evaluate(context, map, factory);
 		
 		assertTrue(result2.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(context.getDouble(result2.getUniqueID()) == 68.62599999999999);
-
 	}
 
 	@Test
@@ -100,9 +102,17 @@ public class CompleteMultiplicationTest {
 		map.put(c.getUniqueID(), c);
 		// multiplication2(c * multiplication1(a * b))
 		// c * (a * b)
-		IVPNumber result = (IVPNumber) multiplication2.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
-		assertTrue(context.getInt(result.getUniqueID()) == 140);
+		IVPNumber result1 = (IVPNumber) factory.createIVPNumber();
+		IVPNumber result2 = (IVPNumber) factory.createIVPNumber();
+		map.put(result1.getUniqueID(), result1);
+		map.put(result2.getUniqueID(), result2);
+		multiplication1.setOperationResultID(result1.getUniqueID());
+		multiplication2.setOperationResultID(result2.getUniqueID());
+		
+		
+		multiplication2.evaluate(context, map, factory);
+		assertTrue(result2.getValueType().equals(IVPValue.INTEGER_TYPE));
+		assertTrue(context.getInt(result2.getUniqueID()) == 140);
 	}
 
 	@Test
@@ -146,9 +156,19 @@ public class CompleteMultiplicationTest {
 		map.put(d.getUniqueID(), d);
 		// multiplication3(multiplication1(a * b) * multiplication2(c * d))
 		// ((a * b) * (c * d))
-		IVPNumber result = (IVPNumber) multiplication3.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
-		assertTrue(context.getInt(result.getUniqueID()) == 280);
+		IVPNumber result1 = (IVPNumber) factory.createIVPNumber();
+		IVPNumber result2 = (IVPNumber) factory.createIVPNumber();
+		IVPNumber result3 = (IVPNumber) factory.createIVPNumber();
+		map.put(result1.getUniqueID(), result1);
+		map.put(result2.getUniqueID(), result2);
+		map.put(result3.getUniqueID(), result3);
+		multiplication1.setOperationResultID(result1.getUniqueID());
+		multiplication2.setOperationResultID(result2.getUniqueID());
+		multiplication3.setOperationResultID(result3.getUniqueID());
+				
+		multiplication3.evaluate(context, map, factory);
+		assertTrue(result3.getValueType().equals(IVPValue.INTEGER_TYPE));
+		assertTrue(context.getInt(result3.getUniqueID()) == 280);
 	}
 
 }

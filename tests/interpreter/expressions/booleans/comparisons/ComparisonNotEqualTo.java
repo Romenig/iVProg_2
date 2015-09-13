@@ -27,7 +27,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 public class ComparisonNotEqualTo {
 
 	@Test
-	public void testEqualForIntNumbers() {
+	public void testNotEqualForIntNumbers() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();
@@ -47,12 +47,16 @@ public class ComparisonNotEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(neq.getUniqueID(), neq);
 
-		IVPBoolean result = (IVPBoolean) neq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		neq.setOperationResultID(result.getUniqueID());
+		
+		neq.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 
 	@Test
-	public void testEqualForDoubleNumbers() {
+	public void testNotEqualForDoubleNumbers() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();
@@ -72,12 +76,16 @@ public class ComparisonNotEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(neq.getUniqueID(), neq);
 
-		IVPBoolean result = (IVPBoolean) neq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		neq.setOperationResultID(result.getUniqueID());
+		
+		neq.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 
 	@Test
-	public void testEqualForIntAndDouble() {
+	public void testNotEqualForIntAndDouble() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPNumber a = factory.createIVPNumber();
@@ -97,12 +105,16 @@ public class ComparisonNotEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(neq.getUniqueID(), neq);
 
-		IVPBoolean result = (IVPBoolean) neq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		neq.setOperationResultID(result.getUniqueID());
+		
+		neq.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
 
 	@Test
-	public void testEqualForStrings() {
+	public void testNotEqualForStrings() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPString a = factory.createIVPString();
@@ -122,7 +134,11 @@ public class ComparisonNotEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(neq.getUniqueID(), neq);
 
-		IVPBoolean result = (IVPBoolean) neq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		neq.setOperationResultID(result.getUniqueID());
+		
+		neq.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateValue(c, "hello");
 		result = (IVPBoolean) neq.evaluate(c, map, factory);
@@ -130,7 +146,7 @@ public class ComparisonNotEqualTo {
 	}
 
 	@Test
-	public void testEqualForBooleans() {
+	public void testNotEqualForBooleans() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 		IVPBoolean a = factory.createIVPBoolean();
@@ -152,11 +168,15 @@ public class ComparisonNotEqualTo {
 		map.put(b.getUniqueID(), b);
 		map.put(neq.getUniqueID(), neq);
 
-		IVPBoolean result = (IVPBoolean) neq.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		neq.setOperationResultID(result.getUniqueID());
+		
+		neq.evaluate(c, map, factory);
 
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateValue(c, new Boolean(true));
-		result = (IVPBoolean) neq.evaluate(c, map, factory);
+		neq.evaluate(c, map, factory);
 		assertFalse(c.getBoolean(result.getUniqueID()));
 	}
 

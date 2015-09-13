@@ -59,14 +59,17 @@ public class CompleteDivisionTest {
 		// c / (a / b)
 
 		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
 		((Division)division1).setOperationResultID(result.getUniqueID());
 		
 		IVPNumber result2 = factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
 		((Division)division2).setOperationResultID(result2.getUniqueID());
-		String resultID = (String) division2.evaluate(context, map, factory);
 		
-		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
-		assertTrue(context.getDouble(result.getUniqueID()) == 5.828694663830035);
+		division2.evaluate(context, map, factory);
+		
+		assertTrue(result2.getValueType().equals(IVPValue.DOUBLE_TYPE));
+		assertTrue(context.getDouble(result2.getUniqueID()) == 5.828694663830035);
 	}
 
 	@Test
@@ -102,13 +105,15 @@ public class CompleteDivisionTest {
 		// division2(c / division1(a / b))
 		// c / (a / b)
 		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
 		((Division)division1).setOperationResultID(result.getUniqueID());
 		
 		IVPNumber result2 = factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
 		((Division)division2).setOperationResultID(result2.getUniqueID());
-		String resultID = (String) division2.evaluate(context, map, factory);
+		division2.evaluate(context, map, factory);
 		
-		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
+		assertTrue(result2.getValueType().equals(IVPValue.INTEGER_TYPE));
 		assertTrue(context.getInt(result.getUniqueID()) == 0);
 	}
 
@@ -154,17 +159,22 @@ public class CompleteDivisionTest {
 		// division3(division1(a / b) / division2(c / d))
 		// ((a / b) / (c / d))
 		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
 		((Division)division1).setOperationResultID(result.getUniqueID());
 		
 		IVPNumber result2 = factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
 		((Division)division2).setOperationResultID(result2.getUniqueID());
 		
 		IVPNumber result3 = factory.createIVPNumber();
+		map.put(result3.getUniqueID(), result3);
 		((Division)division3).setOperationResultID(result3.getUniqueID());
-		String resultID = (String) division3.evaluate(context, map, factory);
+		
+		division3.evaluate(context, map, factory);
 		
 		assertTrue(result3.getValueType().equals(IVPValue.INTEGER_TYPE));
-		assertTrue(context.getInt(result.getUniqueID()) == 0);
+		
+		assertTrue(context.getInt(result3.getUniqueID()) == 0);
 	}
 
 }

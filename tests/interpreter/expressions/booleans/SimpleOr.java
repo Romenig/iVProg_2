@@ -44,7 +44,11 @@ public class SimpleOr {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPBoolean result = (IVPBoolean) or.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		or.setOperationResultID(result.getUniqueID());
+		
+		or.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.BOOLEAN_TYPE));
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
@@ -68,7 +72,11 @@ public class SimpleOr {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPBoolean result = (IVPBoolean) or.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		or.setOperationResultID(result.getUniqueID());
+		
+		or.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.BOOLEAN_TYPE));
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
@@ -92,7 +100,11 @@ public class SimpleOr {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPBoolean result = (IVPBoolean) or.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		or.setOperationResultID(result.getUniqueID());
+		
+		or.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.BOOLEAN_TYPE));
 		assertTrue(c.getBoolean(result.getUniqueID()));
 	}
@@ -116,7 +128,11 @@ public class SimpleOr {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPBoolean result = (IVPBoolean) or.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		or.setOperationResultID(result.getUniqueID());
+		
+		or.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.BOOLEAN_TYPE));
 		assertTrue(!c.getBoolean(result.getUniqueID()));
 	}

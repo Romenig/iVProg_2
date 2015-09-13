@@ -15,6 +15,8 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ResultTreeType;
+
 import usp.ime.line.ivprog.interpreter.DataFactory;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.Context;
@@ -26,6 +28,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPString;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 public class AttributionLineTest {
 
@@ -46,10 +49,11 @@ public class AttributionLineTest {
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(n1.getUniqueID());
 
+
+		
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -57,6 +61,12 @@ public class AttributionLineTest {
 		map.put(n1.getUniqueID(), n1);
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
+
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
+		map.put(ref.getUniqueID(), ref);
+		attLine.setVariableID(ref.getUniqueID());
 
 		assertTrue(c.getInt(v.getValueID()) == 10);
 		attLine.evaluate(c, map, factory);
@@ -83,7 +93,6 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -91,6 +100,11 @@ public class AttributionLineTest {
 		map.put(n1.getUniqueID(), n1);
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
+		map.put(ref.getUniqueID(), ref);
+		attLine.setVariableID(ref.getUniqueID());
 
 		assertTrue(c.getDouble(v.getValueID()) == 10.37);
 		attLine.evaluate(c, map, factory);
@@ -117,7 +131,6 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -125,6 +138,11 @@ public class AttributionLineTest {
 		map.put(n1.getUniqueID(), n1);
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
+		map.put(ref.getUniqueID(), ref);
+		attLine.setVariableID(ref.getUniqueID());
 
 		assertTrue(c.getString(v.getValueID()).equals("Test 1"));
 		attLine.evaluate(c, map, factory);
@@ -151,7 +169,6 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
 		attLine.setExpression(n2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -160,6 +177,11 @@ public class AttributionLineTest {
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
 
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
+		map.put(ref.getUniqueID(), ref);
+		attLine.setVariableID(ref.getUniqueID());
+		
 		assertTrue(c.getBoolean(v.getValueID()));
 		attLine.evaluate(c, map, factory);
 		assertFalse(c.getBoolean(v.getValueID()));
@@ -189,8 +211,7 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v1.getUniqueID());
-		attLine.setExpression(v2.getUniqueID());
+		
 
 		HashMap map = new HashMap();
 		map.put(v1.getUniqueID(), v1);
@@ -198,7 +219,17 @@ public class AttributionLineTest {
 		map.put(n1.getUniqueID(), n1);
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v1.getUniqueID());
+		map.put(ref.getUniqueID(), ref);
+		attLine.setVariableID(ref.getUniqueID());
 
+		IVPVariableReference ref2 = factory.createIVPVariableReference();
+		ref2.setReferencedID(v2.getUniqueID());
+		map.put(ref2.getUniqueID(), ref2);
+		attLine.setExpression(ref2.getUniqueID());
+		
 		assertTrue(c.getBoolean(v1.getValueID()));
 		attLine.evaluate(c, map, factory);
 		assertFalse(c.getBoolean(v1.getValueID()));
@@ -228,7 +259,6 @@ public class AttributionLineTest {
 		// Supondo variável já inicializada com o valor 10.
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v1.getUniqueID());
 		attLine.setExpression(and.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -237,14 +267,23 @@ public class AttributionLineTest {
 		map.put(n1.getUniqueID(), n1);
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
-
+		
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		and.setOperationResultID(result.getUniqueID());
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v1.getUniqueID());
+		map.put(ref.getUniqueID(), ref);
+		attLine.setVariableID(ref.getUniqueID());
+		
 		assertTrue(c.getBoolean(v1.getValueID()));
 		attLine.evaluate(c, map, factory);
 		assertFalse(c.getBoolean(v1.getValueID()));
 	}
 
 	@Test
-	public void varReceivesIntegerExpressionExpression() {
+	public void varReceivesIntegerExpression() {
 		Context c = new Context();
 		DataFactory factory = new DataFactory();
 
@@ -266,8 +305,11 @@ public class AttributionLineTest {
 
 		// Supondo variável já inicializada com o valor 10.
 
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
+		
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -276,6 +318,11 @@ public class AttributionLineTest {
 		map.put(n1.getUniqueID(), n1);
 		map.put(n2.getUniqueID(), n2);
 		map.put(attLine.getUniqueID(), attLine);
+		map.put(ref.getUniqueID(), ref);
+		
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		add.setOperationResultID(result.getUniqueID());
 
 		assertTrue(c.getInt(v.getValueID()) == 10);
 		attLine.evaluate(c, map, factory);
@@ -283,3 +330,4 @@ public class AttributionLineTest {
 	}
 
 }
+;

@@ -72,7 +72,7 @@ public class IVPString extends IVPValue {
 
 	public IVPBoolean ivpNotEqualTo(String resultID, IVPValue str, Context context, DataFactory factory,
 			HashMap map) {
-		IVPBoolean result = factory.createIVPBoolean();
+		IVPBoolean result = (IVPBoolean) map.get(resultID);
 		Boolean booleanResult = new Boolean(!context.getString(getUniqueID()).equals(context.getString(str.getUniqueID())));
 		if(context.addBoolean(result.getUniqueID(), booleanResult) != null){
 			context.updateBoolean(result.getUniqueID(), booleanResult);

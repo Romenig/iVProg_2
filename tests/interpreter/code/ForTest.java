@@ -25,6 +25,7 @@ import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 public class ForTest {
 
@@ -42,6 +43,10 @@ public class ForTest {
 		IVPValue one = factory.createIVPNumber();
 		one.setValueType(IVPValue.INTEGER_TYPE);
 		context.addInt(one.getUniqueID(), 1);
+		
+		IVPValue one2 = factory.createIVPNumber();
+		one2.setValueType(IVPValue.INTEGER_TYPE);
+		context.addInt(one2.getUniqueID(), 1);
 
 		IVPValue n_times = factory.createIVPNumber();
 		n_times.setValueType(IVPValue.INTEGER_TYPE);
@@ -49,24 +54,33 @@ public class ForTest {
 
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
-		v.setValueID(startingValue.getUniqueID());
+		v.setValueID(one2.getUniqueID());
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setUniqueID(v.getUniqueID());
 
+		IVPNumber result = factory.createIVPNumber();
+		
 		Addition add = factory.createAddition();
-		add.setExpressionA(v.getUniqueID());
-		add.setExpressionB(one.getUniqueID());
+		add.setExpressionA(ref.getUniqueID());
+		add.setExpressionB(one2.getUniqueID());
+		add.setOperationResultID(result.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();
 		map.put(startingValue.getUniqueID(), startingValue);
 		map.put(one.getUniqueID(), one);
+		map.put(one2.getUniqueID(), one2);
 		map.put(v.getUniqueID(), v);
 		map.put(add.getUniqueID(), add);
 		map.put(attLine.getUniqueID(), attLine);
 		map.put(n_times.getUniqueID(), n_times);
 		map.put(f.getUniqueID(), f);
+		map.put(result.getUniqueID(), result);
+		map.put(ref.getUniqueID(), ref);
 		context.setFunctionID(f.getUniqueID());
 
 		myFor.setExecutionMethod(For.FOR_N_TIMES);
@@ -74,8 +88,9 @@ public class ForTest {
 		myFor.addChild(attLine.getUniqueID());
 		myFor.evaluate(context, map, factory);
 
-		IVPNumber result = (IVPNumber) v.evaluate(context, map, factory);
-		assertTrue(context.getInt(result.getUniqueID()) == 5);
+		IVPNumber result2 = (IVPNumber) v.evaluate(context, map, factory);
+		
+		assertTrue(context.getInt(result2.getUniqueID()) == 5);
 	}
 
 	@Test
@@ -104,18 +119,24 @@ public class ForTest {
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(startingValue.getUniqueID());
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
 
 		IVPVariable indexVar = factory.createIVPVariable();
 		indexVar.setVariableType(IVPValue.INTEGER_TYPE);
 		indexVar.setValueID(indexValue.getUniqueID());
-
+		
 		Addition add = factory.createAddition();
-		add.setExpressionA(v.getUniqueID());
+		add.setExpressionA(ref.getUniqueID());
 		add.setExpressionB(one.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
+		
+		IVPNumber result = factory.createIVPNumber();
+		add.setOperationResultID(result.getUniqueID());
 
 		HashMap map = new HashMap();
 		map.put(startingValue.getUniqueID(), startingValue);
@@ -127,6 +148,8 @@ public class ForTest {
 		map.put(attLine.getUniqueID(), attLine);
 		map.put(n_times.getUniqueID(), n_times);
 		map.put(func.getUniqueID(), func);
+		map.put(result.getUniqueID(), result);
+		map.put(ref.getUniqueID(), ref);
 		context.setFunctionID(func.getUniqueID());
 
 		f.setExecutionMethod(For.FOR_N_TIMES_WITH_INDEX);
@@ -135,10 +158,10 @@ public class ForTest {
 		f.addChild(attLine.getUniqueID());
 		f.evaluate(context, map, factory);
 
-		IVPNumber result = (IVPNumber) v.evaluate(context, map, factory);
-		assertTrue(context.getInt(result.getUniqueID()) == 5);
-		result = (IVPNumber) indexVar.evaluate(context, map, factory);
-		assertTrue(context.getInt(result.getUniqueID()) == 6);
+		IVPNumber value2 = (IVPNumber) v.evaluate(context, map, factory);
+		assertTrue(context.getInt(value2.getUniqueID()) == 5);
+		value2 = (IVPNumber) indexVar.evaluate(context, map, factory);
+		assertTrue(context.getInt(value2.getUniqueID()) == 6);
 	}
 
 	@Test
@@ -167,21 +190,34 @@ public class ForTest {
 		IVPValue one = factory.createIVPNumber();
 		one.setValueType(IVPValue.INTEGER_TYPE);
 		context.addInt(one.getUniqueID(), 1);
+		
+		IVPValue one2 = factory.createIVPNumber();
+		one2.setValueType(IVPValue.INTEGER_TYPE);
+		context.addInt(one2.getUniqueID(), 1);
 
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(one.getUniqueID());
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
 
 		IVPVariable indexVar = factory.createIVPVariable();
 		indexVar.setVariableType(IVPValue.INTEGER_TYPE);
 		indexVar.setValueID(indexStartingValue.getUniqueID());
-
+		
+		IVPVariableReference ref2 = factory.createIVPVariableReference();
+		ref2.setReferencedID(indexVar.getUniqueID());
+		
 		Addition add = factory.createAddition();
-		add.setExpressionA(v.getUniqueID());
-		add.setExpressionB(one.getUniqueID());
+		add.setExpressionA(ref.getUniqueID());
+		add.setExpressionB(one2.getUniqueID());
+		
+		IVPNumber result = factory.createIVPNumber();
+		add.setOperationResultID(result.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -193,7 +229,11 @@ public class ForTest {
 		map.put(add.getUniqueID(), add);
 		map.put(attLine.getUniqueID(), attLine);
 		map.put(one.getUniqueID(), one);
+		map.put(one2.getUniqueID(), one2);
 		map.put(func.getUniqueID(), func);
+		map.put(ref.getUniqueID(), ref);
+		map.put(ref2.getUniqueID(), ref2);
+		map.put(result.getUniqueID(), result);
 		context.setFunctionID(func.getUniqueID());
 
 		f.setExecutionMethod(For.FOR_N_TIMES_WITH_INDEX);
@@ -204,10 +244,13 @@ public class ForTest {
 		f.addChild(attLine.getUniqueID());
 		f.evaluate(context, map, factory);
 
-		IVPNumber result = (IVPNumber) v.evaluate(context, map, factory);
-		assertTrue(context.getInt(result.getUniqueID()) == 6);
-		result = (IVPNumber) indexVar.evaluate(context, map, factory);
-		assertTrue(context.getInt(result.getUniqueID()) == 5);
+		IVPNumber result2 = (IVPNumber) v.evaluate(context, map, factory);
+		
+		System.out.println(context.getInt(result2.getUniqueID()));
+		
+		assertTrue(context.getInt(result2.getUniqueID()) == 6);
+		result2 = (IVPNumber) indexVar.evaluate(context, map, factory);
+		assertTrue(context.getInt(result2.getUniqueID()) == 5);
 	}
 
 }

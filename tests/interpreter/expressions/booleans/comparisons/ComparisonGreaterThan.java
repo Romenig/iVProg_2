@@ -46,7 +46,13 @@ public class ComparisonGreaterThan {
 		map.put(b.getUniqueID(), b);
 		map.put(gt.getUniqueID(), gt);
 
-		IVPBoolean result = (IVPBoolean) gt.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		gt.setOperationResultID(result.getUniqueID());
+
+		gt.evaluate(c, map, factory);
+		
+		
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateIntegerValue(c, 30);
 		result = (IVPBoolean) gt.evaluate(c, map, factory);
@@ -74,7 +80,11 @@ public class ComparisonGreaterThan {
 		map.put(b.getUniqueID(), b);
 		map.put(gt.getUniqueID(), gt);
 
-		IVPBoolean result = (IVPBoolean) gt.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		gt.setOperationResultID(result.getUniqueID());
+		
+		gt.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateDoubleValue(c, 4.0);
 		result = (IVPBoolean) gt.evaluate(c, map, factory);
@@ -102,7 +112,11 @@ public class ComparisonGreaterThan {
 		map.put(b.getUniqueID(), b);
 		map.put(gt.getUniqueID(), gt);
 
-		IVPBoolean result = (IVPBoolean) gt.evaluate(c, map, factory);
+		IVPBoolean result = factory.createIVPBoolean();
+		map.put(result.getUniqueID(), result);
+		gt.setOperationResultID(result.getUniqueID());
+
+		gt.evaluate(c, map, factory);
 		assertTrue(c.getBoolean(result.getUniqueID()));
 		b.updateIntegerValue(c, 2);
 		result = (IVPBoolean) gt.evaluate(c, map, factory);

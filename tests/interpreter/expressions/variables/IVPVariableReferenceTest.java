@@ -50,7 +50,7 @@ public class IVPVariableReferenceTest {
 		Addition addition1 = factory.createAddition();
 		addition1.setExpressionA(a.getUniqueID());
 		addition1.setExpressionB(b.getUniqueID());
-
+		
 		Addition addition2 = factory.createAddition();
 		addition2.setExpressionA(reference.getUniqueID());
 		addition2.setExpressionB(addition1.getUniqueID());
@@ -63,11 +63,20 @@ public class IVPVariableReferenceTest {
 		map.put(c.getUniqueID(), c);
 		map.put(var.getUniqueID(), var);
 		map.put(reference.getUniqueID(), reference);
+		
+		IVPNumber result1 = factory.createIVPNumber();
+		map.put(result1.getUniqueID(), result1);
+		addition1.setOperationResultID(result1.getUniqueID());
+		
+		IVPNumber result2 = factory.createIVPNumber();
+		map.put(result2.getUniqueID(), result2);
+		addition2.setOperationResultID(result2.getUniqueID());
+		
 		// addition2(c + addition1(a + b))
 		// c + (a + b)
-		IVPNumber result = (IVPNumber) addition2.evaluate(context, map, factory);
-		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
-		assertTrue(context.getDouble(result.getUniqueID()) == 15.4313);
+		addition2.evaluate(context, map, factory);
+		assertTrue(result2.getValueType().equals(IVPValue.DOUBLE_TYPE));
+		assertTrue(context.getDouble(result2.getUniqueID()) == 15.4313);
 	}
 
 }

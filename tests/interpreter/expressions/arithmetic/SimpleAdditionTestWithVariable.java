@@ -58,8 +58,9 @@ public class SimpleAdditionTestWithVariable {
 		map.put(v.getUniqueID(), v);
 
 		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
 		((Addition)addition).setOperationResultID(result.getUniqueID());
-		String resultID = (String) addition.evaluate(c, map, factory);
+		addition.evaluate(c, map, factory);
 		
 		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
 		assertTrue(c.getInt(result.getUniqueID()) == 13);
@@ -91,7 +92,12 @@ public class SimpleAdditionTestWithVariable {
 		map.put(b_var.getUniqueID(), b_var);
 		map.put(v.getUniqueID(), v);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		addition.evaluate(c, map, factory);
+		
+		addition.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 13.4313);
 
@@ -123,7 +129,11 @@ public class SimpleAdditionTestWithVariable {
 		map.put(b_var.getUniqueID(), b_var);
 		map.put(v.getUniqueID(), v);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		addition.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 13.4313);
 	}
@@ -154,8 +164,11 @@ public class SimpleAdditionTestWithVariable {
 		map.put(b_var.getUniqueID(), b_var);
 		map.put(v.getUniqueID(), v);
 
-		IVPNumber result = (IVPNumber) addition.evaluate(c, map, factory);
-
+		IVPNumber result = factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		((Addition)addition).setOperationResultID(result.getUniqueID());
+		addition.evaluate(c, map, factory);
+		
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 13.5424);
 	}

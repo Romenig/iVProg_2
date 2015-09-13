@@ -45,7 +45,11 @@ public class SimpleMultiplicationTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) multiplication.evaluate(c, map, factory);
+		IVPNumber result = (IVPNumber) factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		multiplication.setOperationResultID(result.getUniqueID());
+		
+		multiplication.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.INTEGER_TYPE));
 		assertTrue(c.getInt(result.getUniqueID()) == 30);
 	}
@@ -71,7 +75,11 @@ public class SimpleMultiplicationTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) multiplication.evaluate(c, map, factory);
+		IVPNumber result = (IVPNumber) factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		multiplication.setOperationResultID(result.getUniqueID());
+		
+		multiplication.evaluate(c, map, factory);
 		assertTrue(c.getDouble(result.getUniqueID()) == 34.312999999999995);
 
 	}
@@ -96,7 +104,10 @@ public class SimpleMultiplicationTest {
 		map.put(multiplication.getUniqueID(), multiplication);
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
-		IVPNumber result = (IVPNumber) multiplication.evaluate(c, map, factory);
+		IVPNumber result = (IVPNumber) factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		multiplication.setOperationResultID(result.getUniqueID());
+		multiplication.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 34.312999999999995);
 	}
@@ -122,7 +133,10 @@ public class SimpleMultiplicationTest {
 		map.put(a.getUniqueID(), a);
 		map.put(b.getUniqueID(), b);
 
-		IVPNumber result = (IVPNumber) multiplication.evaluate(c, map, factory);
+		IVPNumber result = (IVPNumber) factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		multiplication.setOperationResultID(result.getUniqueID());
+		multiplication.evaluate(c, map, factory);
 		assertTrue(result.getValueType().equals(IVPValue.DOUBLE_TYPE));
 		assertTrue(c.getDouble(result.getUniqueID()) == 34.69421743);
 	}

@@ -68,14 +68,20 @@ public class IVPVectorReferenceTest {
 		add.setExpressionA(a.getUniqueID());
 		add.setExpressionB(b.getUniqueID());
 
+		IVPNumber result = (IVPNumber) factory.createIVPNumber();
+		map.put(result.getUniqueID(), result);
+		add.setOperationResultID(result.getUniqueID());
+		
 		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
+		
+		
 		attLine.evaluate(context, map, factory);
 
-		IVPNumber result = (IVPNumber) ref.evaluate(context, map, factory);
+		IVPNumber result2 = (IVPNumber) ref.evaluate(context, map, factory);
 
-		assertTrue(context.getInt(result.getUniqueID()) == 3);
+		assertTrue(context.getInt(result2.getUniqueID()) == 3);
 
 	}
 

@@ -59,7 +59,9 @@ public class IVPNumber extends IVPValue {
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) + context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
-			context.addInt(result.getUniqueID(), resultInt);
+			if(context.addInt(result.getUniqueID(), resultInt) != null){
+				context.updateInt(result.getUniqueID(), resultInt);
+			}
 		} else {
 			double resultDouble = 0.0;
 			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
@@ -71,7 +73,9 @@ public class IVPNumber extends IVPValue {
 					resultDouble = context.getInt(getUniqueID()) + context.getDouble(number.getUniqueID());
 				}
 			}
-			context.addDouble(result.getUniqueID(), resultDouble);
+			if(context.addDouble(result.getUniqueID(), resultDouble) != null){
+				context.updateDouble(result.getUniqueID(), resultDouble);
+			}
 			result.setValueType(IVPValue.DOUBLE_TYPE);
 		}
 		return result;
@@ -89,7 +93,9 @@ public class IVPNumber extends IVPValue {
 		IVPNumber result = (IVPNumber) map.get(resultID);
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) * context.getInt(number.getUniqueID());
-			context.addInt(result.getUniqueID(), resultInt);
+			if(context.addInt(result.getUniqueID(), resultInt) != null){
+				context.updateInt(result.getUniqueID(), resultInt);
+			}
 			result.setValueType(IVPValue.INTEGER_TYPE);
 		} else {
 			double resultDouble = 0.0;
@@ -103,7 +109,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 			result.setValueType(IVPValue.DOUBLE_TYPE);
-			context.addDouble(result.getUniqueID(), resultDouble);
+			if(context.addDouble(result.getUniqueID(), resultDouble) != null){
+				context.updateDouble(result.getUniqueID(), resultDouble);
+			}
 		}
 		return result;
 	}
@@ -121,7 +129,9 @@ public class IVPNumber extends IVPValue {
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) / context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
-			context.addInt(result.getUniqueID(), resultInt);
+			if(context.addInt(result.getUniqueID(), resultInt) != null){
+				context.updateInt(result.getUniqueID(), resultInt);
+			}
 		} else {
 			double resultDouble = 0.0;
 			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
@@ -135,7 +145,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 			result.setValueType(IVPValue.DOUBLE_TYPE);
-			context.addDouble(result.getUniqueID(), resultDouble);
+			if(context.addDouble(result.getUniqueID(), resultDouble) != null){
+				context.updateDouble(result.getUniqueID(), resultDouble);
+			}
 		}
 		return result;
 	}
@@ -153,7 +165,9 @@ public class IVPNumber extends IVPValue {
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) - context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
-			context.addInt(result.getUniqueID(), resultInt);
+			if(context.addInt(result.getUniqueID(), resultInt) != null){
+				context.updateInt(result.getUniqueID(), resultInt);
+			}
 		} else {
 			double resultDouble = 0.0;
 			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
@@ -165,7 +179,9 @@ public class IVPNumber extends IVPValue {
 					resultDouble = context.getInt(getUniqueID()) - context.getDouble(number.getUniqueID());
 				}
 			}
-			context.addDouble(result.getUniqueID(), resultDouble);
+			if(context.addDouble(result.getUniqueID(), resultDouble) != null){
+				context.updateDouble(result.getUniqueID(), resultDouble);
+			}
 			result.setValueType(IVPValue.DOUBLE_TYPE);
 		}
 		return result;
@@ -184,7 +200,9 @@ public class IVPNumber extends IVPValue {
 		if (getValueType().equals(IVPValue.INTEGER_TYPE) && number.getValueType().equals(IVPValue.INTEGER_TYPE)) {
 			int resultInt = context.getInt(getUniqueID()) % context.getInt(number.getUniqueID());
 			result.setValueType(IVPValue.INTEGER_TYPE);
-			context.addInt(result.getUniqueID(), resultInt);
+			if(context.addInt(result.getUniqueID(), resultInt) != null){
+				context.updateInt(result.getUniqueID(), resultInt);
+			}
 		} else {
 			double resultDouble = 0.0;
 			if (getValueType().equals(IVPValue.DOUBLE_TYPE) && number.getValueType().equals(IVPValue.DOUBLE_TYPE)) {
@@ -198,7 +216,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 			result.setValueType(IVPValue.DOUBLE_TYPE);
-			context.addDouble(result.getUniqueID(), resultDouble);
+			if(context.addDouble(result.getUniqueID(), resultDouble) != null){
+				context.updateDouble(result.getUniqueID(), resultDouble);
+			}
 		}
 		return result;
 	}
@@ -228,7 +248,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
-		context.addBoolean(result.getUniqueID(), resultBoolean);
+		if(context.addBoolean(result.getUniqueID(), resultBoolean) != null){
+			context.updateBoolean(result.getUniqueID(), resultBoolean);
+		}
 		return result;
 	}
 
@@ -257,7 +279,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
-		context.addBoolean(result.getUniqueID(), resultBoolean);
+		if(context.addBoolean(result.getUniqueID(), resultBoolean) != null){
+			context.updateBoolean(result.getUniqueID(), resultBoolean);
+		}
 		return result;
 	}
 
@@ -317,7 +341,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
-		context.addBoolean(result.getUniqueID(), resultBoolean);
+		if(context.addBoolean(result.getUniqueID(), resultBoolean) != null){
+			context.updateBoolean(result.getUniqueID(), resultBoolean);
+		}
 		return result;
 	}
 
@@ -349,8 +375,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
-		
-		context.addBoolean(result.getUniqueID(), resultBoolean);
+		if(context.addBoolean(result.getUniqueID(), resultBoolean) != null){
+			context.updateBoolean(result.getUniqueID(), resultBoolean);
+		}
 		return result;
 	}
 
@@ -382,7 +409,9 @@ public class IVPNumber extends IVPValue {
 				}
 			}
 		}
-		context.addBoolean(result.getUniqueID(), resultBoolean);
+		if(context.addBoolean(result.getUniqueID(), resultBoolean) != null){
+			context.updateBoolean(result.getUniqueID(), resultBoolean);
+		}
 		return result;
 	}
 

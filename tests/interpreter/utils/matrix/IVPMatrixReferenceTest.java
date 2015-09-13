@@ -72,15 +72,18 @@ public class IVPMatrixReferenceTest {
 
 		add.setExpressionA(a.getUniqueID());
 		add.setExpressionB(b.getUniqueID());
+		IVPNumber result1 = (IVPNumber) factory.createIVPNumber();
+		map.put(result1.getUniqueID(),result1);
+		add.setOperationResultID(result1.getUniqueID());
 
 		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		attLine.evaluate(context, map, factory);
 
-		IVPNumber result = (IVPNumber) ref.evaluate(context, map, factory);
+		IVPNumber result2 = (IVPNumber) ref.evaluate(context, map, factory);
 
-		assertTrue(context.getInt(result.getUniqueID()) == 3);
+		assertTrue(context.getInt(result2.getUniqueID()) == 3);
 
 	}
 
