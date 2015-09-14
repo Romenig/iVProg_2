@@ -24,9 +24,11 @@ import usp.ime.line.ivprog.interpreter.execution.code.While;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons.EqualTo;
 import usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons.LessThanOrEqualTo;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 public class WhileTest {
 
@@ -52,14 +54,23 @@ public class WhileTest {
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(startingValue.getUniqueID());
+		
+		IVPVariableReference ref = factory.createIVPVariableReference();
+		ref.setReferencedID(v.getUniqueID());
 
 		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
-		leq.setExpressionA(v.getUniqueID());
+		leq.setExpressionA(ref.getUniqueID());
 		leq.setExpressionB(maximumValue.getUniqueID());
-
+		
+		IVPBoolean resB = factory.createIVPBoolean();
+		leq.setOperationResultID(resB.getUniqueID());
+		
 		Addition add = factory.createAddition();
-		add.setExpressionA(v.getUniqueID());
+		add.setExpressionA(ref.getUniqueID());
 		add.setExpressionB(one.getUniqueID());
+		
+		IVPNumber res = factory.createIVPNumber();
+		add.setOperationResultID(res.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
 		attLine.setVariableID(v.getUniqueID());
@@ -74,6 +85,9 @@ public class WhileTest {
 		map.put(leq.getUniqueID(), leq);
 		map.put(attLine.getUniqueID(), attLine);
 		map.put(f.getUniqueID(), f);
+		map.put(res.getUniqueID(), res);
+		map.put(ref.getUniqueID(), ref);
+		map.put(resB.getUniqueID(), resB);
 		context.setFunctionID(f.getUniqueID());
 
 		w.setLoopCondition(leq.getUniqueID());

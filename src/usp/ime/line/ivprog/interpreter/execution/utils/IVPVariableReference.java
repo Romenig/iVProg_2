@@ -47,6 +47,8 @@ public class IVPVariableReference extends Expression {
 	 */
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPVariable v = (IVPVariable) map.get(referencedID);
+		System.out.println("> 1 "+referencedID);
+		System.out.println("> 2 "+v);
 		return v.evaluate(c, map, factory);
 	}
 

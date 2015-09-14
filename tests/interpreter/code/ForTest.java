@@ -44,26 +44,22 @@ public class ForTest {
 		one.setValueType(IVPValue.INTEGER_TYPE);
 		context.addInt(one.getUniqueID(), 1);
 		
-		IVPValue one2 = factory.createIVPNumber();
-		one2.setValueType(IVPValue.INTEGER_TYPE);
-		context.addInt(one2.getUniqueID(), 1);
-
 		IVPValue n_times = factory.createIVPNumber();
 		n_times.setValueType(IVPValue.INTEGER_TYPE);
 		context.addInt(n_times.getUniqueID(), 5);
 
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
-		v.setValueID(one2.getUniqueID());
+		v.setValueID(startingValue.getUniqueID());
 		
 		IVPVariableReference ref = factory.createIVPVariableReference();
-		ref.setUniqueID(v.getUniqueID());
+		ref.setReferencedID(v.getUniqueID());
 
 		IVPNumber result = factory.createIVPNumber();
 		
 		Addition add = factory.createAddition();
 		add.setExpressionA(ref.getUniqueID());
-		add.setExpressionB(one2.getUniqueID());
+		add.setExpressionB(one.getUniqueID());
 		add.setOperationResultID(result.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
@@ -73,7 +69,6 @@ public class ForTest {
 		HashMap map = new HashMap();
 		map.put(startingValue.getUniqueID(), startingValue);
 		map.put(one.getUniqueID(), one);
-		map.put(one2.getUniqueID(), one2);
 		map.put(v.getUniqueID(), v);
 		map.put(add.getUniqueID(), add);
 		map.put(attLine.getUniqueID(), attLine);
@@ -86,10 +81,11 @@ public class ForTest {
 		myFor.setExecutionMethod(For.FOR_N_TIMES);
 		myFor.setUpperBound(n_times.getUniqueID());
 		myFor.addChild(attLine.getUniqueID());
+		
 		myFor.evaluate(context, map, factory);
 
 		IVPNumber result2 = (IVPNumber) v.evaluate(context, map, factory);
-		
+		System.out.println(context.getInt(result2.getUniqueID()));
 		assertTrue(context.getInt(result2.getUniqueID()) == 5);
 	}
 
@@ -245,8 +241,6 @@ public class ForTest {
 		f.evaluate(context, map, factory);
 
 		IVPNumber result2 = (IVPNumber) v.evaluate(context, map, factory);
-		
-		System.out.println(context.getInt(result2.getUniqueID()));
 		
 		assertTrue(context.getInt(result2.getUniqueID()) == 6);
 		result2 = (IVPNumber) indexVar.evaluate(context, map, factory);
