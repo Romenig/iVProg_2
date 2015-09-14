@@ -47,8 +47,6 @@ public class IVPVariableReference extends Expression {
 	 */
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPVariable v = (IVPVariable) map.get(referencedID);
-		System.out.println("> 1 "+referencedID);
-		System.out.println("> 2 "+v);
 		return v.evaluate(c, map, factory);
 	}
 
@@ -79,7 +77,7 @@ public class IVPVariableReference extends Expression {
 	 */
 	public void setReferencedID(String referencedID) {
 		this.referencedID = referencedID;
-		/*
+		
 		if (referencedID != null && !"".equals(referencedID)) {
 			IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(referencedID);
 			setReferencedName(var.getVariableName());
@@ -87,7 +85,7 @@ public class IVPVariableReference extends Expression {
 		} else {
 			setReferencedName("");
 			setReferencedType("-1");
-		}*/
+		}
 	}
 
 	/**

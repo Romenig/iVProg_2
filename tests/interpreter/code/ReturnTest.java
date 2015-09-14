@@ -24,9 +24,11 @@ import usp.ime.line.ivprog.interpreter.execution.code.Return;
 import usp.ime.line.ivprog.interpreter.execution.code.While;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons.LessThanOrEqualTo;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 public class ReturnTest {
 
@@ -52,17 +54,26 @@ public class ReturnTest {
 		v.setVariableName("var1");
 		f.addVariable(v, "1", context, map, factory);
 		r.setReturnable(v.getUniqueID());
+		
+			IVPVariableReference vRef = factory.createIVPVariableReference();
+			vRef.setReferencedID(v.getUniqueID());
 
 		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
-		leq.setExpressionA(v.getUniqueID());
+		leq.setExpressionA(vRef.getUniqueID());
 		leq.setExpressionB(maximumValue.getUniqueID());
+		
+			IVPBoolean resultB = factory.createIVPBoolean();
+			leq.setOperationResultID(resultB.getUniqueID());
 
 		Addition add = factory.createAddition();
-		add.setExpressionA(v.getUniqueID());
+		add.setExpressionA(vRef.getUniqueID());
 		add.setExpressionB(one.getUniqueID());
+		
+			IVPNumber resultAdd = factory.createIVPNumber();
+			add.setOperationResultID(resultAdd.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(vRef.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		map.put(add.getUniqueID(), add);
@@ -71,6 +82,11 @@ public class ReturnTest {
 		map.put(w.getUniqueID(), w);
 		map.put(r.getUniqueID(), r);
 		map.put(f.getUniqueID(), f);
+		
+		map.put(vRef.getUniqueID(), vRef);
+		map.put(resultB.getUniqueID(), resultB);
+		map.put(resultAdd.getUniqueID(), resultAdd);
+		
 		context.setFunctionID(f.getUniqueID());
 
 		w.setLoopCondition(leq.getUniqueID());

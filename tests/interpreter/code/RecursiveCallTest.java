@@ -25,6 +25,7 @@ import usp.ime.line.ivprog.interpreter.execution.code.Return;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Multiplication;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Subtraction;
 import usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons.EqualTo;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 
@@ -70,18 +71,30 @@ public class RecursiveCallTest {
 		ifElse.setFlowCondition(eq.getUniqueID());
 		map.put(eq.getUniqueID(), eq);
 		fatorial.addChild(ifElse.getUniqueID());
+		
+			IVPBoolean resultEq = factory.createIVPBoolean();
+			eq.setOperationResultID(resultEq.getUniqueID());
+			map.put(resultEq.getUniqueID(), resultEq);
 
 		Multiplication m = factory.createMultiplication();
 		m.setExpressionA(fatorial.getArgument(0));
 		m.setExpressionB(recursion.getUniqueID());
 		r2.setReturnable(m.getUniqueID());
 		map.put(m.getUniqueID(), m);
+		
+			IVPNumber resultM = factory.createIVPNumber();
+			m.setOperationResultID(resultM.getUniqueID());
+			map.put(resultM.getUniqueID(), resultM);
 
 		Subtraction sub = factory.createSubtraction();
 		sub.setExpressionA(fatorial.getArgument(0));
 		sub.setExpressionB(one.getUniqueID());
 		map.put(sub.getUniqueID(), sub);
 		recursion.addParameter(0, sub.getUniqueID());
+		
+			IVPNumber resultS = factory.createIVPNumber();
+			sub.setOperationResultID(resultS.getUniqueID());
+			map.put(resultS.getUniqueID(), resultS);
 
 		IVPNumber result = (IVPNumber) fatorial.evaluate(context, map, factory);
 		assertTrue(context.getInt(result.getUniqueID()) == 40320);

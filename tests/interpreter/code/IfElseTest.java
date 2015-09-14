@@ -22,9 +22,11 @@ import usp.ime.line.ivprog.interpreter.execution.code.AttributionLine;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
 import usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons.LessThanOrEqualTo;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 public class IfElseTest {
 
@@ -55,17 +57,23 @@ public class IfElseTest {
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(leftValue.getUniqueID());
+		
+			IVPVariableReference vRef = factory.createIVPVariableReference();
+			vRef.setReferencedID(v.getUniqueID());
 
 		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
 		leq.setExpressionA(leftValue.getUniqueID());
 		leq.setExpressionB(comparisonValue.getUniqueID());
+		
+			IVPBoolean resultB = factory.createIVPBoolean();
+			leq.setOperationResultID(resultB.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariableID(v.getUniqueID());
+		attLine1.setVariableID(vRef.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariableID(v.getUniqueID());
+		attLine2.setVariableID(vRef.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -79,6 +87,8 @@ public class IfElseTest {
 		map.put(attLine2.getUniqueID(), attLine2);
 		map.put(comparisonValue.getUniqueID(), comparisonValue);
 		map.put(f.getUniqueID(), f);
+		map.put(vRef.getUniqueID(), vRef);
+		map.put(resultB.getUniqueID(), resultB);
 		context.setFunctionID(f.getUniqueID());
 
 		ifElse.setFlowCondition(leq.getUniqueID());
@@ -124,17 +134,23 @@ public class IfElseTest {
 		IVPVariable v = factory.createIVPVariable();
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(leftValue.getUniqueID());
+		
+			IVPVariableReference vRef = factory.createIVPVariableReference();
+			vRef.setReferencedID(v.getUniqueID());
 
 		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
 		leq.setExpressionA(leftValue.getUniqueID());
 		leq.setExpressionB(comparisonValue.getUniqueID());
+		
+			IVPBoolean resultB = factory.createIVPBoolean();
+			leq.setOperationResultID(resultB.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariableID(v.getUniqueID());
+		attLine1.setVariableID(vRef.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariableID(v.getUniqueID());
+		attLine2.setVariableID(vRef.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -148,6 +164,8 @@ public class IfElseTest {
 		map.put(attLine2.getUniqueID(), attLine2);
 		map.put(comparisonValue.getUniqueID(), comparisonValue);
 		map.put(f.getUniqueID(), f);
+		map.put(vRef.getUniqueID(), vRef);
+		map.put(resultB.getUniqueID(), resultB);
 		context.setFunctionID(f.getUniqueID());
 
 		ifElse.setFlowCondition(leq.getUniqueID());
@@ -190,16 +208,22 @@ public class IfElseTest {
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(leftValue.getUniqueID());
 
-		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
-		leq.setExpressionA(leftValue.getUniqueID());
-		leq.setExpressionB(comparisonValue.getUniqueID());
+		IVPVariableReference vRef = factory.createIVPVariableReference();
+		vRef.setReferencedID(v.getUniqueID());
 
+	LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
+	leq.setExpressionA(leftValue.getUniqueID());
+	leq.setExpressionB(comparisonValue.getUniqueID());
+	
+		IVPBoolean resultB = factory.createIVPBoolean();
+		leq.setOperationResultID(resultB.getUniqueID());
+		
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariableID(v.getUniqueID());
+		attLine1.setVariableID(vRef.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariableID(v.getUniqueID());
+		attLine2.setVariableID(vRef.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -213,6 +237,8 @@ public class IfElseTest {
 		map.put(attLine2.getUniqueID(), attLine2);
 		map.put(comparisonValue.getUniqueID(), comparisonValue);
 		map.put(f.getUniqueID(), f);
+		map.put(vRef.getUniqueID(), vRef);
+		map.put(resultB.getUniqueID(), resultB);
 		context.setFunctionID(f.getUniqueID());
 
 		ifElse.setFlowCondition(leq.getUniqueID());
@@ -255,16 +281,22 @@ public class IfElseTest {
 		v.setVariableType(IVPValue.INTEGER_TYPE);
 		v.setValueID(leftValue.getUniqueID());
 
+			IVPVariableReference vRef = factory.createIVPVariableReference();
+			vRef.setReferencedID(v.getUniqueID());
+
 		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
 		leq.setExpressionA(leftValue.getUniqueID());
 		leq.setExpressionB(comparisonValue.getUniqueID());
+	
+			IVPBoolean resultB = factory.createIVPBoolean();
+			leq.setOperationResultID(resultB.getUniqueID());
 
 		AttributionLine attLine1 = factory.createAttributionLine();
-		attLine1.setVariableID(v.getUniqueID());
+		attLine1.setVariableID(vRef.getUniqueID());
 		attLine1.setExpression(value1.getUniqueID());
 
 		AttributionLine attLine2 = factory.createAttributionLine();
-		attLine2.setVariableID(v.getUniqueID());
+		attLine2.setVariableID(vRef.getUniqueID());
 		attLine2.setExpression(value2.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -278,6 +310,8 @@ public class IfElseTest {
 		map.put(attLine2.getUniqueID(), attLine2);
 		map.put(comparisonValue.getUniqueID(), comparisonValue);
 		map.put(f.getUniqueID(), f);
+		map.put(vRef.getUniqueID(), vRef);
+		map.put(resultB.getUniqueID(), resultB);
 		context.setFunctionID(f.getUniqueID());
 
 		ifElse.setFlowCondition(leq.getUniqueID());

@@ -73,7 +73,7 @@ public class WhileTest {
 		add.setOperationResultID(res.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(ref.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		HashMap map = new HashMap();
@@ -95,7 +95,7 @@ public class WhileTest {
 		w.evaluate(context, map, factory);
 
 		IVPNumber result = (IVPNumber) v.evaluate(context, map, factory);
-
+		
 		assertTrue(context.getInt(result.getUniqueID()) == 10);
 	}
 

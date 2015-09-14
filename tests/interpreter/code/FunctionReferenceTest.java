@@ -25,9 +25,11 @@ import usp.ime.line.ivprog.interpreter.execution.code.Return;
 import usp.ime.line.ivprog.interpreter.execution.code.While;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
 import usp.ime.line.ivprog.interpreter.execution.expressions.booleans.comparisons.LessThanOrEqualTo;
+import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPBoolean;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPNumber;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPVariable;
+import usp.ime.line.ivprog.interpreter.execution.utils.IVPVariableReference;
 
 public class FunctionReferenceTest {
 
@@ -49,6 +51,9 @@ public class FunctionReferenceTest {
 		IVPVariable result = factory.createIVPVariable();
 		result.setVariableType(IVPValue.INTEGER_TYPE);
 		f.addVariable(result, "-11", context, map, factory);
+		
+			IVPVariableReference resultRef = factory.createIVPVariableReference();
+			resultRef.setReferencedID(result.getUniqueID());
 
 		IVPValue one = factory.createIVPNumber();
 		one.setValueType(IVPValue.INTEGER_TYPE);
@@ -59,17 +64,26 @@ public class FunctionReferenceTest {
 		v.setVariableName("var1");
 		f.addVariable(v, "1", context, map, factory);
 		r.setReturnable(v.getUniqueID());
+		
+			IVPVariableReference vRef = factory.createIVPVariableReference();
+			vRef.setReferencedID(v.getUniqueID());
 
 		LessThanOrEqualTo leq = factory.createLessThanOrEqualTo();
-		leq.setExpressionA(v.getUniqueID());
+		leq.setExpressionA(vRef.getUniqueID());
 		leq.setExpressionB(maximumValue.getUniqueID());
+		
+			IVPBoolean resultB = factory.createIVPBoolean();
+			leq.setOperationResultID(resultB.getUniqueID());
 
 		Addition add = factory.createAddition();
-		add.setExpressionA(v.getUniqueID());
+		add.setExpressionA(vRef.getUniqueID());
 		add.setExpressionB(one.getUniqueID());
+		
+			IVPNumber resultAdd = factory.createIVPNumber();
+			add.setOperationResultID(resultAdd.getUniqueID());
 
 		AttributionLine attLine = factory.createAttributionLine();
-		attLine.setVariableID(v.getUniqueID());
+		attLine.setVariableID(vRef.getUniqueID());
 		attLine.setExpression(add.getUniqueID());
 
 		map.put(add.getUniqueID(), add);
@@ -80,6 +94,10 @@ public class FunctionReferenceTest {
 		map.put(r.getUniqueID(), r);
 		map.put(f.getUniqueID(), f);
 		map.put(fr.getUniqueID(), fr);
+		map.put(vRef.getUniqueID(), vRef);
+		map.put(resultAdd.getUniqueID(), resultAdd);
+		map.put(resultB.getUniqueID(), resultB);
+		map.put(resultRef.getUniqueID(), resultRef);
 
 		context.setFunctionID(f.getUniqueID());
 
@@ -91,13 +109,12 @@ public class FunctionReferenceTest {
 		f.addChild(w.getUniqueID());
 		f.addChild(r.getUniqueID());
 
-		attLine2.setVariableID(result.getUniqueID());
+		attLine2.setVariableID(resultRef.getUniqueID());
 		attLine2.setExpression(fr.getUniqueID());
 
 		attLine2.evaluate(context, map, factory);
 
 		IVPNumber result2 = (IVPNumber) result.evaluate(context, map, factory);
-
 		assertTrue(context.getInt(result2.getUniqueID()) == 10);
 	}
 
