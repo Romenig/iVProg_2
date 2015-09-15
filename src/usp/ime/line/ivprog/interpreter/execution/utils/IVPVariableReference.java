@@ -77,7 +77,7 @@ public class IVPVariableReference extends Expression {
 	 */
 	public void setReferencedID(String referencedID) {
 		this.referencedID = referencedID;
-		
+		//To run the tests, comment the following lines.
 		if (referencedID != null && !"".equals(referencedID)) {
 			IVPVariable var = (IVPVariable) Services.getService().getModelMapping().get(referencedID);
 			setReferencedName(var.getVariableName());
@@ -86,6 +86,7 @@ public class IVPVariableReference extends Expression {
 			setReferencedName("");
 			setReferencedType("-1");
 		}
+
 	}
 
 	/**
