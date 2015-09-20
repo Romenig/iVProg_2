@@ -86,7 +86,6 @@ public class IVPVariableReference extends Expression {
 			setReferencedName("");
 			setReferencedType("-1");
 		}
-
 	}
 
 	/**

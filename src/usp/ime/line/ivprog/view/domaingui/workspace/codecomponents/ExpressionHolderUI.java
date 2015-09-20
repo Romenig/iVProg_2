@@ -752,6 +752,7 @@ public class ExpressionHolderUI extends JPanel implements IExpressionListener {
 	}
 
 	public void setExpression(JComponent exp) {
+		System.out.println(exp);
 		currentModelID = ((IDomainObjectUI) exp).getModelID();
 		if (expression != null)
 			remove(expression);

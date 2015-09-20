@@ -77,8 +77,7 @@ public class IVPContextMenu extends RoundedJPanel {
 		createfOR.putValue(Action.NAME, ResourceBundleIVP.getString("IVPContextMenu.for.text"));
 		Action createifElse = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				// Services.getService().getController().addChild(container.getCodeComposite(),
-				// IVPConstants.MODEL_IFELSE, context);
+				Services.getService().getController().addChild(scopeID, container.getContainer(),IVPConstants.MODEL_IFELSE, context);
 			}
 		};
 		createifElse.putValue(Action.SMALL_ICON, new ImageIcon(IVPContextMenu.class.getResource("/usp/ime/line/resources/icons/if.png")));

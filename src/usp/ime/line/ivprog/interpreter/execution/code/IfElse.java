@@ -78,6 +78,14 @@ public class IfElse extends CodeComposite {
 	public void setFlowCondition(String uniqueID) {
 		flowConditionID = uniqueID;
 	}
+	
+	/**
+	 * Get the flow condition ID.
+	 * @return
+	 */
+	public String getFlowConditionID() {
+		return flowConditionID;
+	}
 
 	/**
 	 * Append a child in the end of the 'if' children list.

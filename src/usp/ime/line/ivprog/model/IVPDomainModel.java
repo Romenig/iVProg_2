@@ -441,6 +441,9 @@ public class IVPDomainModel extends DomainModel {
 			exp = (Expression) createValueToExpression(expressionType, c);
 			exp.setExpressionType(expressionType);
 		} else {
+			
+			System.out.println("Criar expressão do IFELSE "+expressionType);
+			
 			exp = (Expression) createOperationToExpression(expressionType, state);
 			exp.setExpressionType(expressionType);
 			if(expressionType.equals(Expression.OPERATION_ADDITION)||
@@ -503,68 +506,69 @@ public class IVPDomainModel extends DomainModel {
 			IVPNumber result = factory.createIVPNumber();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createSubtraction();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_MULTIPLICATION)) {
 			IVPNumber result = factory.createIVPNumber();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createMultiplication();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_DIVISION)) {
 			IVPNumber result = factory.createIVPNumber();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createDivision();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_AND)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createAnd();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_OR)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createOr();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_LEQ)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createLessThanOrEqualTo();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_LES)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createLessThan();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_EQU)) {
+			System.out.println("Tem que criar o EqualTo >>. ");
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createEqualTo();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_GRE)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createGreaterThan();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_GEQ)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createGreaterThanOrEqualTo();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_NEQ)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
-			((Operation)op).setOperationResultID(result.getUniqueID());
 			op = factory.createNotEqualTo();
+			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_INTDIV)) {
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
@@ -572,6 +576,7 @@ public class IVPDomainModel extends DomainModel {
 			((Operation)op).setOperationResultID(result.getUniqueID());
 			//op = factory.create();
 		}
+		System.out.println(op);
 		return op;
 	}
 
@@ -622,8 +627,7 @@ public class IVPDomainModel extends DomainModel {
 			// ((While)
 			// Services.getService().getModelMapping().get(holder)).setCondition(exp.getUniqueID());
 		} else if (context.equals("ifElse")) {
-			// ((IfElse)
-			// Services.getService().getModelMapping().get(holder)).setComparison(exp.getUniqueID());
+			 ((IfElse)Services.getService().getModelMapping().get(holder)).setFlowCondition(exp.getUniqueID());
 		} else if (context.equals("forIndex")) {
 			// ((For)
 			// Services.getService().getModelMapping().get(holder)).setIndexExpression(exp.getUniqueID());

@@ -5,6 +5,7 @@ import javax.swing.JComponent;
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.code.AttributionLine;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
+import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
@@ -17,6 +18,7 @@ import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.AttributionLi
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.BooleanOperationUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.ConstantUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.FunctionBodyUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.IfElseUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.OperationUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.PrintUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.StringOperationUI;
@@ -27,7 +29,12 @@ import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 public class IVPRenderer {
 
 	public JComponent paint(String objectKey, String scope) {
+		System.out.println(">> "+objectKey+" "+scope);
+		
 		DataObject codeElementModel = (DataObject) Services.getService().getModelMapping().get((String) objectKey);
+		
+		System.out.println("codeElementModel "+codeElementModel);
+		
 		if (codeElementModel instanceof Function) {
 			return renderFunction((Function) codeElementModel);
 		} else if (codeElementModel instanceof IVPVariable) {
@@ -38,11 +45,13 @@ public class IVPRenderer {
 			return renderExpresion((Expression) codeElementModel);
 		} else if (codeElementModel instanceof AttributionLine) {
 			return renderAttributionLine((AttributionLine) codeElementModel);
+		} else if (codeElementModel instanceof IfElse) {
+			return renderIfElse((IfElse) codeElementModel);
 		}
 		/*
-		 * else if (codeElementModel instanceof Reference) { return
-		 * renderReference((Reference) codeElementModel); }else if
-		 * (codeElementModel instanceof While) { return renderWhile((While)
+ 		 * else if (codeElementModel instanceof Reference) { returnwd
+ 		 * renderReference((Reference) codeElementModel); }else if
+ d		 * (codeElementModel instanceof While) { return renderWhile((While)
 		 * codeElementModel); } else if (codeElementModel instanceof IfElse) {
 		 * return renderIfElse((IfElse) codeElementModel); } else if
 		 * (codeElementModel instanceof ReadData) { return renderRead((ReadData)
@@ -57,10 +66,19 @@ public class IVPRenderer {
 	 * null; }
 	 */
 
+	private JComponent renderIfElse(IfElse codeElementModel) {
+		IfElseUI i = new IfElseUI(codeElementModel.getUniqueID());
+		i.setModelParent(codeElementModel.getParentID());
+		i.setModelScope(codeElementModel.getScopeID());
+		Services.getService().getViewMapping().addToMap(codeElementModel.getUniqueID(), i);
+		return i;
+	}
+
 	private JComponent renderExpresion(Expression expressionModel) {
 		VariableSelectorUI var;
 		OperationUI exp;
 		ConstantUI constant;
+		System.out.println("Chegou aqui");
 		if (expressionModel instanceof IVPVariableReference) {
 			var = new VariableSelectorUI(expressionModel.getParentID());
 			var.setModelID(expressionModel.getUniqueID());
@@ -74,6 +92,7 @@ public class IVPRenderer {
 			Services.getService().getViewMapping().addToMap(expressionModel.getUniqueID(), constant);
 			return constant;
 		} else {// It's an operation
+			System.out.println("identificou que é uma operação :"+expressionModel);
 			if ((expressionModel.getExpressionType().equals(Expression.OPERATION_AND)
 			        || expressionModel.getExpressionType().equals(Expression.OPERATION_OR)
 			        || expressionModel.getExpressionType().equals(Expression.OPERATION_LES)

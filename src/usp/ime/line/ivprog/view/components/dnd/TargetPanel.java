@@ -241,6 +241,19 @@ public class TargetPanel extends JPanel {
 		elementList.add(menu);
 		return index;
 	}
+	
+	public void moveChild(String childID, int toIndex) {
+		JComponent c = (JComponent) Services.getService().getViewMapping().getObject(childID);
+		int lastIndex = elementList.indexOf(c);
+		if (toIndex >= lastIndex) {
+			elementList.add(toIndex, c);
+			elementList.remove(lastIndex);
+		} else {
+			elementList.remove(c);
+			elementList.add(toIndex, c);
+		}
+		relayout();
+	}
 
 	/**
 	 * @return the context
