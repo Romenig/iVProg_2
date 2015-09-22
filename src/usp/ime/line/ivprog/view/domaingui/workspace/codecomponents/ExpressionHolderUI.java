@@ -30,7 +30,6 @@ import usp.ime.line.ivprog.view.domaingui.utils.IconButtonUI;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
 public class ExpressionHolderUI extends JPanel implements IExpressionListener {
-
 	public static final Color borderColor = new Color(230, 126, 34);
 	public static final Color hoverColor = FlatUIColors.HOVER_COLOR;
 	private boolean drawBorder = true;
@@ -142,8 +141,7 @@ public class ExpressionHolderUI extends JPanel implements IExpressionListener {
 		Action changeToOR = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				String expressionID = ((IDomainObjectUI) expression).getModelID();
-				Services.getService().getController()
-				        .createExpression(scopeModelID, expressionID, parentModelID, Expression.OPERATION_OR, "-1", operationContext);
+				Services.getService().getController().createExpression(scopeModelID, expressionID, parentModelID, Expression.OPERATION_OR, "-1", operationContext);
 			}
 		};
 		changeToOR.putValue(Action.SHORT_DESCRIPTION, ResourceBundleIVP.getString("BooleanOperationUI.OR.tip"));
@@ -752,7 +750,6 @@ public class ExpressionHolderUI extends JPanel implements IExpressionListener {
 	}
 
 	public void setExpression(JComponent exp) {
-		System.out.println(exp);
 		currentModelID = ((IDomainObjectUI) exp).getModelID();
 		if (expression != null)
 			remove(expression);

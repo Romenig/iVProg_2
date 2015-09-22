@@ -29,11 +29,8 @@ import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 public class IVPRenderer {
 
 	public JComponent paint(String objectKey, String scope) {
-		System.out.println(">> "+objectKey+" "+scope);
 		
 		DataObject codeElementModel = (DataObject) Services.getService().getModelMapping().get((String) objectKey);
-		
-		System.out.println("codeElementModel "+codeElementModel);
 		
 		if (codeElementModel instanceof Function) {
 			return renderFunction((Function) codeElementModel);
@@ -67,9 +64,7 @@ public class IVPRenderer {
 	 */
 
 	private JComponent renderIfElse(IfElse codeElementModel) {
-		IfElseUI i = new IfElseUI(codeElementModel.getUniqueID());
-		i.setModelParent(codeElementModel.getParentID());
-		i.setModelScope(codeElementModel.getScopeID());
+		IfElseUI i = new IfElseUI(codeElementModel.getUniqueID(), codeElementModel.getScopeID(), codeElementModel.getParentID());
 		Services.getService().getViewMapping().addToMap(codeElementModel.getUniqueID(), i);
 		return i;
 	}
@@ -78,11 +73,8 @@ public class IVPRenderer {
 		VariableSelectorUI var;
 		OperationUI exp;
 		ConstantUI constant;
-		System.out.println("Chegou aqui");
 		if (expressionModel instanceof IVPVariableReference) {
-			var = new VariableSelectorUI(expressionModel.getParentID());
-			var.setModelID(expressionModel.getUniqueID());
-			var.setScopeID(expressionModel.getScopeID());
+			var = new VariableSelectorUI(expressionModel.getParentID(), expressionModel.getUniqueID(), expressionModel.getScopeID());
 			Services.getService().getViewMapping().addToMap(expressionModel.getUniqueID(), var);
 			return var;
 		} else if (expressionModel instanceof IVPValue) {
@@ -92,7 +84,6 @@ public class IVPRenderer {
 			Services.getService().getViewMapping().addToMap(expressionModel.getUniqueID(), constant);
 			return constant;
 		} else {// It's an operation
-			System.out.println("identificou que é uma operação :"+expressionModel);
 			if ((expressionModel.getExpressionType().equals(Expression.OPERATION_AND)
 			        || expressionModel.getExpressionType().equals(Expression.OPERATION_OR)
 			        || expressionModel.getExpressionType().equals(Expression.OPERATION_LES)
@@ -120,8 +111,6 @@ public class IVPRenderer {
 
 	private JComponent renderAttributionLine(AttributionLine attLineModel) {
 		AttributionLineUI attLine = new AttributionLineUI(attLineModel.getUniqueID(), attLineModel.getScopeID(), attLineModel.getParentID());
-		attLine.setModelParent(attLineModel.getParentID());
-		attLine.setModelScope(attLineModel.getScopeID());
 		attLine.setLeftVarModelID(attLineModel.getVariableID());
 		Services.getService().getViewMapping().addToMap(attLineModel.getUniqueID(), attLine);
 		return attLine;

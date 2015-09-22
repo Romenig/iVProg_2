@@ -37,7 +37,7 @@ public class AttributionLineUI extends ComponentPanel {
 		expression = new ExpressionFieldUI(getModelID(), getModelScope());
 		contentPanel = new JPanel();
 		codeLabel = new JLabel(ResourceBundleIVP.getString("AttLine.text"));
-		varSelector = new VariableSelectorUI(getModelID());
+		varSelector = new VariableSelectorUI(getModelID(), "", getModelScope());
 		varSelector.setModelScope(getModelScope());
 		varSelector.setIsolationMode(true);
 		blockedLabel = new JLabel(ResourceBundleIVP.getString("AttributionLineUI.lblNewLabel.text")); //$NON-NLS-1$

@@ -33,7 +33,7 @@ public abstract class OperationUI extends JPanel implements IDomainObjectUI, IOp
 	private boolean drawBorder = false;
 	private boolean isEditing = false;
 	protected JPopupMenu operationSignMenu;
-	protected String expressionType;
+	protected String expressionType = "-1";
 
 	public OperationUI(String parent, String scope, String id) {
 		currentModelID = id;

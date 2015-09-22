@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.plaf.basic.BasicTreeUI.SelectionModelPropertyChangeHandler;
 
 import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
@@ -50,8 +51,11 @@ public class VariableSelectorUI extends JPanel implements IVariableListener, IDo
 	private boolean editState = true;
 	private String referencedType = "-1";
 
-	public VariableSelectorUI(String parent) {
-		this.parentModelID = parent;
+	public VariableSelectorUI(String parentID, String modelID, String scopeID) {
+		this.parentModelID = parentID;
+		setModelScope(scopeID);
+		setModelID(modelID);
+		setModelParent(parentID);
 		initialization();
 		initComponents();
 		Services.getService().getProgramData().getVariableListeners().add(this);
@@ -164,7 +168,6 @@ public class VariableSelectorUI extends JPanel implements IVariableListener, IDo
 
 	private void updateValuesFromVariableList() {
 		if (!isIsolated && (!referencedType.equals("-1") && !referencedType.equals("0"))) {
-			
 			Function f = (Function) Services.getService().getModelMapping().get(getScopeID());
 			if(f == null){
 				f = Services.getService().getProgramData().getMainFunction();

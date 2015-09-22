@@ -12,6 +12,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import usp.ime.line.ivprog.interpreter.execution.code.CodeComposite;
 import usp.ime.line.ivprog.model.utils.IVPConstants;
@@ -44,7 +45,8 @@ public class TargetPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public TargetPanel(boolean isInter, String compositeID, String scopeID, String context) {
-		context = context;
+		this.context = context;
+		this.scopeID = scopeID;
 		isInternal = isInter;
 		setContainer(compositeID);
 		initializeLayout();
@@ -52,7 +54,7 @@ public class TargetPanel extends JPanel {
 		addMouseListener(Services.getService().getML());
 		addMouseMotionListener(Services.getService().getML());
 		setBackground(FlatUIColors.MAIN_BG);
-		menu = new IVPContextMenu(this, "", scopeID);
+		menu = new IVPContextMenu(this, context, scopeID);
 		elementList.add(menu);
 		relayout();
 	}
@@ -65,7 +67,7 @@ public class TargetPanel extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
 		if (isInternal)
-			setPreferredSize(new Dimension(10, 30));
+			setPreferredSize(new Dimension(10, 42));
 	}
 
 	/**
@@ -93,6 +95,7 @@ public class TargetPanel extends JPanel {
 		removeAll();
 		gbc.gridy = row++;
 		gbc.insets = new Insets(4, 3, 2, 5);
+		initCanvasHeight();
 		elementList.remove(menu);
 		elementList.add(menu);
 		for (int i = 0; i < elementList.size(); i++) {
@@ -107,6 +110,14 @@ public class TargetPanel extends JPanel {
 		add(strut, gbc);
 		revalidate();
 		repaint();
+	}
+	
+	private void initCanvasHeight() {
+		if (elementList.size() == 0) {
+			setPreferredSize(new Dimension(10, 42));
+		} else {
+			setPreferredSize(null);
+		}
 	}
 
 	/**

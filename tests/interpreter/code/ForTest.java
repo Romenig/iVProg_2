@@ -85,7 +85,6 @@ public class ForTest {
 		myFor.evaluate(context, map, factory);
 
 		IVPNumber result2 = (IVPNumber) v.evaluate(context, map, factory);
-		System.out.println(context.getInt(result2.getUniqueID()));
 		assertTrue(context.getInt(result2.getUniqueID()) == 5);
 	}
 

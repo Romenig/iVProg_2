@@ -87,7 +87,9 @@ public class IVPDomainModel extends DomainModel {
 		f.setFunctionReturnType(funcReturnVoid);
 		Services.getService().getModelMapping().put(f.getUniqueID(), f);
 		Services.getService().getProgramData().setMainFunction(f);
-		Services.getService().getContextMapping().put(f.getUniqueID(), new Context());
+		Context c = new Context();
+		c.setFunctionID(f.getUniqueID());
+		Services.getService().getContextMapping().put(f.getUniqueID(), c);
 		for (int i = 0; i < Services.getService().getProgramData().getFunctionListeners().size(); i++) {
 			IFunctionListener listener = (IFunctionListener) Services.getService().getProgramData().getFunctionListeners().get(i);
 			listener.functionCreated(f.getUniqueID());
@@ -441,9 +443,6 @@ public class IVPDomainModel extends DomainModel {
 			exp = (Expression) createValueToExpression(expressionType, c);
 			exp.setExpressionType(expressionType);
 		} else {
-			
-			System.out.println("Criar expressão do IFELSE "+expressionType);
-			
 			exp = (Expression) createOperationToExpression(expressionType, state);
 			exp.setExpressionType(expressionType);
 			if(expressionType.equals(Expression.OPERATION_ADDITION)||
@@ -484,6 +483,7 @@ public class IVPDomainModel extends DomainModel {
 			Expression newExp = (Expression) createOperationToExpression(Expression.OPERATION_EQU, state);
 			newExp.setParentID(exp.getUniqueID());
 			newExp.setScopeID(scopeID);
+			newExp.setExpressionType(Expression.OPERATION_EQU);
 			((Operation) exp).setExpressionB(newExp.getUniqueID());
 			Services.getService().getModelMapping().put(newExp.getUniqueID(), newExp);
 			for (int i = 0; i < Services.getService().getProgramData().getExpressionListeners().size(); i++) {
@@ -492,6 +492,8 @@ public class IVPDomainModel extends DomainModel {
 			}
 			state.add(newExp);
 		}
+		
+
 	}
 
 	private Operation createOperationToExpression(String operationType, AssignmentState state) {
@@ -545,7 +547,6 @@ public class IVPDomainModel extends DomainModel {
 			op = factory.createLessThan();
 			((Operation)op).setOperationResultID(result.getUniqueID());
 		} else if (operationType.equals(Operation.OPERATION_EQU)) {
-			System.out.println("Tem que criar o EqualTo >>. ");
 			IVPBoolean result = factory.createIVPBoolean();
 			Services.getService().getModelMapping().put(result.getUniqueID(), result);
 			state.add(result);
@@ -576,7 +577,6 @@ public class IVPDomainModel extends DomainModel {
 			((Operation)op).setOperationResultID(result.getUniqueID());
 			//op = factory.create();
 		}
-		System.out.println(op);
 		return op;
 	}
 
@@ -916,7 +916,6 @@ public class IVPDomainModel extends DomainModel {
 			container.addChild(codeBlock.getUniqueID());
 		}
 		ICodeListener listener = (ICodeListener) Services.getService().getProgramData().getCodeListeners().get(containerID);
-
 		listener.addChild(codeBlock.getUniqueID(), context);
 		// Framework
 		state.add(codeBlock);

@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
+import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 import usp.ime.line.ivprog.listeners.ICodeListener;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.components.dnd.TargetPanel;
@@ -37,9 +38,11 @@ public class IfElseUI extends CodeBaseUI implements ICodeListener {
 	private JPanel elseHeader;
 	private JLabel lblSeno;
 
-	public IfElseUI(String modelID) {
+	public IfElseUI(String modelID, String scopeModelID, String parentModelID) {
 		super(modelID);
 		setModelID(modelID);
+		setModelParent(parentModelID);
+		setModelScope(scopeModelID);
 		initContentPanel();
 		initExpandButtonIcon();
 		initHeader();
@@ -102,10 +105,9 @@ public class IfElseUI extends CodeBaseUI implements ICodeListener {
 
 	private void initExpression() {
 		String condition = ((IfElse) Services.getService().getModelMapping().get(getModelID())).getFlowConditionID();
-		System.out.println("condition no ifEls "+condition);
 		booleanOperationUI = (BooleanOperationUI) Services.getService().getRenderer().paint(condition, this.getModelScope());
-		System.out.println(booleanOperationUI+" asdasdasd");
 		expressionField = new ExpressionFieldUI(this.getModelID(), this.getModelScope());
+		//expressionField.setHoldingType(booleanOperationUI.getExpressionType());
 		expressionField.setHolderContent(booleanOperationUI);
 		expressionField.setComparison(true);
 		expressionField.setBlocked(false);

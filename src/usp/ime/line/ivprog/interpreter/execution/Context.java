@@ -220,6 +220,7 @@ public class Context implements Cloneable {
 	 */
 	public Object clone() {
 		Context c = new Context(((HashMap)integerMap.clone()), (HashMap) doubleMap.clone(), (HashMap) stringMap.clone(),(HashMap) booleanMap.clone());
+		c.setFunctionID(getFunctionID());
 		return c;
 	}
 

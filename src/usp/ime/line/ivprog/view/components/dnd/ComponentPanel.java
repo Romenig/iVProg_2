@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
 import usp.ime.line.ivprog.model.utils.Services;
 import usp.ime.line.ivprog.view.domaingui.FlatUIColors;
 import usp.ime.line.ivprog.view.domaingui.IDomainObjectUI;
@@ -57,8 +58,13 @@ public abstract class ComponentPanel extends RoundedJPanel implements IDomainObj
 		trashCanPanel = new JPanel(new BorderLayout());
 		Action action = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				TargetPanel t = (TargetPanel) getParent();
-				t.removeElement(instance);
+				if (Services.getService().getModelMapping().get(parentModelID) instanceof IfElse) {
+					IfElse ifelse = (IfElse) Services.getService().getModelMapping().get(parentModelID);
+					String context = ifelse.getChildContext(thisModelID);
+					Services.getService().getController().removeChild(scopeModelID, parentModelID, thisModelID, context);
+				} else {
+					Services.getService().getController().removeChild(scopeModelID, parentModelID, thisModelID, "");
+				}
 			}
 		};
 		try {
