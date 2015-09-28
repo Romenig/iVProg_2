@@ -58,8 +58,7 @@ public class IVPContextMenu extends RoundedJPanel {
 		menu.setBackground(FlatUIColors.MAIN_BG);
 		Action createWhile = new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				// Services.getService().getController().addChild(container.getCodeComposite(),
-				// IVPConstants.MODEL_WHILE, context);
+				 Services.getService().getController().addChild(scopeID, container.getContainer(),IVPConstants.MODEL_WHILE, context);
 			}
 		};
 		createWhile.putValue(Action.SMALL_ICON,

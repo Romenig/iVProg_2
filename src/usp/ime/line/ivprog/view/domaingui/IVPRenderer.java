@@ -6,6 +6,7 @@ import usp.ime.line.ivprog.interpreter.DataObject;
 import usp.ime.line.ivprog.interpreter.execution.code.AttributionLine;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
+import usp.ime.line.ivprog.interpreter.execution.code.While;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.value.IVPValue;
@@ -23,6 +24,7 @@ import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.OperationUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.PrintUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.StringOperationUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.VariableSelectorUI;
+import usp.ime.line.ivprog.view.domaingui.workspace.codecomponents.WhileUI;
 import usp.ime.line.ivprog.view.domaingui.workspace.variable.IVPVariableBasic;
 import usp.ime.line.ivprog.view.utils.language.ResourceBundleIVP;
 
@@ -44,6 +46,8 @@ public class IVPRenderer {
 			return renderAttributionLine((AttributionLine) codeElementModel);
 		} else if (codeElementModel instanceof IfElse) {
 			return renderIfElse((IfElse) codeElementModel);
+		}else if(codeElementModel instanceof While) { 
+			return renderWhile((While)codeElementModel); 
 		}
 		/*
  		 * else if (codeElementModel instanceof Reference) { returnwd
@@ -62,6 +66,12 @@ public class IVPRenderer {
 	 * private JComponent renderReference(Reference referenceModel) { return
 	 * null; }
 	 */
+
+	private JComponent renderWhile(While codeElementModel) {
+		WhileUI w = new WhileUI(codeElementModel.getUniqueID(), codeElementModel.getParentID(), codeElementModel.getScopeID());
+		Services.getService().getViewMapping().addToMap(codeElementModel.getUniqueID(), w);
+		return w;
+	}
 
 	private JComponent renderIfElse(IfElse codeElementModel) {
 		IfElseUI i = new IfElseUI(codeElementModel.getUniqueID(), codeElementModel.getScopeID(), codeElementModel.getParentID());

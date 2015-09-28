@@ -501,7 +501,7 @@ public class ExpressionHolderUI extends JPanel implements IExpressionListener {
 					((IDomainObjectUI) lastExp).setModelParent(currentModelID);
 				}
 			}
-			if (Services.getService().getViewMapping().getObject(parentModelID) instanceof ComponentPanel) {
+			if (Services.getService().getViewMapping().getObject(parentModelID) instanceof CodeBaseUI) {
 				if (lastExp != null && !"".equals(lastExp)) {
 					Services.getService().getController()
 					        .updateParent(parentModelID, ((IDomainObjectUI) lastExp).getModelID(), id, operationContext);

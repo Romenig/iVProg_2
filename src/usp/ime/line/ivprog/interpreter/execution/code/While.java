@@ -48,6 +48,9 @@ public class While extends CodeComposite {
 	public Object evaluate(Context c, HashMap map, DataFactory factory) {
 		IVPBoolean b = (IVPBoolean) ((DataObject) map.get(loopConditionID)).evaluate(c, map, factory);
 		Function f = (Function) map.get(c.getFunctionID());
+		
+		System.out.println(((DataObject) map.get(loopConditionID)).evaluate(c, map, factory));
+		
 		while (c.getBoolean(b.getUniqueID())) {
 			for (int i = 0; i < children.size(); i += 1) {
 				DataObject component = (DataObject) map.get(children.get(i));
@@ -75,7 +78,6 @@ public class While extends CodeComposite {
 	 */
 	@Override
 	public boolean equals(DomainObject o) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -110,7 +112,16 @@ public class While extends CodeComposite {
 	 */
 	@Override
 	public void updateParent(String lastExp, String newExp, String operationContext) {
-		loopConditionID = newExp;
+		if(loopConditionID.equals(lastExp))
+			loopConditionID = newExp;
+	}
+
+	public String getLoopConditionID() {
+		return loopConditionID;
+	}
+
+	public void setLoopConditionID(String loopConditionID) {
+		this.loopConditionID = loopConditionID;
 	}
 
 }

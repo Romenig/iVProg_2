@@ -19,6 +19,7 @@ import usp.ime.line.ivprog.interpreter.execution.code.CodeComposite;
 import usp.ime.line.ivprog.interpreter.execution.code.For;
 import usp.ime.line.ivprog.interpreter.execution.code.Function;
 import usp.ime.line.ivprog.interpreter.execution.code.IfElse;
+import usp.ime.line.ivprog.interpreter.execution.code.While;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Expression;
 import usp.ime.line.ivprog.interpreter.execution.expressions.Operation;
 import usp.ime.line.ivprog.interpreter.execution.expressions.arithmetic.Addition;
@@ -611,7 +612,6 @@ public class IVPDomainModel extends DomainModel {
 	 */
 	private void putExpressionOnRightPlace(String holder, String context, Expression exp) {
 
-		
 		if (context.equals("right")) {
 			((Operation) Services.getService().getModelMapping().get(holder)).setExpressionB(exp.getUniqueID());
 		} else if (context.equals("left")) {
@@ -621,11 +621,9 @@ public class IVPDomainModel extends DomainModel {
 		} else if (context.equals("printable")) {
 			((IVPPrinter) Services.getService().getModelMapping().get(holder)).setPrintableID(exp.getUniqueID());
 		} else if (context.equals("writable")) {
-			// ((ReadData)
-			// Services.getService().getModelMapping().get(holder)).setWritableObject(exp.getUniqueID());
+			// ((ReadData)Services.getService().getModelMapping().get(holder)).setWritableObject(exp.getUniqueID());
 		} else if (context.equals("while")) {
-			// ((While)
-			// Services.getService().getModelMapping().get(holder)).setCondition(exp.getUniqueID());
+			((While)Services.getService().getModelMapping().get(holder)).setLoopCondition(exp.getUniqueID());
 		} else if (context.equals("ifElse")) {
 			 ((IfElse)Services.getService().getModelMapping().get(holder)).setFlowCondition(exp.getUniqueID());
 		} else if (context.equals("forIndex")) {
